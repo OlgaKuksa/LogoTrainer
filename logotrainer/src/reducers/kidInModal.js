@@ -1,0 +1,18 @@
+import { ADD_TO_MODAL, CLEAR_MODAL } from "../actions/kidInModal";
+
+const DEFAULT_STATE = null;
+
+const kidInModal = (state = DEFAULT_STATE, action) => {
+  switch (action.type) {
+    case ADD_TO_MODAL:
+      return action.payload;
+      break;
+    case CLEAR_MODAL:
+      return null;
+      break;
+    default:
+      return state;
+  }
+};
+
+export default kidInModal;
