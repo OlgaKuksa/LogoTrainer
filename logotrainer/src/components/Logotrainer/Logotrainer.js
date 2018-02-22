@@ -3,7 +3,7 @@ import './Logotrainer.css';
 import { Menu, Icon } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import Header from '../Header';
-import Kids from '../Kids';
+import KidsWrapper from '../KidsWrapper';
 
 class Logotrainer extends Component {
   state = { activeItem: "kids",
@@ -41,7 +41,7 @@ color:'green' };
             Навыки и критерии их оценки
           </Menu.Item>
         </Menu>
-    {this.state.activeItem=='kids'?(<Kids />):null}
+    {this.state.activeItem=='kids'?(<KidsWrapper />):null}
       </div>
     );
   }

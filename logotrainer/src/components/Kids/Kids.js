@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import { Card, CardGroup, Icon, Label } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { getKids } from "../../actions/kids";
-import {addToModal} from '../../actions/kidInModal';
-import KidModal from '../KidModal'
+import { addToModal } from "../../actions/kidInModal";
+import { addKidToPage } from "../../actions/kidInPage";
+import KidModal from "../KidModal";
 
 class Kids extends Component {
   state = {
@@ -17,9 +18,9 @@ class Kids extends Component {
   };
 
   render() {
-    let filteredKids=this.props.kids.filter(
+    let filteredKids = this.props.kids.filter(
       item => item.group == this.state.selectedGroup
-    )
+    );
 
     return (
       <div>
@@ -40,36 +41,45 @@ class Kids extends Component {
         <CardGroup itemsPerRow={5} className="ui link cards">
           {filteredKids.map((item, index) => (
             <Card key={index} color="olive">
-              <Card.Content>
+              <Card.Content onClick={()=>this.props.addKidToPage(item)}>
                 <Card.Header>
                   {item.firstName} {item.lastName}
                 </Card.Header>
                 <Card.Meta>Дата рождения: {item.dateOfBirth}</Card.Meta>
                 <Card.Description>Группа {item.group}</Card.Description>
               </Card.Content>
-              <Icon name='edit' color='olive' size='large' onClick={()=>this.props.addToModal(item)}/>
+              <Icon
+                name="edit"
+                color="olive"
+                size="large"
+                onClick={() => this.props.addToModal(item)}
+              />
             </Card>
           ))}
           <Card>
-            <Card.Content textAlign="center" onClick={()=>this.props.addToModal({})}>
+            <Card.Content
+              textAlign="center"
+              onClick={() => this.props.addToModal({})}
+            >
               <Icon name="add user" size="huge" color="olive" />
             </Card.Content>
           </Card>
         </CardGroup>
-        {this.props.kidInModal==null?null:(<KidModal/>)}
+        {this.props.kidInModal == null ? null : <KidModal />}
       </div>
     );
   }
 }
 
-const mapStateToProps = state=>({
+const mapStateToProps = state => ({
   kids: state.kids,
-  kidInModal:state.kidInModal
+  kidInModal: state.kidInModal
 });
 
 const mapDispatchToProps = {
   getKids,
-  addToModal
+  addToModal,
+  addKidToPage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Kids);
