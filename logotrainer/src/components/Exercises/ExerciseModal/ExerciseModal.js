@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Modal, Header, Button} from 'semantic-ui-react';
-import {removeExerciseFromModal} from '../../actions/exerciseInModal';
+import {removeExerciseFromModal} from '../../../actions/exerciseInModal';
 
 class ExerciseModal extends Component{
 render(){

@@ -5,7 +5,7 @@ import "semantic-ui-css/semantic.min.css";
 import { getKids } from "../../actions/kids";
 import { addToModal } from "../../actions/kidInModal";
 import { addKidToPage } from "../../actions/kidInPage";
-import KidModal from "../KidModal";
+import KidModal from "./KidModal";
 
 class Kids extends Component {
   state = {

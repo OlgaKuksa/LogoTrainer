@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, Icon, Button, Form, Header } from "semantic-ui-react";
-import { addKid, updateKid } from "../../actions/kids";
-import { clearModal } from "../../actions/kidInModal";
+import { addKid, updateKid } from "../../../actions/kids";
+import { clearModal } from "../../../actions/kidInModal";
 
 class KidModal extends Component {
   render() {

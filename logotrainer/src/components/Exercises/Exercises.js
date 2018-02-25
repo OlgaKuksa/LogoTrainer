@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Icon} from 'semantic-ui-react';
 import {addExerciseToModal} from '../../actions/exerciseInModal';
-import ExerciseModal from '../ExerciseModal'
+import ExerciseModal from './ExerciseModal'
 import ExerciseSearchForm from './ExerciseSearchForm';
 import ExerciseList from './ExerciseList';
 
@@ -28,7 +28,6 @@ const mapStateToProps=state=>({
 const mapDispatchToProps={
     addExerciseToModal
 }
-
 
 
 export default connect (mapStateToProps, mapDispatchToProps)(Exercises);
