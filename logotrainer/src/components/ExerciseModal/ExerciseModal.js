@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Modal} from 'semantic-ui-react';
+import {Modal, Header, Button} from 'semantic-ui-react';
 import {removeExerciseFromModal} from '../../actions/exerciseInModal';
 
 class ExerciseModal extends Component{
@@ -13,7 +13,13 @@ render(){
     return(
         <Modal onClose={this.props.removeExerciseFromModal} open={Boolean(this.props.exerciseInModal)}
         closeIcon>
+        <Header icon='sign language' color='green' content={legend}/>
+        <Modal.Content>
             ADD/EDIT EXERCISE MODAL
+            </Modal.Content>
+            <Button className="ui right floated button" color="green">
+              {btnLabel}
+            </Button>
             </Modal>
     )
 }
