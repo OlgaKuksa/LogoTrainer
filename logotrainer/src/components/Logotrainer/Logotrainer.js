@@ -4,6 +4,7 @@ import { Menu, Icon } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import Header from '../Header';
 import KidsWrapper from '../KidsWrapper';
+import Exercises from "../Exercises";
 
 class Logotrainer extends Component {
   state = { activeItem: "kids",
@@ -42,6 +43,7 @@ color:'green' };
           </Menu.Item>
         </Menu>
     {this.state.activeItem=='kids'?(<KidsWrapper />):null}
+    {this.state.activeItem=='exercises'?(<Exercises />):null}
       </div>
     );
   }
