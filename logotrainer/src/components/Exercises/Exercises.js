@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Button} from 'semantic-ui-react';
+import {Button, Icon} from 'semantic-ui-react';
 import {addExerciseToModal} from '../../actions/exerciseInModal';
 import ExerciseModal from '../ExerciseModal'
 import ExerciseSearchForm from './ExerciseSearchForm';
@@ -10,8 +10,8 @@ class Exercises extends Component {
 render(){
     return(
         <div>
-        <Button onClick={()=>this.props.addExerciseToModal({})}>
-            Добавить
+        <Button color='olive' onClick={()=>this.props.addExerciseToModal({})}>
+            <Icon name='add' size='big'/> Добавить упражнение
         </Button>
         <ExerciseSearchForm/>
         <ExerciseList/>
