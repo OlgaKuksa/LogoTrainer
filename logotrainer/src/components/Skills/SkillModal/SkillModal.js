@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Modal, Button, Header, Form, Message } from "semantic-ui-react";
+import { Modal, Button, Header, Form, Message, Icon } from "semantic-ui-react";
 import { removeSkillModal } from "../../../actions/skillInModal";
 import LevelForm from './LevelForm';
 
@@ -22,7 +22,7 @@ class SkillModal extends Component {
         closeIcon
       >
         <Modal.Header>{legend}</Modal.Header>
-        <Modal.Content>
+        <Modal.Content scrolling>
         <Form>
         <Form.Input
               type="text"
@@ -48,6 +48,7 @@ class SkillModal extends Component {
             />
             {this.props.skillInModal.skillLevels!=undefined&&this.props.skillInModal.skillLevels.map(item=>
             <LevelForm level={item} key={item.levelId}/>)}
+             <Icon name='add circle' color='olive' size='big'/>
           </Form>
         </Modal.Content>
         <Modal.Actions>
@@ -61,7 +62,6 @@ class SkillModal extends Component {
                 {btnLabel}
               </Button>
           </Modal.Actions>
-          <Message color='olive'> 1 - навык практически сформирован (лучшая оценка), max - навыка практически нет (худшая оценка)</Message>
       </Modal>
     );
   }

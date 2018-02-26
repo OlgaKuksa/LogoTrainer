@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form} from 'semantic-ui-react';
+import {Form, Icon} from 'semantic-ui-react';
 
 class LevelForm extends Component{
 render(){
@@ -29,7 +29,9 @@ render(){
                   : this.props.level.levelText
               }
             />
+             <Icon name='remove circle' color='red' size='big'/>
         </Form.Group>
+       
     )
 }
 
