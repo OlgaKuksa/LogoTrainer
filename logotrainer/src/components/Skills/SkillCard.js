@@ -4,7 +4,7 @@ import { Card, Header, Accordion } from "semantic-ui-react";
 
 class SkillCard extends Component {
   render() {
-    return <Card>
+    return (<Card>
         <Card.Content>
     <Card.Header>
         {this.props.skill.skillName}
@@ -13,9 +13,9 @@ class SkillCard extends Component {
         {"Вопрос теста: "+this.props.skill.skillQuestion}
         </div>
         {this.props.skill.skillLevels.map(level=>
-        (<div>{level.levelNumber + ' : ' + level.levelText}</div>))}
+        (<div  key={level.levelId}>{level.levelNumber + ' : ' + level.levelText}</div>))}
         </Card.Content>
-    </Card>;
+    </Card>);
   }
 }
 

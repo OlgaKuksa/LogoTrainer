@@ -10,6 +10,10 @@ import {
   Card
 } from "semantic-ui-react";
 import SkillCard from "./SkillCard";
+import { addSkillModal } from "../../actions/skillInModal";
+import { addSkillGroupModal } from "../../actions/skillGroupInModal";
+import SkillModal from './SkillModal';
+import SkillGroupModal from './SkillGroupModal';
 
 class Skills extends Component {
   state = {
@@ -39,32 +43,44 @@ class Skills extends Component {
                 />
               ))}
             </Menu>
-            <Button color="olive">
-              <Icon name="add" size="big" textAlign="center"/> Добавить группу навыков
+            <Button color="olive" onClick={()=>this.props.addSkillGroupModal({})}>
+              <Icon name="add" size="big"/> Добавить группу
+              навыков
             </Button>
           </Grid.Column>
           <Grid.Column stretched width={12}>
             <CardGroup itemsPerRow={2} className="ui link cards">
               {selectedGroup.skills.map(item => (
-                <SkillCard skill={item} key={item.id} />
+                <SkillCard key={item.id} skill={item}  />
               ))}
-              <Card>
+              <Card onClick={()=>this.props.addSkillModal({})}>
                 <Card.Content textAlign="center">
-                <Icon name="plus square outline" size="massive" color="olive"/>
+                  <Icon
+                    name="plus square outline"
+                    size="massive"
+                    color="olive"
+                  />
                 </Card.Content>
               </Card>
             </CardGroup>
           </Grid.Column>
         </Grid>
+        {this.props.skillInModal==null?null:<SkillModal/>}
+        {this.props.skillGroupInModal==null?null:<SkillGroupModal/>}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  skills: state.skills
+  skills: state.skills,
+  skillInModal: state.skillInModal,
+  skillGroupInModal: state.skillGroupInModal
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  addSkillModal,
+  addSkillGroupModal
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Skills);
