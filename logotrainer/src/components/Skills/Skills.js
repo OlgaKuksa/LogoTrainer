@@ -42,7 +42,7 @@ class Skills extends Component {
                   onClick={this.handleMenuItemClick}
                 >
                 {item.skillGroupName}
-                <Icon name='edit' onClick={(e)=>{this.props.addSkillGroupModal(item);e.stopPropagation()}}/>
+                <Icon name='pencil' onClick={(e)=>{this.props.addSkillGroupModal(item);e.stopPropagation()}}/>
                 </Menu.Item>
               ))}
             </Menu>

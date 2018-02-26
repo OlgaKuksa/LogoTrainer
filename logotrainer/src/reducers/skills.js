@@ -102,6 +102,10 @@ const DEFAULT_STATE = [
 
 const skills = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
+    case ADD_SKILLGROUP:
+    return [...state, action.payload];
+    case UPDATE_SKILLGROUP:
+    return ({...state.find(item=>item.skillGroupId==action.payload.skillGroupId), ...action.payload});
     default:
       return state;
   }

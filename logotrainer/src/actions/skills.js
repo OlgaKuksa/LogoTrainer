@@ -11,9 +11,12 @@ export const getSkills=payload=>({
     payload
 });
 
-export const addSkillGroup=payload=>({
+export const addSkillGroup=groupName=>({
     type:GET_SKILLS,
-    payload
+    payload:{
+        ...groupName,
+        skillGroupId:Date.now()
+    }
 });
 
 export const addSkill=payload=>({
