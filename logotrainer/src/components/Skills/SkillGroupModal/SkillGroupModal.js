@@ -36,6 +36,7 @@ class SkillGroupModal extends Component {
               type="text"
               placeholder="Название группы"
               label="Название группы навыков"
+              required
               defaultValue={
                 this.props.skillGroupInModal.skillGroupName == undefined
                   ? ""

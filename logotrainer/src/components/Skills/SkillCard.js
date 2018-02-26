@@ -9,7 +9,6 @@ class SkillCard extends Component {
       <Card>
         <Card.Content>
           <Card.Header>{this.props.skill.skillName}</Card.Header>
-
           <div>{"Вопрос теста: " + this.props.skill.skillQuestion}</div>
           {this.props.skill.skillLevels.map(level => (
             <div key={level.levelId}>
