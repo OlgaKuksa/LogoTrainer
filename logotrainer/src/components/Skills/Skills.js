@@ -40,7 +40,10 @@ class Skills extends Component {
                   key={item.skillGroupId}
                   active={this.state.activeItem == item.skillGroupId}
                   onClick={this.handleMenuItemClick}
-                />
+                >
+                {item.skillGroupName}
+                <Icon name='edit' onClick={(e)=>{this.props.addSkillGroupModal(item);e.stopPropagation()}}/>
+                </Menu.Item>
               ))}
             </Menu>
             <Button color="olive" onClick={()=>this.props.addSkillGroupModal({})}>
