@@ -5,40 +5,57 @@ import { addKid, updateKid } from "../../../actions/kids";
 import { clearModal } from "../../../actions/kidInModal";
 
 class KidModal extends Component {
+  constructor(props) {
+    super(props);
+    const isNew = !props.kidInModal || !props.kidInModal.id;
+    const { firstName = "", lastName = "", isArchived = false } =
+      props.kidInModal || {};
+    this.state = { isNew, firstName, lastName, isArchived };
+  }
+  onFirstNameChange = e => {
+    this.setState({ firstName: e.target.value });
+  };
+  onLastNameChange = e => {
+    this.setState({ lastName: e.target.value });
+  };
+  onIsArchivedChanged = e => {
+    this.setState({ isArchived: e.target.checked });
+  };
+  onAddKid = () => {
+    const { firstName, lastName, isArchived } = this.state;
+    this.props.addKid({ firstName, lastName, isArchived });
+  };
+  onUpdateKid = () => {
+    const { firstName, lastName, isArchived } = this.state;
+    const kid = this.props.kidInModal;
+    this.props.updateKid({ ...kid, firstName, lastName, isArchived });
+  };
   render() {
-    let legend =
-    Object.getOwnPropertyNames(this.props.kidInModal).length === 0
-        ? "Добавить ребенка"
-        : "Редактировать";
-    let btnLabel = Object.getOwnPropertyNames(this.props.kidInModal).length === 0 ? "Добавить" : "Сохранить";
+    const { isNew, firstName, lastName, isArchived } = this.state;
+    let legend = isNew ? "Добавить ребенка" : "Редактировать";
+    let btnLabel = isNew ? "Добавить" : "Сохранить";
     return (
-      <Modal 
+      <Modal
         onClose={this.props.clearModal}
         open={Boolean(this.props.kidInModal)}
         closeIcon
       >
-        <Header icon='child' color='green' content={legend}/>
+        <Header icon="child" color="green" content={legend} />
         <Modal.Content>
           <Form>
             <Form.Input
               type="text"
               placeholder="Фамилия ребенка"
               label="Фамилия ребенка"
-              defaultValue={
-                this.props.kidInModal == null
-                  ? ""
-                  : this.props.kidInModal.lastName
-              }
+              value={firstName}
+              onChange={this.onFirstNameChange}
             />
             <Form.Input
               type="text"
               placeholder="Имя ребенка"
               label="Имя ребенка"
-              defaultValue={
-                this.props.kidInModal == null
-                  ? ""
-                  : this.props.kidInModal.firstName
-              }
+              value={lastName}
+              onChange={this.onLastNameChange}
             />
             <Form.Input
               label="Дата рождения"
@@ -54,13 +71,14 @@ class KidModal extends Component {
               label="Выбыл из группы"
               control="input"
               type="checkbox"
-              defaultValue={
-                this.props.kidInModal == null
-                  ? false
-                  : this.props.kidInModal.isArchived
-              }
+              checked={isArchived}
+              onChange={this.onIsArchivedChanged}
             />
-            <Button className="ui right floated button" color="green">
+            <Button
+              className="ui right floated button"
+              color="green"
+              onClick={isNew ? this.onAddKid : this.onUpdateKid}
+            >
               {btnLabel}
             </Button>
           </Form>
