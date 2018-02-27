@@ -12,8 +12,8 @@ import {
 import SkillCard from "./SkillCard";
 import { addSkillModal } from "../../actions/skillInModal";
 import { addSkillGroupModal } from "../../actions/skillGroupInModal";
-import SkillModal from './SkillModal';
-import SkillGroupModal from './SkillGroupModal';
+import SkillModal from "./SkillModal";
+import SkillGroupModal from "./SkillGroupModal";
 
 class Skills extends Component {
   state = {
@@ -41,22 +41,30 @@ class Skills extends Component {
                   active={this.state.activeItem == item.skillGroupId}
                   onClick={this.handleMenuItemClick}
                 >
-                {item.skillGroupName}
-                <Icon name='pencil' onClick={(e)=>{this.props.addSkillGroupModal(item);e.stopPropagation()}}/>
+                  {item.skillGroupName}
+                  <Icon
+                    name="pencil"
+                    onClick={e => {
+                      this.props.addSkillGroupModal(item);
+                      e.stopPropagation();
+                    }}
+                  />
                 </Menu.Item>
               ))}
             </Menu>
-            <Button color="olive" onClick={()=>this.props.addSkillGroupModal({})}>
-              <Icon name="add" size="big"/> Добавить группу
-              навыков
+            <Button
+              color="olive"
+              onClick={() => this.props.addSkillGroupModal({})}
+            >
+              <Icon name="add" size="big" /> Добавить группу навыков
             </Button>
           </Grid.Column>
           <Grid.Column stretched width={12}>
             <CardGroup itemsPerRow={2} className="ui link cards">
               {selectedGroup.skills.map(item => (
-                <SkillCard key={item.id} skill={item}  />
+                <SkillCard key={item.id} skill={item} />
               ))}
-              <Card onClick={()=>this.props.addSkillModal({})}>
+              <Card onClick={() => this.props.addSkillModal({})}>
                 <Card.Content textAlign="center">
                   <Icon
                     name="plus square outline"
@@ -68,8 +76,8 @@ class Skills extends Component {
             </CardGroup>
           </Grid.Column>
         </Grid>
-        {this.props.skillInModal==null?null:<SkillModal/>}
-        {this.props.skillGroupInModal==null?null:<SkillGroupModal/>}
+        {this.props.skillInModal == null ? null : <SkillModal />}
+        {this.props.skillGroupInModal == null ? null : <SkillGroupModal />}
       </div>
     );
   }

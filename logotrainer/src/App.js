@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-import Logotrainer from './components/Logotrainer'
+import React, { Component } from "react";
+import Logotrainer from "./components/Logotrainer";
 
 class App extends Component {
   render() {
-    return (
-   <Logotrainer/>
-    );
+    return <Logotrainer />;
   }
 }
 
