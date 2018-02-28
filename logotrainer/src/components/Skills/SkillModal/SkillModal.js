@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Modal, Button, Header, Form, Message, Icon } from "semantic-ui-react";
 import { removeSkillModal } from "../../../actions/skillInModal";
 import LevelForm from "./LevelForm";
+import skillInModal from "../../../reducers/skillInModal";
 
 class SkillModal extends Component {
   state = {
@@ -11,13 +12,10 @@ class SkillModal extends Component {
 
   addLevelBtnHandler = () => {
     const guid = require("uuid/v4");
-
-    this.setState(prevState => ({
-      ...prevState.skillInModal,
-      skillLevels: prevState.skillInModal.skillLevels.push({
-        levelId: guid()
-      })
-    }));
+    let levels = [...this.state.skillInModal.skillLevels, { levelId: guid() }];
+    let theSkill = { ...this.state.skillInModal };
+    theSkill.skillLevels = [...levels];
+    this.setState({ skillInModal: theSkill });
   };
 
   removeLevelBtnHandler = ev => {
@@ -41,7 +39,10 @@ class SkillModal extends Component {
 
     return (
       <Modal
-        onClose={this.props.removeSkillModal}
+        onClose={() => {
+          this.props.removeSkillModal();
+          this.setState(this.props.skillInModal);
+        }}
         open={Boolean(this.props.skillInModal)}
         closeIcon
       >
