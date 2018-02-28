@@ -31,16 +31,13 @@ const kids = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case GET_KIDS:
       return action.payload || DEFAULT_STATE;
-      break;
     case ADD_KID:
       return [...state, action.payload];
-      break;
     case UPDATE_KID:
       return state.map(
         kid =>
-          kid.id == action.payload.id ? { ...kid, ...action.payload } : kid
+          kid.id === action.payload.id ? { ...kid, ...action.payload } : kid
       );
-      break;
     default:
       return state;
   }

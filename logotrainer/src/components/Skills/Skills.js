@@ -26,7 +26,7 @@ class Skills extends Component {
   };
   render() {
     let selectedGroup = this.props.skills.find(
-      item => item.skillGroupId == this.state.activeItem
+      item => item.skillGroupId === this.state.activeItem
     );
     return (
       <div>

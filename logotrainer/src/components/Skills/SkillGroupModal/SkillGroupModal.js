@@ -6,17 +6,24 @@ import { addSkillGroup, updateSkillGroup } from "../../../actions/skills";
 
 class SkillGroupModal extends Component {
   state = {
-    skillGroup: this.props.skillGroupInModal
+    skillGroup: { ...this.props.skillGroupInModal }
   };
 
   changeGroupNameBtnHandler = ev => {
-    this.setState({ skillGroup: { skillGroupName: ev.target.value } });
+    let newGroupName = ev.target.value;
+    this.setState(prevState => ({
+      skillGroup: {
+        ...prevState.skillGroup,
+        skillGroupName: newGroupName
+      }
+    }));
   };
 
   addUpdateBtnHandler = () => {
-    Object.getOwnPropertyNames(this.props.skillGroupInModal).length === 0
+    this.props.skillGroupInModal.skillGroupId === undefined
       ? this.props.addSkillGroup(this.state.skillGroup)
       : this.props.updateSkillGroup(this.state.skillGroup);
+    this.props.removeSkillGroupModal();
   };
   render() {
     let btnLabel =
@@ -51,7 +58,11 @@ class SkillGroupModal extends Component {
                   Удалить
                 </Button>
               )}
-              <Button color="green" onSubmit={this.addUpdateBtnHandler} className="ui right floated button">
+              <Button
+                color="green"
+                onClick={this.addUpdateBtnHandler}
+                className="ui right floated button"
+              >
                 {btnLabel}
               </Button>
             </Modal.Actions>
@@ -67,7 +78,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  removeSkillGroupModal
+  removeSkillGroupModal,
+  addSkillGroup,
+  updateSkillGroup
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SkillGroupModal);

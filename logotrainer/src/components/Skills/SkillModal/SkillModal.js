@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, Button, Header, Form, Message, Icon } from "semantic-ui-react";
 import { removeSkillModal } from "../../../actions/skillInModal";
-import LevelForm from './LevelForm';
+import LevelForm from "./LevelForm";
 
 class SkillModal extends Component {
   render() {
@@ -23,8 +23,8 @@ class SkillModal extends Component {
       >
         <Modal.Header>{legend}</Modal.Header>
         <Modal.Content scrolling>
-        <Form>
-        <Form.Input
+          <Form>
+            <Form.Input
               type="text"
               placeholder="Название навыка"
               label="Название навыка"
@@ -35,7 +35,7 @@ class SkillModal extends Component {
                   : this.props.skillInModal.skillName
               }
             />
-             <Form.Input
+            <Form.Input
               type="text"
               placeholder="Вопрос для теста"
               label="Вопрос для теста"
@@ -46,22 +46,21 @@ class SkillModal extends Component {
                   : this.props.skillInModal.skillQuestion
               }
             />
-            {this.props.skillInModal.skillLevels!=undefined&&this.props.skillInModal.skillLevels.map(item=>
-            <LevelForm level={item} key={item.levelId}/>)}
-             <Icon name='add circle' color='olive' size='big'/>
+            {this.props.skillInModal.skillLevels !== undefined &&
+              this.props.skillInModal.skillLevels.map(item => (
+                <LevelForm level={item} key={item.levelId} />
+              ))}
+            <Icon name="add circle" color="olive" size="big" />
           </Form>
         </Modal.Content>
         <Modal.Actions>
-        {Object.getOwnPropertyNames(this.props.skillInModal)
-                .length != 0 && (
-                <Button color="red">
-                  Удалить
-                </Button>
-              )}
-              <Button color="green" className="ui right floated button">
-                {btnLabel}
-              </Button>
-          </Modal.Actions>
+          {Object.getOwnPropertyNames(this.props.skillInModal).length != 0 && (
+            <Button color="red">Удалить</Button>
+          )}
+          <Button color="green" className="ui right floated button">
+            {btnLabel}
+          </Button>
+        </Modal.Actions>
       </Modal>
     );
   }
