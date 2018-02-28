@@ -5,6 +5,7 @@ export const UPDATE_SKILL = "UPDATE_SKILL";
 export const UPDATE_SKILLGROUP = "UPDATE_SKILLGROUP";
 export const REMOVE_SKILLGROUP = "REMOVE_SKILLGROUP";
 export const REMOVE_SKILL = "REMOVE_SKILL";
+const guid = require("uuid/v4");
 
 export const getSkills = payload => ({
   type: GET_SKILLS,
@@ -15,14 +16,20 @@ export const addSkillGroup = groupName => ({
   type: ADD_SKILLGROUP,
   payload: {
     ...groupName,
-    skillGroupId: Date.now(),
+    skillGroupId: guid(),
     skills: []
   }
 });
 
-export const addSkill = payload => ({
+export const addSkill = skillData => ({
   type: ADD_SKILL,
-  payload
+  payload: {
+    skillGroupId: skillData.skillGroupId,
+    skill: {
+      ...skillData.skill,
+      skillId: guid()
+    }
+  }
 });
 
 export const updateSkill = payload => ({
@@ -35,12 +42,15 @@ export const updateSkillGroup = payload => ({
   payload
 });
 
-export const removeSKillGroup = payload => ({
+export const removeSkillGroup = payload => ({
   type: REMOVE_SKILLGROUP,
   payload
 });
 
-export const removeSkill = payload => ({
+export const removeSkill = skillData => ({
   type: REMOVE_SKILL,
-  payload
+  payload: {
+    skillGroupId: skillData.skillGroupId,
+    skillId: skillData.skillId
+  }
 });

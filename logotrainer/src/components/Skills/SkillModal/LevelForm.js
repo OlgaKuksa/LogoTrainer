@@ -9,6 +9,8 @@ class LevelForm extends Component {
           type="text"
           placeholder="Уровень"
           label="Уровень"
+          name="levelNumber"
+          onChange={this.props.onLevelPropertyChange}
           width={2}
           required
           defaultValue={
@@ -21,6 +23,8 @@ class LevelForm extends Component {
           type="text"
           placeholder="Вариант ответа"
           label="Текстовое описание"
+          name="levelText"
+          onChange={this.props.onLevelPropertyChange}
           width={14}
           required
           defaultValue={

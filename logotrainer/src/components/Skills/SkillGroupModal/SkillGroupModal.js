@@ -5,7 +5,7 @@ import { removeSkillGroupModal } from "../../../actions/skillGroupInModal";
 import {
   addSkillGroup,
   updateSkillGroup,
-  removeSKillGroup
+  removeSkillGroup
 } from "../../../actions/skills";
 
 class SkillGroupModal extends Component {
@@ -32,7 +32,7 @@ class SkillGroupModal extends Component {
 
   removeBtnHandler = () => {
     if (this.state.skillGroup.skills.length !== 0) return;
-    this.props.removeSKillGroup(this.state.skillGroup);
+    this.props.removeSkillGroup(this.state.skillGroup);
     this.props.removeSkillGroupModal();
   };
   render() {
@@ -92,7 +92,7 @@ const mapDispatchToProps = {
   removeSkillGroupModal,
   addSkillGroup,
   updateSkillGroup,
-  removeSKillGroup
+  removeSkillGroup
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SkillGroupModal);

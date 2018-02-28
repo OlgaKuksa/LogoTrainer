@@ -116,6 +116,26 @@ const skills = (state = DEFAULT_STATE, action) => {
       return state.filter(
         item => item.skillGroupId !== action.payload.skillGroupId
       );
+    case ADD_SKILL:
+      return state.map(
+        group =>
+          group.skillGroupId != action.payload.skillGroupId
+            ? group
+            : { ...group, skills: [...group.skills, action.payload.skill] }
+      );
+    case REMOVE_SKILL:
+      return state.map(
+        group =>
+          group.skillGroupId != action.payload.skillGroupId
+            ? group
+            : {
+                ...group,
+                skills: group.skills.filter(
+                  skill => skill.skillId != action.payload.skillId
+                )
+              }
+      );
+
     default:
       return state;
   }

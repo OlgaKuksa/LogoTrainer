@@ -10,11 +10,12 @@ class SkillCard extends Component {
         <Card.Content>
           <Card.Header>{this.props.skill.skillName}</Card.Header>
           <div>{"Вопрос теста: " + this.props.skill.skillQuestion}</div>
-          {this.props.skill.skillLevels.map(level => (
-            <div key={level.levelId}>
-              {level.levelNumber + " : " + level.levelText}
-            </div>
-          ))}
+          {this.props.skill.skillLevels != undefined &&
+            this.props.skill.skillLevels.map(level => (
+              <div key={level.levelId}>
+                {level.levelNumber + " : " + level.levelText}
+              </div>
+            ))}
           <Icon
             name="pencil"
             onClick={() => this.props.addSkillModal(this.props.skill)}

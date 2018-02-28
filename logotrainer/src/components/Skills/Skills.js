@@ -17,7 +17,7 @@ import SkillGroupModal from "./SkillGroupModal";
 
 class Skills extends Component {
   state = {
-    activeItem: this.props.skills[0].skillGroupId
+    activeItem: this.props.skills[0].skillGroupId || 0
   };
   handleMenuItemClick = (e, { id }) => {
     this.setState({
@@ -83,7 +83,9 @@ class Skills extends Component {
             )}
           </Grid.Column>
         </Grid>
-        {this.props.skillInModal == null ? null : <SkillModal />}
+        {this.props.skillInModal == null ? null : (
+          <SkillModal groupid={selectedGroup.skillGroupId} />
+        )}
         {this.props.skillGroupInModal == null ? null : <SkillGroupModal />}
       </div>
     );

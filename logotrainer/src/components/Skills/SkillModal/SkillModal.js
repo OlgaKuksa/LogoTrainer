@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Modal, Button, Header, Form, Message, Icon } from "semantic-ui-react";
 import { removeSkillModal } from "../../../actions/skillInModal";
 import LevelForm from "./LevelForm";
-import skillInModal from "../../../reducers/skillInModal";
+import { addSkill, updateSkill, removeSkill } from "../../../actions/skills";
 
 class SkillModal extends Component {
   state = {
@@ -27,15 +27,62 @@ class SkillModal extends Component {
     this.setState({ skillInModal: skillToOperate });
   };
 
+  onSkillPropertyChange = ev => {
+    let name = ev.target.getAttribute("name");
+    let value = ev.target.value;
+    this.setState(prevState => ({
+      skillInModal: {
+        ...prevState.skillInModal,
+        [name]: value
+      }
+    }));
+  };
+
+  onLevelPropertyChange = ev => {
+    let levelIdToEdit = ev.target.parentNode.parentNode.parentNode.getAttribute(
+      "levelid"
+    );
+    let name = ev.target.getAttribute("name");
+    let value = ev.target.value;
+    this.setState(prevState => ({
+      skillInModal: {
+        ...prevState.skillInModal,
+        skillLevels: prevState.skillInModal.skillLevels.map(
+          level =>
+            level.levelId != levelIdToEdit ? level : { ...level, [name]: value }
+        )
+      }
+    }));
+  };
+
+  removeSkillBtnHandler = () => {
+    this.props.removeSkill({
+      skillGroupId: this.props.groupid,
+      skillId: this.state.skillInModal.skillId
+    });
+    this.props.removeSkillModal();
+  };
+
+  addUpdateSkillBtnHandler = () => {
+    this.props.skillInModal.skillId === undefined
+      ? this.props.addSkill({
+          skillGroupId: this.props.groupid,
+          skill: this.state.skillInModal
+        })
+      : this.props.updateSkill({
+          skillGroupId: this.props.groupid,
+          skill: this.state.skillInModal
+        });
+    this.props.removeSkillModal();
+  };
+
   render() {
     let legend =
-      Object.getOwnPropertyNames(this.props.skillInModal).length === 0
+      this.props.skillInModal.skillId === undefined
         ? "Добавить навык"
         : "Редактировать навык";
     let btnLabel =
-      Object.getOwnPropertyNames(this.props.skillInModal).length === 0
-        ? "Добавить"
-        : "Сохранить";
+      this.props.skillInModal.skillId === undefined ? "Добавить" : "Сохранить";
 
     return (
       <Modal
@@ -54,6 +101,8 @@ class SkillModal extends Component {
               placeholder="Название навыка"
               label="Название навыка"
               required
+              name="skillName"
+              onChange={this.onSkillPropertyChange}
               defaultValue={
                 this.state.skillInModal.skillName == undefined
                   ? ""
@@ -65,6 +114,8 @@ class SkillModal extends Component {
               type="text"
               placeholder="Вопрос для теста"
               label="Вопрос для теста"
+              name="skillQuestion"
+              onChange={this.onSkillPropertyChange}
               required
               defaultValue={
                 this.state.skillInModal.skillQuestion == undefined
@@ -78,6 +129,7 @@ class SkillModal extends Component {
                   level={item}
                   key={item.levelId}
                   removeLevelBtnHandler={this.removeLevelBtnHandler}
+                  onLevelPropertyChange={this.onLevelPropertyChange}
                 />
               ))}
             <Icon
@@ -89,10 +141,16 @@ class SkillModal extends Component {
           </Form>
         </Modal.Content>
         <Modal.Actions>
-          {Object.getOwnPropertyNames(this.state.skillInModal).length !== 0 && (
-            <Button color="red">Удалить</Button>
+          {this.props.skillInModal.skillId !== undefined && (
+            <Button color="red" onClick={this.removeSkillBtnHandler}>
+              Удалить
+            </Button>
           )}
-          <Button color="green" className="ui right floated button">
+          <Button
+            color="green"
+            className="ui right floated button"
+            onClick={this.addUpdateSkillBtnHandler}
+          >
             {btnLabel}
           </Button>
         </Modal.Actions>
@@ -106,7 +164,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  removeSkillModal
+  removeSkillModal,
+  addSkill,
+  updateSkill,
+  removeSkill
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SkillModal);
