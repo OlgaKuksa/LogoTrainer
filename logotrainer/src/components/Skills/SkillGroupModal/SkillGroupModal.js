@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, Button, Header, Form } from "semantic-ui-react";
 import { removeSkillGroupModal } from "../../../actions/skillGroupInModal";
-import { addSkillGroup, updateSkillGroup } from "../../../actions/skills";
+import {
+  addSkillGroup,
+  updateSkillGroup,
+  removeSKillGroup
+} from "../../../actions/skills";
 
 class SkillGroupModal extends Component {
   state = {
@@ -23,6 +27,12 @@ class SkillGroupModal extends Component {
     this.props.skillGroupInModal.skillGroupId === undefined
       ? this.props.addSkillGroup(this.state.skillGroup)
       : this.props.updateSkillGroup(this.state.skillGroup);
+    this.props.removeSkillGroupModal();
+  };
+
+  removeBtnHandler = () => {
+    if (this.state.skillGroup.skills.length !== 0) return;
+    this.props.removeSKillGroup(this.state.skillGroup);
     this.props.removeSkillGroupModal();
   };
   render() {
@@ -54,7 +64,7 @@ class SkillGroupModal extends Component {
             <Modal.Actions>
               {Object.getOwnPropertyNames(this.props.skillGroupInModal)
                 .length != 0 && (
-                <Button color="red" onSubmit={this.addUpdateBtnHandler}>
+                <Button color="red" onClick={this.removeBtnHandler}>
                   Удалить
                 </Button>
               )}
@@ -80,7 +90,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   removeSkillGroupModal,
   addSkillGroup,
-  updateSkillGroup
+  updateSkillGroup,
+  removeSKillGroup
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SkillGroupModal);

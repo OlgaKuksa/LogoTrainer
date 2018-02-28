@@ -107,12 +107,15 @@ const skills = (state = DEFAULT_STATE, action) => {
       return [...state, action.payload];
     }
     case UPDATE_SKILLGROUP:
-      console.log(action.payload);
       return state.map(
         skillGroup =>
           skillGroup.skillGroupId === action.payload.skillGroupId
             ? { ...skillGroup, ...action.payload }
             : skillGroup
+      );
+    case REMOVE_SKILLGROUP:
+      return state.filter(
+        item => item.skillGroupId !== action.payload.skillGroupId
       );
     default:
       return state;
