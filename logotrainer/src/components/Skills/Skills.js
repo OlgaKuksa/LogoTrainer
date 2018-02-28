@@ -64,7 +64,9 @@ class Skills extends Component {
               {selectedGroup.skills.map(item => (
                 <SkillCard key={item.id} skill={item} />
               ))}
-              <Card onClick={() => this.props.addSkillModal({})}>
+              <Card
+                onClick={() => this.props.addSkillModal({ skillLevels: [] })}
+              >
                 <Card.Content textAlign="center">
                   <Icon
                     name="plus square outline"

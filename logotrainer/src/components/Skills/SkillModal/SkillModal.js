@@ -5,6 +5,30 @@ import { removeSkillModal } from "../../../actions/skillInModal";
 import LevelForm from "./LevelForm";
 
 class SkillModal extends Component {
+  state = {
+    skillInModal: { ...this.props.skillInModal }
+  };
+
+  addLevelBtnHandler = () => {
+    const guid = require("uuid/v4");
+
+    this.setState(prevState => ({
+      ...prevState.skillInModal,
+      skillLevels: prevState.skillInModal.skillLevels.push({
+        levelId: guid()
+      })
+    }));
+  };
+
+  removeLevelBtnHandler = ev => {
+    let levelIdToRemove = ev.target.parentNode.getAttribute("levelid");
+    let skillToOperate = { ...this.state.skillInModal };
+    skillToOperate.skillLevels = skillToOperate.skillLevels.filter(
+      level => level.levelId != levelIdToRemove
+    );
+    this.setState({ skillInModal: skillToOperate });
+  };
+
   render() {
     let legend =
       Object.getOwnPropertyNames(this.props.skillInModal).length === 0
@@ -30,31 +54,41 @@ class SkillModal extends Component {
               label="Название навыка"
               required
               defaultValue={
-                this.props.skillInModal.skillName == undefined
+                this.state.skillInModal.skillName == undefined
                   ? ""
-                  : this.props.skillInModal.skillName
+                  : this.state.skillInModal.skillName
               }
             />
+
             <Form.Input
               type="text"
               placeholder="Вопрос для теста"
               label="Вопрос для теста"
               required
               defaultValue={
-                this.props.skillInModal.skillQuestion == undefined
+                this.state.skillInModal.skillQuestion == undefined
                   ? ""
-                  : this.props.skillInModal.skillQuestion
+                  : this.state.skillInModal.skillQuestion
               }
             />
-            {this.props.skillInModal.skillLevels !== undefined &&
-              this.props.skillInModal.skillLevels.map(item => (
-                <LevelForm level={item} key={item.levelId} />
+            {this.state.skillInModal.skillLevels !== undefined &&
+              this.state.skillInModal.skillLevels.map(item => (
+                <LevelForm
+                  level={item}
+                  key={item.levelId}
+                  removeLevelBtnHandler={this.removeLevelBtnHandler}
+                />
               ))}
-            <Icon name="add circle" color="olive" size="big" />
+            <Icon
+              name="add circle"
+              color="olive"
+              size="big"
+              onClick={this.addLevelBtnHandler}
+            />
           </Form>
         </Modal.Content>
         <Modal.Actions>
-          {Object.getOwnPropertyNames(this.props.skillInModal).length != 0 && (
+          {Object.getOwnPropertyNames(this.state.skillInModal).length !== 0 && (
             <Button color="red">Удалить</Button>
           )}
           <Button color="green" className="ui right floated button">
