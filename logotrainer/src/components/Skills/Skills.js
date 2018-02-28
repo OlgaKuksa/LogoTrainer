@@ -25,9 +25,12 @@ class Skills extends Component {
     });
   };
   render() {
-    let selectedGroup = this.props.skills.find(
-      item => item.skillGroupId === this.state.activeItem
-    );
+    let selectedGroup =
+      this.props.skills === undefined
+        ? {}
+        : this.props.skills.find(
+            item => item.skillGroupId === this.state.activeItem
+          );
     return (
       <div>
         <Grid>
@@ -60,22 +63,24 @@ class Skills extends Component {
             </Button>
           </Grid.Column>
           <Grid.Column stretched width={12}>
-            <CardGroup itemsPerRow={2} className="ui link cards">
-              {selectedGroup.skills.map(item => (
-                <SkillCard key={item.id} skill={item} />
-              ))}
-              <Card
-                onClick={() => this.props.addSkillModal({ skillLevels: [] })}
-              >
-                <Card.Content textAlign="center">
-                  <Icon
-                    name="plus square outline"
-                    size="massive"
-                    color="olive"
-                  />
-                </Card.Content>
-              </Card>
-            </CardGroup>
+            {selectedGroup !== undefined && (
+              <CardGroup itemsPerRow={2} className="ui link cards">
+                {selectedGroup.skills.map(item => (
+                  <SkillCard key={item.id} skill={item} />
+                ))}
+                <Card
+                  onClick={() => this.props.addSkillModal({ skillLevels: [] })}
+                >
+                  <Card.Content textAlign="center">
+                    <Icon
+                      name="plus square outline"
+                      size="massive"
+                      color="olive"
+                    />
+                  </Card.Content>
+                </Card>
+              </CardGroup>
+            )}
           </Grid.Column>
         </Grid>
         {this.props.skillInModal == null ? null : <SkillModal />}

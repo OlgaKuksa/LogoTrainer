@@ -63,11 +63,12 @@ class SkillGroupModal extends Component {
             />
             <Modal.Actions>
               {Object.getOwnPropertyNames(this.props.skillGroupInModal)
-                .length != 0 && (
-                <Button color="red" onClick={this.removeBtnHandler}>
-                  Удалить
-                </Button>
-              )}
+                .length != 0 &&
+                this.props.skillGroupInModal.skills.length === 0 && (
+                  <Button color="red" onClick={this.removeBtnHandler}>
+                    Удалить
+                  </Button>
+                )}
               <Button
                 color="green"
                 onClick={this.addUpdateBtnHandler}

@@ -103,7 +103,6 @@ const DEFAULT_STATE = [
 const skills = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case ADD_SKILLGROUP: {
-      console.log(action.payload);
       return [...state, action.payload];
     }
     case UPDATE_SKILLGROUP:
