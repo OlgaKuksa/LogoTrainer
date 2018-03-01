@@ -8,30 +8,43 @@ class KidModal extends Component {
   constructor(props) {
     super(props);
     const isNew = !props.kidInModal || !props.kidInModal.id;
-    const { firstName = "", lastName = "", isArchived = false } =
+    const {
+      firstName = "",
+      lastName = "",
+      isArchived = false,
+      dateOfBirth = new Date().toISOString().substring(0, 10)
+    } =
       props.kidInModal || {};
-    this.state = { isNew, firstName, lastName, isArchived };
+    const kidInModal = {
+      ...(props.kidInModal || {}),
+      firstName,
+      lastName,
+      isArchived,
+      dateOfBirth
+    };
+    this.state = { isNew, kidInModal };
   }
-  onFirstNameChange = e => {
-    this.setState({ firstName: e.target.value });
+  onKidPropertyChanged = e => {
+    const name = e.target.getAttribute("name");
+    const value =
+      e.target.getAttribute("type") === "checkbox"
+        ? e.target.checked
+        : e.target.value;
+    this.setState(prevState => ({
+      kidInModal: { ...prevState.kidInModal, [name]: value }
+    }));
   };
-  onLastNameChange = e => {
-    this.setState({ lastName: e.target.value });
-  };
-  onIsArchivedChanged = e => {
-    this.setState({ isArchived: e.target.checked });
-  };
-  onAddKid = () => {
-    const { firstName, lastName, isArchived } = this.state;
-    this.props.addKid({ firstName, lastName, isArchived });
-  };
-  onUpdateKid = () => {
-    const { firstName, lastName, isArchived } = this.state;
-    const kid = this.props.kidInModal;
-    this.props.updateKid({ ...kid, firstName, lastName, isArchived });
+  onSaveKid = () => {
+    const { isNew, kidInModal } = this.state;
+    const { addKid, updateKid } = this.props;
+    if (isNew) addKid(kidInModal);
+    else updateKid(kidInModal);
   };
   render() {
-    const { isNew, firstName, lastName, isArchived } = this.state;
+    const {
+      isNew,
+      kidInModal: { firstName, lastName, isArchived, dateOfBirth }
+    } = this.state;
     let legend = isNew ? "Добавить ребенка" : "Редактировать";
     let btnLabel = isNew ? "Добавить" : "Сохранить";
     return (
@@ -47,37 +60,38 @@ class KidModal extends Component {
               type="text"
               placeholder="Фамилия ребенка"
               label="Фамилия ребенка"
-              value={firstName}
-              onChange={this.onFirstNameChange}
+              name="firstName"
+              defaultValue={firstName}
+              onChange={this.onKidPropertyChanged}
             />
             <Form.Input
               type="text"
               placeholder="Имя ребенка"
               label="Имя ребенка"
-              value={lastName}
-              onChange={this.onLastNameChange}
+              name="lastName"
+              defaultValue={lastName}
+              onChange={this.onKidPropertyChanged}
             />
             <Form.Input
               label="Дата рождения"
               type="date"
-              defaultValue={
-                this.props.kidInModal == null
-                  ? new Date().toISOString().substring(0, 10)
-                  : this.props.kidInModal.dateOfBirth
-              }
-              name="date"
+              name="dateOfBirth"
+              defaultValue={dateOfBirth}
+              onChange={this.onKidPropertyChanged}
             />
             <Form.Field
               label="Выбыл из группы"
               control="input"
               type="checkbox"
-              checked={isArchived}
+              defaultChecked={isArchived}
+              name="isArchived"
               onChange={this.onIsArchivedChanged}
+              onChange={this.onKidPropertyChanged}
             />
             <Button
               className="ui right floated button"
               color="green"
-              onClick={isNew ? this.onAddKid : this.onUpdateKid}
+              onClick={this.onSaveKid}
             >
               {btnLabel}
             </Button>
