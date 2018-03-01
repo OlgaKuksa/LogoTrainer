@@ -1,3 +1,5 @@
+import { v4 as guid } from "uuid";
+
 export const GET_SKILLS = "GET_SKILLS";
 export const ADD_SKILLGROUP = "ADD_SKILLGROUP";
 export const ADD_SKILL = "ADD_SKILL";
@@ -5,7 +7,6 @@ export const UPDATE_SKILL = "UPDATE_SKILL";
 export const UPDATE_SKILLGROUP = "UPDATE_SKILLGROUP";
 export const REMOVE_SKILLGROUP = "REMOVE_SKILLGROUP";
 export const REMOVE_SKILL = "REMOVE_SKILL";
-const guid = require("uuid/v4");
 
 export const getSkills = payload => ({
   type: GET_SKILLS,

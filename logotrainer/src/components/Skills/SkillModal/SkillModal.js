@@ -4,6 +4,7 @@ import { Modal, Button, Header, Form, Message, Icon } from "semantic-ui-react";
 import { removeSkillModal } from "../../../actions/skillInModal";
 import LevelForm from "./LevelForm";
 import { addSkill, updateSkill, removeSkill } from "../../../actions/skills";
+import { v4 as guid } from "uuid";
 
 class SkillModal extends Component {
   state = {
@@ -11,7 +12,6 @@ class SkillModal extends Component {
   };
 
   addLevelBtnHandler = () => {
-    const guid = require("uuid/v4");
     let levels = [...this.state.skillInModal.skillLevels, { levelId: guid() }];
     let theSkill = { ...this.state.skillInModal };
     theSkill.skillLevels = [...levels];
