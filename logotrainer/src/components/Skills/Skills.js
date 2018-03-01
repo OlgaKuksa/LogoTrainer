@@ -17,7 +17,7 @@ import SkillGroupModal from "./SkillGroupModal";
 
 class Skills extends Component {
   state = {
-    activeItem: this.props.skills[0].skillGroupId || 0
+    activeItem: (this.props.skills[0] || {}).skillGroupId || 0
   };
   handleMenuItemClick = (e, { id }) => {
     this.setState({
@@ -26,7 +26,7 @@ class Skills extends Component {
   };
   render() {
     let selectedGroup =
-      this.props.skills === undefined
+      this.props.skills == null
         ? {}
         : this.props.skills.find(
             item => item.skillGroupId === this.state.activeItem

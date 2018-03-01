@@ -1,4 +1,5 @@
 import { v4 as guid } from "uuid";
+import { getAllSkills } from "../ApiWrapper";
 
 export const GET_SKILLS = "GET_SKILLS";
 export const ADD_SKILLGROUP = "ADD_SKILLGROUP";
@@ -8,10 +9,18 @@ export const UPDATE_SKILLGROUP = "UPDATE_SKILLGROUP";
 export const REMOVE_SKILLGROUP = "REMOVE_SKILLGROUP";
 export const REMOVE_SKILL = "REMOVE_SKILL";
 
-export const getSkills = payload => ({
+const getSkills = payload => ({
   type: GET_SKILLS,
   payload
 });
+
+export const getSkillsAsync = () => (dispatch, getState) => {
+  const state = getState();
+  if (state.skills) return Promise.resolve();
+  return getAllSkills().then(payload => {
+    dispatch(getSkills(payload));
+  });
+};
 
 export const addSkillGroup = groupName => ({
   type: ADD_SKILLGROUP,

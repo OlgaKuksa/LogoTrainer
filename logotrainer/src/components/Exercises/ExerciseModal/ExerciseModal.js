@@ -34,7 +34,7 @@ class ExerciseModal extends Component {
               rows="2"
               type="text"
               placeholder="Инвентарь"
-              label="Инвентрарь"
+              label="Инвентарь"
               name="exerciseInventory"
             />
             <Form.TextArea

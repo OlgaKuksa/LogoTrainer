@@ -6,6 +6,8 @@ import Header from "../Header";
 import KidsWrapper from "../KidsWrapper";
 import Exercises from "../Exercises";
 import Skills from "../Skills/Skills";
+import { connect } from "react-redux";
+import { getSkillsAsync } from "../../actions/skills";
 
 class Logotrainer extends Component {
   state = {
@@ -13,7 +15,11 @@ class Logotrainer extends Component {
     color: "green"
   };
   handleItemClick = (ev, { name }) => {
-    this.setState({ activeItem: name });
+    if (name == "skills") {
+      this.props
+        .getSkillsAsync()
+        .then(() => this.setState({ activeItem: name }));
+    } else this.setState({ activeItem: name });
   };
   render() {
     return (
@@ -52,5 +58,5 @@ class Logotrainer extends Component {
     );
   }
 }
-
-export default Logotrainer;
+const mapDispatchToProps = { getSkillsAsync };
+export default connect(undefined, mapDispatchToProps)(Logotrainer);
