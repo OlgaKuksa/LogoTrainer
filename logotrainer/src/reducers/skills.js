@@ -135,7 +135,21 @@ const skills = (state = DEFAULT_STATE, action) => {
                 )
               }
       );
-
+    case UPDATE_SKILL:
+      return state.map(
+        group =>
+          group.skillGroupId != action.payload.skillGroupId
+            ? group
+            : {
+                ...group,
+                skills: group.skills.map(
+                  skill =>
+                    skill.skillId != action.payload.skillToUpdate.skillId
+                      ? skill
+                      : action.payload.skillToUpdate
+                )
+              }
+      );
     default:
       return state;
   }

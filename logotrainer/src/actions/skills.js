@@ -33,9 +33,12 @@ export const addSkill = skillData => ({
   }
 });
 
-export const updateSkill = payload => ({
+export const updateSkill = skillData => ({
   type: UPDATE_SKILL,
-  payload
+  payload: {
+    skillGroupId: skillData.skillGroupId,
+    skillToUpdate: skillData.skill
+  }
 });
 
 export const updateSkillGroup = payload => ({
