@@ -15,11 +15,7 @@ class Logotrainer extends Component {
     color: "green"
   };
   handleItemClick = (ev, { name }) => {
-    if (name == "skills") {
-      this.props
-        .getSkillsAsync()
-        .then(() => this.setState({ activeItem: name }));
-    } else this.setState({ activeItem: name });
+    this.setState({ activeItem: name });
   };
   render() {
     return (

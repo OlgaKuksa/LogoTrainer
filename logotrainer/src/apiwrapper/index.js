@@ -33,18 +33,18 @@ const allSkills = [
         skillQuestion: "Произносит ли ребенок чисто звуки ш, ж, ч, щ?",
         skillLevels: [
           {
-            levelId: 111,
+            levelId: 121,
             levelNumber: 1,
             levelText:
               "Практически всегда, но иногда заменяет их другими (сь, ць и т.п.)"
           },
           {
-            levelId: 112,
+            levelId: 122,
             levelNumber: 2,
             levelText: "Иногда получается проскакивает, но чаще нет"
           },
           {
-            levelId: 113,
+            levelId: 123,
             levelNumber: 3,
             levelText: "Совсем не произносит"
           }
@@ -90,6 +90,42 @@ const allSkills = [
   }
 ];
 
+const allExercises = [
+  {
+    exerciseId: 10001,
+    exerciseName: "Фиксация языка вверху",
+    exerciseInventory: "ватная палочка",
+    exerciseSteps: "Помочь ребенку зафиксировать язык наверху",
+    exerciseMainSkillId: 12,
+    exerciseMainLevelId: 123,
+    exerciseSecondarySkills: [11]
+  },
+  {
+    exerciseId: 10002,
+    exerciseName: "Автоматизация звука ш",
+    exerciseInventory: "Лист со списком слов с буквой ш",
+    exerciseSteps:
+      "Читать слова. Заставлять ребенка повторять слова с буквой ш - повторять, если ошибается",
+    exerciseMainSkillId: 12,
+    exerciseMainLevelId: 121,
+    exerciseSecondarySkills: []
+  },
+  {
+    exerciseId: 10003,
+    exerciseName: "Составление краткого рассказа",
+    exerciseInventory: "Рассказ из 5 предложений",
+    exerciseSteps:
+      "Прочитать рассказ. По каждому предложению задать вопрос. Попросить ребенка пересказать",
+    exerciseMainSkillId: 21,
+    exerciseMainLevelId: 212,
+    exerciseSecondarySkills: [11, 12]
+  }
+];
+
 export const getAllSkills = () => {
   return Promise.resolve(allSkills);
+};
+
+export const getExerciseListApi = () => {
+  return Promise.resolve(allExercises);
 };
