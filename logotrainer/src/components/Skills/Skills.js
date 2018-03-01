@@ -66,7 +66,7 @@ class Skills extends Component {
             {selectedGroup !== undefined && (
               <CardGroup itemsPerRow={2} className="ui link cards">
                 {selectedGroup.skills.map(item => (
-                  <SkillCard key={item.id} skill={item} />
+                  <SkillCard key={item.skillId} skill={item} />
                 ))}
                 <Card
                   onClick={() => this.props.addSkillModal({ skillLevels: [] })}
