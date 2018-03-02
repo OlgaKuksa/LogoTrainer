@@ -1,10 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Modal, Header, Button, Form, Label } from "semantic-ui-react";
+import { Modal, Header, Button, Form, Label, Icon } from "semantic-ui-react";
 import { removeExerciseFromModal } from "../../../actions/exerciseInModal";
 import SelectSkillRow from "../SelectSkillRow";
 
 class ExerciseModal extends Component {
+  state = {
+    ...this.props.exerciseInModal
+  };
+
+  addSecondarySkillHandler = () => {
+    let exerciseToState = { ...this.state };
+    exerciseToState.exerciseSecondarySkills.push(
+      this.props.skills[0].skills[0].skillId
+    );
+    this.setState(exerciseToState);
+  };
+
+  removeSecondarySkill = skillId => {
+    let skillIndex = this.state.exerciseSecondarySkills.indexOf(skillId);
+    this.setState({
+      ...this.state,
+      exerciseSecondarySkills: this.state.exerciseSecondarySkills.filter(
+        (item, index) => skillIndex !== index
+      )
+    });
+  };
+
+  updateSecondarySkill = (skillId, index) => {
+    let secSkills = [...this.state.exerciseSecondarySkills];
+    secSkills[index] = skillId;
+    this.setState({
+      ...this.state,
+      exerciseSecondarySkills: [...secSkills]
+    });
+  };
+
   render() {
     let legend =
       Object.getOwnPropertyNames(this.props.exerciseInModal).length === 0
@@ -49,9 +80,33 @@ class ExerciseModal extends Component {
             <Label tag color="green">
               Основной навык
             </Label>
-            <SelectSkillRow isMain={true} />
-            <Label>Дополнительные навыки</Label>
-            <SelectSkillRow />
+            {
+              <SelectSkillRow
+                isMain={true}
+                skillId={this.state.exerciseMainSkillId}
+                levelId={this.state.exerciseMainLevelId}
+              />
+            }
+            <Label tag color="olive">
+              Дополнительные навыки
+            </Label>
+            {this.state.exerciseSecondarySkills.length !== 0 &&
+              this.state.exerciseSecondarySkills.map((item, index) => (
+                <SelectSkillRow
+                  skillId={item}
+                  key={index}
+                  index={index}
+                  removeSecondarySkill={this.removeSecondarySkill}
+                  updateSecondarySkill={this.updateSecondarySkill}
+                />
+              ))}
+
+            <Icon
+              name="add"
+              color="olive"
+              size="big"
+              onClick={this.addSecondarySkillHandler}
+            />
           </Form>
         </Modal.Content>
         <Button className="ui right floated button" color="green">
@@ -63,7 +118,8 @@ class ExerciseModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  exerciseInModal: state.exerciseInModal
+  exerciseInModal: state.exerciseInModal,
+  skills: state.skills
 });
 
 const mapDispatchToProps = {

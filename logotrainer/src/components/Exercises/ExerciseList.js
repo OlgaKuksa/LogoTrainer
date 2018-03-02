@@ -8,10 +8,10 @@ class ExerciseList extends Component {
       <Card.Group>
         {this.props.exerciseList.map(exercise => (
           <Card>
-            <Card.Header>{exercise.exerciseName}</Card.Header>
             <Card.Content>
-              Основной навык:
-              {
+              <Card.Header>{exercise.exerciseName}</Card.Header>
+
+              {"Основной навык: " +
                 this.props.skills
                   .find(
                     group =>
@@ -21,8 +21,7 @@ class ExerciseList extends Component {
                   )
                   .skills.find(
                     skill => skill.skillId === exercise.exerciseMainSkillId
-                  ).skillName
-              }
+                  ).skillName}
             </Card.Content>
           </Card>
         ))}
