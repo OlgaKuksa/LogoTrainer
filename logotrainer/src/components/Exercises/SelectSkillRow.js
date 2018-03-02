@@ -31,10 +31,15 @@ class SelectSkillRow extends Component {
       ...prevState,
       selectedSkillId: skillId
     }));
-    this.props.updateSecondarySkill(ev.target.value, this.props.index);
+    this.props.updateSecondarySkill(skillId, this.props.index);
   };
   onLevelChange = ev => {
-    return;
+    let levelId = ev.target.value;
+    this.setState(prevState => ({
+      ...prevState,
+      selectedLevelId: levelId
+    }));
+    this.props.updateMainLevel(levelId);
   };
 
   render() {

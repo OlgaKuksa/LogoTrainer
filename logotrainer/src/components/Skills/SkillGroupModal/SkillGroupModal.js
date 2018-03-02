@@ -13,7 +13,7 @@ class SkillGroupModal extends Component {
     skillGroup: { ...this.props.skillGroupInModal }
   };
 
-  changeGroupNameBtnHandler = ev => {
+  changeGroupNameHandler = ev => {
     let newGroupName = ev.target.value;
     this.setState(prevState => ({
       skillGroup: {
@@ -59,7 +59,7 @@ class SkillGroupModal extends Component {
                   ? ""
                   : this.props.skillGroupInModal.skillGroupName
               }
-              onChange={this.changeGroupNameBtnHandler}
+              onChange={this.changeGroupNameHandler}
             />
             <Modal.Actions>
               {Object.getOwnPropertyNames(this.props.skillGroupInModal)

@@ -15,7 +15,9 @@ class Exercises extends Component {
           onClick={() =>
             this.props.addExerciseToModal({
               exerciseSecondarySkills: [],
-              exerciseMainSkillId: this.props.skills[0].skills[0].skillId
+              exerciseMainSkillId: this.props.skills[0].skills[0].skillId,
+              exerciseMainLevelId: this.props.skills[0].skills[0].skillLevels[0]
+                .levelId
             })
           }
         >

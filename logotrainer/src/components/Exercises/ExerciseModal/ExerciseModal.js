@@ -3,10 +3,24 @@ import { connect } from "react-redux";
 import { Modal, Header, Button, Form, Label, Icon } from "semantic-ui-react";
 import { removeExerciseFromModal } from "../../../actions/exerciseInModal";
 import SelectSkillRow from "../SelectSkillRow";
+import {
+  addExerciseAsync,
+  updateExerciseAsync,
+  removeExerciseAsync
+} from "../../../actions/exerciseList";
 
 class ExerciseModal extends Component {
   state = {
     ...this.props.exerciseInModal
+  };
+
+  onExercisePropertyChange = ev => {
+    let name = ev.target.getAttribute("name");
+    let value = ev.target.value;
+    this.setState({
+      ...this.state,
+      [name]: value
+    });
   };
 
   addSecondarySkillHandler = () => {
@@ -34,15 +48,34 @@ class ExerciseModal extends Component {
     });
   };
 
+  updateMainLevel = levelId => {
+    this.setState({
+      ...this.state,
+      exerciseMainLevelId: levelId
+    });
+  };
+
+  updateMainSkillHandler = skillId => {
+    this.setState({
+      ...this.state,
+      exerciseMainSkillId: skillId,
+      exerciseMainLevelId: this.props.skills[0].skills[0].skillLevels[0].levelId
+    });
+  };
+
+  addUpdateExerciseBtnHandler = () => {
+    this.state.exerciseId === undefined
+      ? this.props.addExerciseAsync(this.state)
+      : this.props.updateExerciseAsync(this.state);
+  };
+
   render() {
     let legend =
-      Object.getOwnPropertyNames(this.props.exerciseInModal).length === 0
+      this.state.exerciseId === undefined
         ? "Добавить упражнение"
         : "Редактировать упражнение";
     let btnLabel =
-      Object.getOwnPropertyNames(this.props.exerciseInModal).length === 0
-        ? "Добавить"
-        : "Сохранить";
+      this.state.exerciseId === undefined ? "Добавить" : "Сохранить";
     return (
       <Modal
         onClose={this.props.removeExerciseFromModal}
@@ -58,6 +91,8 @@ class ExerciseModal extends Component {
               label="Название упражнения"
               required
               name="exerciseName"
+              onChange={this.onExercisePropertyChange}
+              defaultValue={this.state.exerciseName}
             />
             <Form.TextArea
               rows="2"
@@ -65,6 +100,9 @@ class ExerciseModal extends Component {
               placeholder="Инвентарь"
               label="Инвентарь"
               name="exerciseInventory"
+              onChange={this.onExercisePropertyChange}
+              required
+              defaultValue={this.state.exerciseInventory}
             />
             <Form.TextArea
               rows="8"
@@ -72,7 +110,9 @@ class ExerciseModal extends Component {
               placeholder="Методика"
               label="Методика"
               name="exerciseSteps"
+              onChange={this.onExercisePropertyChange}
               required
+              defaultValue={this.state.exerciseSteps}
             />
 
             <Label tag color="green">
@@ -83,6 +123,8 @@ class ExerciseModal extends Component {
                 isMain={true}
                 skillId={this.state.exerciseMainSkillId}
                 levelId={this.state.exerciseMainLevelId}
+                updateMainLevel={this.updateMainLevel}
+                updateSecondarySkill={this.updateMainSkillHandler}
               />
             }
             <Label tag color="olive">
@@ -109,7 +151,19 @@ class ExerciseModal extends Component {
               ))}
           </Form>
         </Modal.Content>
-        <Button className="ui right floated button" color="green">
+        {this.state.exerciseId !== undefined && (
+          <Button
+            color="red"
+            onClick={() => this.props.removeExerciseAsync(this.state)}
+          >
+            Удалить
+          </Button>
+        )}
+        <Button
+          className="ui right floated button"
+          color="green"
+          onClick={this.addUpdateExerciseBtnHandler}
+        >
           {btnLabel}
         </Button>
       </Modal>
@@ -123,7 +177,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  removeExerciseFromModal
+  removeExerciseFromModal,
+  addExerciseAsync,
+  updateExerciseAsync,
+  removeExerciseAsync
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExerciseModal);

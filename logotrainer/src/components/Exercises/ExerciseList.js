@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Card, Header } from "semantic-ui-react";
+import { Card, Icon } from "semantic-ui-react";
+import { addExerciseToModal } from "../../actions/exerciseInModal";
 
 class ExerciseList extends Component {
   render() {
     return (
       <Card.Group>
         {this.props.exerciseList.map(exercise => (
-          <Card>
+          <Card key={exercise.exerciseId}>
             <Card.Content>
               <Card.Header>{exercise.exerciseName}</Card.Header>
 
@@ -23,6 +24,12 @@ class ExerciseList extends Component {
                     skill => skill.skillId === exercise.exerciseMainSkillId
                   ).skillName}
             </Card.Content>
+            <Icon
+              name="edit"
+              color="olive"
+              size="large"
+              onClick={() => this.props.addExerciseToModal(exercise)}
+            />
           </Card>
         ))}
       </Card.Group>
@@ -35,4 +42,8 @@ const mapStateToProps = state => ({
   skills: state.skills
 });
 
-export default connect(mapStateToProps, undefined)(ExerciseList);
+const mapDispatchToProps = {
+  addExerciseToModal
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExerciseList);

@@ -90,7 +90,7 @@ const allSkills = [
   }
 ];
 
-const allExercises = [
+let allExercises = [
   {
     exerciseId: "10001",
     exerciseName: "Фиксация языка вверху",
@@ -123,9 +123,36 @@ const allExercises = [
 ];
 
 export const getAllSkills = () => {
-  return Promise.resolve(allSkills);
+  return Promise.resolve([...allSkills]);
 };
 
 export const getExerciseListApi = () => {
-  return Promise.resolve(allExercises);
+  return Promise.resolve([...allExercises]);
+};
+
+export const addExerciseApi = exercise => {
+  exercise.exerciseId = Date.now();
+  allExercises.push(exercise);
+  return Promise.resolve(exercise);
+};
+
+export const updateExerciseApi = exerciseToUpdate => {
+  allExercises = [
+    ...allExercises.map(
+      exercise =>
+        exercise.exerciseId != exerciseToUpdate.exerciseId
+          ? exercise
+          : exerciseToUpdate
+    )
+  ];
+  return Promise.resolve(exerciseToUpdate);
+};
+
+export const removeExerciseApi = exerciseToRemove => {
+  allExercises = [
+    ...allExercises.filter(
+      exercise => exercise.exerciseId !== exerciseToRemove.exerciseId
+    )
+  ];
+  return Promise.resolve(exerciseToRemove);
 };
