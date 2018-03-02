@@ -17,17 +17,15 @@ class ExerciseModal extends Component {
     this.setState(exerciseToState);
   };
 
-  removeSecondarySkill = skillId => {
-    let skillIndex = this.state.exerciseSecondarySkills.indexOf(skillId);
+  removeSecondarySkillHandler = () => {
+    let filteredSkills = this.state.exerciseSecondarySkills.slice(0, -1);
     this.setState({
       ...this.state,
-      exerciseSecondarySkills: this.state.exerciseSecondarySkills.filter(
-        (item, index) => skillIndex !== index
-      )
+      exerciseSecondarySkills: [...filteredSkills]
     });
   };
 
-  updateSecondarySkill = (skillId, index) => {
+  updateSecondarySkillHandler = (skillId, index) => {
     let secSkills = [...this.state.exerciseSecondarySkills];
     secSkills[index] = skillId;
     this.setState({
@@ -90,23 +88,25 @@ class ExerciseModal extends Component {
             <Label tag color="olive">
               Дополнительные навыки
             </Label>
-            {this.state.exerciseSecondarySkills.length !== 0 &&
-              this.state.exerciseSecondarySkills.map((item, index) => (
-                <SelectSkillRow
-                  skillId={item}
-                  key={index}
-                  index={index}
-                  removeSecondarySkill={this.removeSecondarySkill}
-                  updateSecondarySkill={this.updateSecondarySkill}
-                />
-              ))}
-
             <Icon
               name="add"
               color="olive"
               size="big"
               onClick={this.addSecondarySkillHandler}
             />
+            {this.state.exerciseSecondarySkills.length !== 0 &&
+              this.state.exerciseSecondarySkills.map((item, index) => (
+                <SelectSkillRow
+                  skillId={item}
+                  key={index}
+                  index={index}
+                  isLast={
+                    index == this.state.exerciseSecondarySkills.length - 1
+                  }
+                  removeSecondarySkill={this.removeSecondarySkillHandler}
+                  updateSecondarySkill={this.updateSecondarySkillHandler}
+                />
+              ))}
           </Form>
         </Modal.Content>
         <Button className="ui right floated button" color="green">

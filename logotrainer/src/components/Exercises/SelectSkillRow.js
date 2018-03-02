@@ -37,10 +37,6 @@ class SelectSkillRow extends Component {
     return;
   };
 
-  onSkillRemove = ev => {
-    this.props.removeSecondarySkill(this.state.selectedSkillId);
-  };
-
   render() {
     return (
       <div>
@@ -80,7 +76,7 @@ class SelectSkillRow extends Component {
                 ))}
             </select>
           </Label>
-          {this.props.isMain ? (
+          {this.props.isMain && (
             <Label>
               Уровень развития
               <select
@@ -103,12 +99,13 @@ class SelectSkillRow extends Component {
                   ))}
               </select>
             </Label>
-          ) : (
+          )}
+          {this.props.isLast && (
             <Icon
               name="remove circle"
               color="red"
               size="big"
-              onClick={this.onSkillRemove}
+              onClick={this.props.removeSecondarySkill}
             />
           )}
         </Form.Group>

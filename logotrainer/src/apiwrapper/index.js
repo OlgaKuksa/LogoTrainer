@@ -5,7 +5,7 @@ const allSkills = [
     skills: [
       {
         skillId: "11",
-        skillName: "Произношение свистящих",
+        skillName: "Произношение свистящих 11",
         skillQuestion:
           "Произносит ли ребенок звуки с-сь, з-зь (всегда и чисто)?",
         skillLevels: [
@@ -29,7 +29,7 @@ const allSkills = [
       },
       {
         skillId: "12",
-        skillName: "Произношение шипящих",
+        skillName: "Произношение шипящих 12",
         skillQuestion: "Произносит ли ребенок чисто звуки ш, ж, ч, щ?",
         skillLevels: [
           {
@@ -58,7 +58,7 @@ const allSkills = [
     skills: [
       {
         skillId: "21",
-        skillName: "Составление предложения",
+        skillName: "Составление предложения 21",
         skillQuestion:
           "Говорит ли ребенок правильными развернутыми предложениями (всегда или почти всегда)?",
         skillLevels: [
