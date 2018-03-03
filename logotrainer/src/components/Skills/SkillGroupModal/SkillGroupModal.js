@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { Modal, Button, Header, Form } from "semantic-ui-react";
 import { removeSkillGroupModal } from "../../../actions/skillGroupInModal";
 import {
-  addSkillGroup,
-  updateSkillGroup,
-  removeSkillGroup
+  addSkillGroupAsync as addSkillGroup,
+  updateSkillGroupAsync as updateSkillGroup,
+  removeSkillGroupAsync as removeSkillGroup
 } from "../../../actions/skills";
 
 class SkillGroupModal extends Component {

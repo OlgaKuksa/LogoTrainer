@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import { Modal, Button, Header, Form, Message, Icon } from "semantic-ui-react";
 import { removeSkillModal } from "../../../actions/skillInModal";
 import LevelForm from "./LevelForm";
-import { addSkill, updateSkill, removeSkill } from "../../../actions/skills";
+import {
+  addSkillAsync as addSkill,
+  updateSkillAsync as updateSkill,
+  removeSkillAsync as removeSkill
+} from "../../../actions/skills";
 import { v4 as guid } from "uuid";
 
 class SkillModal extends Component {
