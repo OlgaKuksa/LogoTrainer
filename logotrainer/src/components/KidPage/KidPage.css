@@ -1,0 +1,10 @@
+.KidNameInMenu {
+  position: absolute;
+  right: 0;
+  background-color: white;
+  color: olive;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 25px;
+  vertical-align: middle;
+  padding: 0.7em;
+}
