@@ -122,8 +122,38 @@ let allExercises = [
   }
 ];
 
-export const getAllSkills = () => {
+export const getSkillsApi = () => {
   return Promise.resolve([...allSkills]);
+};
+
+export const addSkillGroupApi = skillGroup => {
+  //TODO
+  return Promise.resolve(skillGroup);
+};
+
+export const addSkillApi = payload => {
+  //TODO
+  return Promise.resolve(payload);
+};
+
+export const updateSkillApi = payload => {
+  //TODO
+  return Promise.resolve(payload);
+};
+
+export const updateSkillGroupApi = payload => {
+  //TODO
+  return Promise.resolve(payload);
+};
+
+export const removeSkillApi = payload => {
+  //TODO
+  return Promise.resolve(payload);
+};
+
+export const removeSkillGroupApi = payload => {
+  //TODO
+  return Promise.resolve(payload);
 };
 
 export const getExerciseListApi = () => {
