@@ -140,7 +140,7 @@ export const updateExerciseApi = exerciseToUpdate => {
   allExercises = [
     ...allExercises.map(
       exercise =>
-        exercise.exerciseId != exerciseToUpdate.exerciseId
+        exercise.exerciseId !== exerciseToUpdate.exerciseId
           ? exercise
           : exerciseToUpdate
     )

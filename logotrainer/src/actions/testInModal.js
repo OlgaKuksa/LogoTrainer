@@ -1,6 +1,6 @@
 export const ADD_TESTMODAL = "ADD_TESTMODAL";
 export const REMOVE_TESTMODAL = "REMOVE_TESTMODAL";
-const uuid = require("uuid/v4");
+//import { v4 as uuid } from "uuid";
 
 export const addTestModal = payload => ({
   type: ADD_TESTMODAL,
