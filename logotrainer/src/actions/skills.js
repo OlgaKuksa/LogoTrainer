@@ -22,10 +22,10 @@ export const getSkillsAsync = () => (dispatch, getState) => {
   });
 };
 
-export const addSkillGroup = groupName => ({
+export const addSkillGroup = skillGroup => ({
   type: ADD_SKILLGROUP,
   payload: {
-    ...groupName,
+    ...skillGroup,
     skillGroupId: guid(),
     skills: []
   }
