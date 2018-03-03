@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Icon, Button, Menu, Grid } from "semantic-ui-react";
 import { clearKidPage } from "../../actions/kidInPage";
 import { connect } from "react-redux";
-import "./KidPage.css";
+import "./kidpage.css";
+import ProfileKid from "./ProfileKid";
 
 class KidPage extends Component {
   state = {
@@ -51,6 +52,7 @@ class KidPage extends Component {
               this.props.kidInPage.lastName}
           </div>
         </Menu>
+        {this.state.activeItem === "profile" && <ProfileKid />}
       </div>
     );
   }
