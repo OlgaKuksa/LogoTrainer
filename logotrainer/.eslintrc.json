@@ -2,6 +2,7 @@
   "extends": "react-app",
   "plugins": ["dependencies"],
   "rules": {
-    "dependencies/no-cycles": "error"
+    "dependencies/no-cycles": "error",
+    "eqeqeq": ["warn", "smart"]
   }
 }
