@@ -14,18 +14,16 @@ class ProfileKid extends Component {
               Пройти тест
             </Button>
             {this.props.testInModal != null ? <TestModal /> : null}
-            <List divided bulleted relaxed>
+            <List bulleted>
               {this.props.testResults != null &&
-                this.props.testResults.map(testResult => (
-                  <List.Item>
-                    <List.Content>
-                      <List.Header
-                        as="a"
-                        onClick={() => this.props.addTestModal(testResult)}
-                      >
-                        {"Профиль от " + testResult.testDate}
-                      </List.Header>
-                    </List.Content>
+                this.props.testResults.map(kidProfile => (
+                  <List.Item key={kidProfile.kidProfileId}>
+                    <List.Header>
+                      <a onClick={() => this.props.addTestModal(kidProfile)}>
+                        {"Профиль от " +
+                          kidProfile.createDateTime.toLocaleDateString()}
+                      </a>
+                    </List.Header>
                   </List.Item>
                 ))}
             </List>

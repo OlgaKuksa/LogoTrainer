@@ -1,4 +1,5 @@
 import { addTestResultApi } from "../ApiWrapper";
+import { removeTestModal } from "./testInModal";
 export const GET_TESTRESULTS = "GET_TESTRESULTS";
 export const ADD_TESTRESULT = "ADD_TESTRESULT";
 
@@ -12,6 +13,9 @@ const addTestResult = payload => ({
   payload
 });
 
-export const addTestResultAsync = testResult => dispatch => {
-  return addTestResultApi(testResult).then(payload => addTestResult(payload));
+export const addTestResultAsync = (kidId, testResult) => dispatch => {
+  return addTestResultApi(kidId, testResult).then(payload => {
+    dispatch(addTestResult(payload));
+    dispatch(removeTestModal());
+  });
 };

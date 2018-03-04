@@ -1,12 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Header, Checkbox, Form } from "semantic-ui-react";
 
 class TestModalSkillItem extends Component {
-  state = {};
+  state = {
+    value:
+      this.props.isReadonly &&
+      this.props.testInModal.testResult[this.props.skillItem.skillId]
+  };
 
   handleChange = (ev, { value }) => {
     this.setState({ value });
-    this.props.handleLevelChange(this.props.skillId, value);
+    this.props.handleLevelChange(this.props.skillItem.skillId, value);
   };
 
   render() {
@@ -22,6 +27,7 @@ class TestModalSkillItem extends Component {
                 label={level.levelText}
                 checked={this.state.value == level.levelId}
                 onClick={this.handleChange}
+                readOnly={this.props.isReadonly}
               />
             </Form.Field>
           ))}
@@ -32,4 +38,9 @@ class TestModalSkillItem extends Component {
   }
 }
 
-export default TestModalSkillItem;
+const mapStateToProps = state => ({
+  testInModal: state.testInModal,
+  isReadonly: state.testInModal.kidProfileId !== undefined
+});
+
+export default connect(mapStateToProps, undefined)(TestModalSkillItem);

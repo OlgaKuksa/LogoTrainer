@@ -141,9 +141,9 @@ let allExercises = [
 
 let TestResults = [
   {
-    testResultId: "11111",
+    kidProfileId: "11111",
     kidId: 1,
-    testDate: new Date(),
+    createDateTime: new Date(),
     testResult: {
       "11": "110",
       "12": "121",
@@ -219,18 +219,16 @@ export const removeExerciseApi = exerciseToRemove => {
 
 export const addTestResultApi = (kidId, testResult) => {
   let addedData = {
-    testResultId: uuid(),
+    kidProfileId: uuid(),
     kidId,
     testResult: { ...testResult },
-    testDate: new Date()
+    createDateTime: new Date()
   };
   TestResults = [...TestResults, addedData];
   return Promise.resolve(addedData);
 };
 
 export const getTestResultsApi = kidId => {
-  console.log(kidId);
-  console.log(TestResults.filter(resultObject => resultObject.kidId === kidId));
   return Promise.resolve(
     TestResults.filter(resultObject => resultObject.kidId === kidId)
   );
