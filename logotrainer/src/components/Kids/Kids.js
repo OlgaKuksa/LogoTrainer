@@ -4,7 +4,7 @@ import { Card, CardGroup, Icon, Label } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { getKids } from "../../actions/kids";
 import { addToModal } from "../../actions/kidInModal";
-import { addKidToPage } from "../../actions/kidInPage";
+import { addKidToPageAsync } from "../../actions/kidInPage";
 import KidModal from "./KidModal";
 
 class Kids extends Component {
@@ -41,7 +41,7 @@ class Kids extends Component {
         <CardGroup itemsPerRow={5} className="ui link cards">
           {filteredKids.map((item, index) => (
             <Card key={index} color="olive">
-              <Card.Content onClick={()=>this.props.addKidToPage(item)}>
+              <Card.Content onClick={() => this.props.addKidToPageAsync(item)}>
                 <Card.Header>
                   {item.firstName} {item.lastName}
                 </Card.Header>
@@ -79,7 +79,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getKids,
   addToModal,
-  addKidToPage
+  addKidToPageAsync
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Kids);

@@ -2,7 +2,7 @@ import { GET_KIDS, UPDATE_KID, ADD_KID } from "../actions/kids";
 
 const DEFAULT_STATE = [
   {
-    id: 1,
+    kidId: 1,
     firstName: "Егор",
     lastName: "Иванов",
     dateOfBirth: "2012-05-19",
@@ -10,7 +10,7 @@ const DEFAULT_STATE = [
     isArchived: false
   },
   {
-    id: 2,
+    kidId: 2,
     firstName: "Анастасия",
     lastName: "Семенова",
     dateOfBirth: "2012-03-15",
@@ -18,7 +18,7 @@ const DEFAULT_STATE = [
     isArchived: false
   },
   {
-    id: 3,
+    kidId: 3,
     firstName: "Иван",
     lastName: "Алексин",
     dateOfBirth: "2011-12-24",
@@ -36,7 +36,9 @@ const kids = (state = DEFAULT_STATE, action) => {
     case UPDATE_KID:
       return state.map(
         kid =>
-          kid.id === action.payload.id ? { ...kid, ...action.payload } : kid
+          kid.kidId === action.payload.kidId
+            ? { ...kid, ...action.payload }
+            : kid
       );
     default:
       return state;

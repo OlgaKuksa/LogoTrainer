@@ -11,7 +11,7 @@ export const addKid = kid => ({
   type: ADD_KID,
   payload: {
     ...kid,
-    id: Date.now(),
+    kidId: Date.now(),
     isArchived: false
   }
 });

@@ -15,6 +15,8 @@ import { addSkillGroupModal } from "../../actions/skillGroupInModal";
 import SkillModal from "./SkillModal";
 import SkillGroupModal from "./SkillGroupModal";
 
+const uuid = require("uuid/v4");
+
 class Skills extends Component {
   state = {
     activeItem: (this.props.skills[0] || {}).skillGroupId || 0
@@ -69,7 +71,17 @@ class Skills extends Component {
                   <SkillCard key={item.skillId} skill={item} />
                 ))}
                 <Card
-                  onClick={() => this.props.addSkillModal({ skillLevels: [] })}
+                  onClick={() =>
+                    this.props.addSkillModal({
+                      skillLevels: [
+                        {
+                          levelId: uuid(),
+                          levelNumber: 100,
+                          levelText: "Да, всегда"
+                        }
+                      ]
+                    })
+                  }
                 >
                   <Card.Content textAlign="center">
                     <Icon

@@ -13,7 +13,7 @@ class SkillCard extends Component {
           {this.props.skill.skillLevels != undefined &&
             this.props.skill.skillLevels.map(level => (
               <div key={level.levelId}>
-                {level.levelNumber + " : " + level.levelText}
+                {level.levelNumber + "% : " + level.levelText}
               </div>
             ))}
           <Icon

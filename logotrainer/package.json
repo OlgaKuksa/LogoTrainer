@@ -18,5 +18,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "eslint-plugin-dependencies": "^2.4.0",
+    "eslint-plugin-import": "^2.9.0"
   }
 }

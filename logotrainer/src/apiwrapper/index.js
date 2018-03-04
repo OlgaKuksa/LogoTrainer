@@ -1,3 +1,5 @@
+const uuid = require("uuid/v4");
+
 const allSkills = [
   {
     skillGroupId: "1",
@@ -10,18 +12,23 @@ const allSkills = [
           "Произносит ли ребенок звуки с-сь, з-зь (всегда и чисто)?",
         skillLevels: [
           {
+            levelId: "110",
+            levelNumber: 100,
+            levelText: "Да, всегда"
+          },
+          {
             levelId: "111",
-            levelNumber: 1,
+            levelNumber: 80,
             levelText: "Практически всегда, но иногда заменяет их другими"
           },
           {
             levelId: "112",
-            levelNumber: 2,
+            levelNumber: 50,
             levelText: "Иногда получается произносить, но чаще нет"
           },
           {
             levelId: "113",
-            levelNumber: 3,
+            levelNumber: 10,
             levelText:
               "Ребенок совсем не произносит звуки или произносит очень редко"
           }
@@ -33,19 +40,24 @@ const allSkills = [
         skillQuestion: "Произносит ли ребенок чисто звуки ш, ж, ч, щ?",
         skillLevels: [
           {
+            levelId: "120",
+            levelNumber: 100,
+            levelText: "Да, всегда"
+          },
+          {
             levelId: "121",
-            levelNumber: 1,
+            levelNumber: 75,
             levelText:
               "Практически всегда, но иногда заменяет их другими (сь, ць и т.п.)"
           },
           {
             levelId: "122",
-            levelNumber: 2,
+            levelNumber: 50,
             levelText: "Иногда получается проскакивает, но чаще нет"
           },
           {
             levelId: "123",
-            levelNumber: 3,
+            levelNumber: 0,
             levelText: "Совсем не произносит"
           }
         ]
@@ -63,25 +75,30 @@ const allSkills = [
           "Говорит ли ребенок правильными развернутыми предложениями (всегда или почти всегда)?",
         skillLevels: [
           {
+            levelId: "210",
+            levelNumber: 100,
+            levelText: "Да, всегда"
+          },
+          {
             levelId: "211",
-            levelNumber: 1,
+            levelNumber: 80,
             levelText: "Предложения правильные, но не очень развернутые"
           },
           {
             levelId: "212",
-            levelNumber: 2,
+            levelNumber: 60,
             levelText:
               "Предложения есть, но есть небольшие ошибки (например, в предлогах)"
           },
           {
             levelId: "213",
-            levelNumber: 3,
+            levelNumber: 25,
             levelText:
               "Грамматический строй серьезно нарушен (например, не согласуются подлежащее и сказуемое, порядок слов нарушается)"
           },
           {
             levelId: "214",
-            levelNumber: 3,
+            levelNumber: 5,
             levelText: "Есть отдельные слова"
           }
         ]
@@ -119,6 +136,19 @@ let allExercises = [
     exerciseMainSkillId: "21",
     exerciseMainLevelId: "212",
     exerciseSecondarySkills: ["11", "12"]
+  }
+];
+
+let TestResults = [
+  {
+    testResultId: "11111",
+    kidId: 1,
+    testDate: new Date(),
+    testResult: {
+      "11": "110",
+      "12": "121",
+      "21": "212"
+    }
   }
 ];
 
@@ -185,4 +215,23 @@ export const removeExerciseApi = exerciseToRemove => {
     )
   ];
   return Promise.resolve(exerciseToRemove);
+};
+
+export const addTestResultApi = (kidId, testResult) => {
+  let addedData = {
+    testResultId: uuid(),
+    kidId,
+    testResult: { ...testResult },
+    testDate: new Date()
+  };
+  TestResults = [...TestResults, addedData];
+  return Promise.resolve(addedData);
+};
+
+export const getTestResultsApi = kidId => {
+  console.log(kidId);
+  console.log(TestResults.filter(resultObject => resultObject.kidId === kidId));
+  return Promise.resolve(
+    TestResults.filter(resultObject => resultObject.kidId === kidId)
+  );
 };

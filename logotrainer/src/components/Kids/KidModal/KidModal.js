@@ -85,7 +85,6 @@ class KidModal extends Component {
               type="checkbox"
               defaultChecked={isArchived}
               name="isArchived"
-              onChange={this.onIsArchivedChanged}
               onChange={this.onKidPropertyChanged}
             />
             <Button
