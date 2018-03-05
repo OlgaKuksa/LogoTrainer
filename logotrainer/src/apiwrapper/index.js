@@ -275,3 +275,13 @@ export const updateKidApi = payload => {
   return Promise.resolve(payload);
 };
 //end: kids
+//begin: groups
+const allGroups = [
+  { groupId: "1", groupNumber: "1" },
+  { groupId: "2", groupNumber: "2" },
+  { groupId: "3", groupNumber: "3" }
+];
+export const getGroupsApi = () => {
+  return Promise.resolve([...allGroups]);
+};
+//end: groups

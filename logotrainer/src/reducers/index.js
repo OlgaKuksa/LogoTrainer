@@ -9,8 +9,10 @@ import skillGroupInModal from "./skillGroupInModal";
 import exerciseList from "./exerciseList";
 import testInModal from "./testInModal";
 import testResults from "./testResults";
+import groups from "./groups";
 
 const appReducers = combineReducers({
+  groups,
   kids,
   kidInModal,
   kidInPage,
