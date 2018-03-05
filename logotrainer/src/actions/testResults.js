@@ -1,4 +1,4 @@
-import { addTestResultApi } from "../ApiWrapper";
+import { addTestResultApi } from "../apiwrapper";
 import { removeTestModal } from "./testInModal";
 export const GET_TESTRESULTS = "GET_TESTRESULTS";
 export const ADD_TESTRESULT = "ADD_TESTRESULT";

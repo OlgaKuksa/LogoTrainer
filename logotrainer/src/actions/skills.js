@@ -7,7 +7,7 @@ import {
   updateSkillGroupApi,
   removeSkillApi,
   removeSkillGroupApi
-} from "../ApiWrapper";
+} from "../apiwrapper";
 
 export const GET_SKILLS = "GET_SKILLS";
 export const ADD_SKILLGROUP = "ADD_SKILLGROUP";

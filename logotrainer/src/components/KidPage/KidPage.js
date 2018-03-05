@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Icon, Button, Menu, Grid } from "semantic-ui-react";
 import { clearKidPage } from "../../actions/kidInPage";
 import { connect } from "react-redux";
-import "./kidpage.css";
+import "./KidPage.css";
 import ProfileKid from "./ProfileKid";
 
 class KidPage extends Component {

@@ -3,7 +3,7 @@ import {
   addExerciseApi,
   updateExerciseApi,
   removeExerciseApi
-} from "../ApiWrapper";
+} from "../apiwrapper";
 import { removeExerciseFromModal } from "./exerciseInModal";
 export const GET_EXERCISE_LIST = "GET_EXERCISE_LIST";
 export const ADD_EXERCISE = "ADD_EXERCISE";

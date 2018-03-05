@@ -1,4 +1,4 @@
-import { getTestResultsApi } from "../ApiWrapper";
+import { getTestResultsApi } from "../apiwrapper";
 import { getTestResults } from "./testResults";
 export const ADD_KID_TO_PAGE = "ADD_KID_TO_PAGE";
 export const CLEAR_KIDPAGE = "CLEAR_KIDPAGE";
