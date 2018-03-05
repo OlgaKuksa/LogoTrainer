@@ -1,25 +1,49 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Card, CardGroup, Icon, Label } from "semantic-ui-react";
+import {
+  Card,
+  CardGroup,
+  Icon,
+  Label,
+  Dimmer,
+  Segment
+} from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
-import { getKids } from "../../actions/kids";
+import { getKidsAsync as getKids } from "../../actions/kids";
 import { addToModal } from "../../actions/kidInModal";
 import { addKidToPageAsync } from "../../actions/kidInPage";
 import KidModal from "./KidModal";
 
 class Kids extends Component {
   state = {
-    groups: [1, 2, 3],
+    groups: ["1", "2", "3"],
     selectedGroup: 1
   };
 
   groupChanged = ev => {
     this.setState({ selectedGroup: ev.target.value });
   };
+  componentDidMount() {
+    if (this.props.kids == null) {
+      this.props.getKids();
+    }
+  }
+
+  addNewKid = () => {
+    this.props.addToModal({ groupId: this.state.selectedGroup });
+  };
 
   render() {
+    if (this.props.kids == null) {
+      //loading
+      return (
+        <Dimmer.Dimmable as={Segment}>
+          <Dimmer active />
+        </Dimmer.Dimmable>
+      );
+    }
     let filteredKids = this.props.kids.filter(
-      item => item.group == this.state.selectedGroup
+      item => item.groupId == this.state.selectedGroup
     );
 
     return (
@@ -57,10 +81,7 @@ class Kids extends Component {
             </Card>
           ))}
           <Card>
-            <Card.Content
-              textAlign="center"
-              onClick={() => this.props.addToModal({})}
-            >
+            <Card.Content textAlign="center" onClick={this.addNewKid}>
               <Icon name="add user" size="huge" color="olive" />
             </Card.Content>
           </Card>

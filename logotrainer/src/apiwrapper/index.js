@@ -233,3 +233,45 @@ export const getTestResultsApi = kidId => {
     TestResults.filter(resultObject => resultObject.kidId === kidId)
   );
 };
+//begin: kids
+let allKids = [
+  {
+    kidId: 1,
+    firstName: "Егор",
+    lastName: "Иванов",
+    dateOfBirth: "2012-05-19",
+    groupId: 1,
+    isArchived: false
+  },
+  {
+    kidId: 2,
+    firstName: "Анастасия",
+    lastName: "Семенова",
+    dateOfBirth: "2012-03-15",
+    groupId: 2,
+    isArchived: false
+  },
+  {
+    kidId: 3,
+    firstName: "Иван",
+    lastName: "Алексин",
+    dateOfBirth: "2011-12-24",
+    groupId: 1,
+    isArchived: false
+  }
+];
+export const getKidsApi = () => {
+  return Promise.resolve([...allKids]);
+};
+export const addKidApi = payload => {
+  const toAdd = { ...payload, kidId: uuid() };
+  allKids = [...allKids, toAdd];
+  return Promise.resolve(toAdd);
+};
+export const updateKidApi = payload => {
+  allKids = allKids.map(
+    kid => (kid.kidId === payload.kidId ? { ...kid, ...payload } : kid)
+  );
+  return Promise.resolve(payload);
+};
+//end: kids

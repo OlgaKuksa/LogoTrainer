@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, Icon, Button, Form, Header } from "semantic-ui-react";
-import { addKid, updateKid } from "../../../actions/kids";
+import {
+  addKidAsync as addKid,
+  updateKidAsync as updateKid
+} from "../../../actions/kids";
 import { clearModal } from "../../../actions/kidInModal";
 
 class KidModal extends Component {
   constructor(props) {
     super(props);
-    const isNew = !props.kidInModal || !props.kidInModal.id;
+    const isNew = !props.kidInModal || !props.kidInModal.kidId;
     const {
       firstName = "",
       lastName = "",
