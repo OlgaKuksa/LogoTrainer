@@ -10,6 +10,7 @@ import exerciseList from "./exerciseList";
 import testInModal from "./testInModal";
 import testResults from "./testResults";
 import groups from "./groups";
+import setSettingsInModal from "./setSettingsInModal";
 
 const appReducers = combineReducers({
   groups,
@@ -22,7 +23,8 @@ const appReducers = combineReducers({
   skillGroupInModal,
   exerciseList,
   testInModal,
-  testResults
+  testResults,
+  setSettingsInModal
 });
 
 export default appReducers;

@@ -4,6 +4,7 @@ import { clearKidPage } from "../../actions/kidInPage";
 import { connect } from "react-redux";
 import "./KidPage.css";
 import ProfileKid from "./ProfileKid";
+import SetsKid from "./SetsKid";
 
 class KidPage extends Component {
   state = {
@@ -53,6 +54,7 @@ class KidPage extends Component {
           </div>
         </Menu>
         {this.state.activeItem === "profile" && <ProfileKid />}
+        {this.state.activeItem === "sets" && <SetsKid />}
       </div>
     );
   }
