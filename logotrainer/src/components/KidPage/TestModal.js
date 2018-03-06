@@ -53,7 +53,7 @@ class TestModal extends Component {
         <Modal.Actions>
           {this.state.kidProfileId !== undefined ? null : (
             <Button
-              color="olive"
+              color="green"
               onClick={() =>
                 this.props.addTestResultAsync(
                   this.props.kidInPage.kidId,

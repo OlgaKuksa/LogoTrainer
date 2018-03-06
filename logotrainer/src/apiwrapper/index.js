@@ -285,3 +285,16 @@ export const getGroupsApi = () => {
   return Promise.resolve([...allGroups]);
 };
 //end: groups
+
+export const generateSetApi = (kidId, skillList) => {
+  let defaultSetObject = {
+    kidSetId: uuid(),
+    createDateTime: new Date(),
+    exerciseIdsInSet: ["10001", "10002", "10003"]
+  };
+  return Promise.resolve(defaultSetObject);
+};
+
+export const getSetExercisesApi = setId => {
+  return Promise.resolve(allExercises);
+};

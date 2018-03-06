@@ -1,9 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Modal } from "semantic-ui-react";
+import { Modal, Header, Checkbox, Button, Form } from "semantic-ui-react";
 import { removeSetSettingsModal } from "../../actions/setSettingsInModal";
 
 class SetSettingsModal extends Component {
+  state = {
+    selectedSkillIds: []
+  };
+
+  handleChange = (e, { value }) => {
+    this.state.selectedSkillIds.includes(value)
+      ? this.setState({
+          selectedSkillIds: this.state.selectedSkillIds.filter(
+            item => item != value
+          )
+        })
+      : this.setState({
+          selectedSkillIds: [...this.state.selectedSkillIds, value]
+        });
+  };
+
   render() {
     return (
       <Modal
@@ -11,13 +27,43 @@ class SetSettingsModal extends Component {
         open={Boolean(this.props.setSettingsInModal)}
         closeIcon
       >
-        test modal
+        <Header color="green">Выбор целевых навыков для комплекса</Header>
+        <Form>
+          {this.props.skills.map(skillGroup => {
+            return (
+              <div key={skillGroup.skillGroupId}>
+                {skillGroup.skills.length === 0 ? null : (
+                  <Header as="h3">{skillGroup.skillGroupName}</Header>
+                )}
+                {skillGroup.skills.map(skill => (
+                  <Form.Field key={skill.skillId} color="green">
+                    <Checkbox
+                      value={skill.skillId}
+                      label={skill.skillName}
+                      onChange={this.handleChange}
+                      checked={this.state.selectedSkillIds.includes(
+                        skill.skillId
+                      )}
+                    />
+                  </Form.Field>
+                ))}
+                <Header as="h4" />
+              </div>
+            );
+          })}
+        </Form>
+        <Modal.Actions>
+          <Button color="green" onClick={this.props.removeSetSettingsModal}>
+            Сгенерировать комплекс
+          </Button>
+        </Modal.Actions>
       </Modal>
     );
   }
 }
 const mapStateToProps = state => ({
-  setSettingsInModal: state.setSettingsInModal
+  setSettingsInModal: state.setSettingsInModal,
+  skills: state.skills
 });
 
 const mapDispatchToProps = {

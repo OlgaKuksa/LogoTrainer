@@ -8,7 +8,7 @@ import SetsKid from "./SetsKid";
 
 class KidPage extends Component {
   state = {
-    activeItem: "profile"
+    activeItem: "sets"
   };
   handleItemClick = (ev, { name }) => {
     this.setState({ activeItem: name });
