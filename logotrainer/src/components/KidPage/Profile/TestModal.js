@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, Header, Label } from "semantic-ui-react";
-import { removeTestModal } from "../../actions/testInModal";
-import { addTestResultAsync } from "../../actions/testResults";
+import { removeTestModal } from "../../../actions/testInModal";
+import { addTestResultAsync } from "../../../actions/testResults";
 import TestModalSkillItem from "./TestModalSkillItem";
 import Button from "semantic-ui-react/dist/commonjs/elements/Button/Button";
 

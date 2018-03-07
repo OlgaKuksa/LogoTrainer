@@ -3,8 +3,8 @@ import { Icon, Button, Menu, Grid } from "semantic-ui-react";
 import { clearKidPage } from "../../actions/kidInPage";
 import { connect } from "react-redux";
 import "./KidPage.css";
-import ProfileKid from "./ProfileKid";
-import SetsKid from "./SetsKid";
+import ProfileKid from "./Profile/ProfileKid.js";
+import SetsKid from "./Sets/SetsKid.js";
 
 class KidPage extends Component {
   state = {

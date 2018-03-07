@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, Header, Checkbox, Button, Form } from "semantic-ui-react";
-import { removeSetSettingsModal } from "../../actions/setSettingsInModal";
+import {
+  removeSetSettingsModal,
+  sendSettingsToGenerateSetAsync
+} from "../../../actions/setSettingsInModal";
 
 class SetSettingsModal extends Component {
   state = {
@@ -53,7 +56,15 @@ class SetSettingsModal extends Component {
           })}
         </Form>
         <Modal.Actions>
-          <Button color="green" onClick={this.props.removeSetSettingsModal}>
+          <Button
+            color="green"
+            onClick={() =>
+              this.props.sendSettingsToGenerateSetAsync(
+                this.props.kidId,
+                this.state.selectedSkillIds
+              )
+            }
+          >
             Сгенерировать комплекс
           </Button>
         </Modal.Actions>
@@ -63,11 +74,13 @@ class SetSettingsModal extends Component {
 }
 const mapStateToProps = state => ({
   setSettingsInModal: state.setSettingsInModal,
-  skills: state.skills
+  skills: state.skills,
+  kidId: state.kidInPage.kidId
 });
 
 const mapDispatchToProps = {
-  removeSetSettingsModal
+  removeSetSettingsModal,
+  sendSettingsToGenerateSetAsync
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetSettingsModal);
