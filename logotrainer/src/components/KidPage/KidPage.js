@@ -3,11 +3,12 @@ import { Icon, Button, Menu, Grid } from "semantic-ui-react";
 import { clearKidPage } from "../../actions/kidInPage";
 import { connect } from "react-redux";
 import "./KidPage.css";
-import ProfileKid from "./ProfileKid";
+import ProfileKid from "./Profile/ProfileKid.js";
+import SetsKid from "./Sets/SetsKid.js";
 
 class KidPage extends Component {
   state = {
-    activeItem: "profile"
+    activeItem: "sets"
   };
   handleItemClick = (ev, { name }) => {
     this.setState({ activeItem: name });
@@ -53,6 +54,7 @@ class KidPage extends Component {
           </div>
         </Menu>
         {this.state.activeItem === "profile" && <ProfileKid />}
+        {this.state.activeItem === "sets" && <SetsKid />}
       </div>
     );
   }

@@ -7,6 +7,7 @@ const testResults = (state = DEFAULT_STATE, action) => {
     case GET_TESTRESULTS:
       return action.payload;
     case ADD_TESTRESULT:
+      state = state || [];
       return [...state, action.payload];
     default:
       return state;

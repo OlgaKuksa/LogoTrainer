@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Logotrainer.css";
-import { Menu, Icon } from "semantic-ui-react";
+import { Menu, Icon, Sticky } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import Header from "../Header";
 import KidsWrapper from "../KidsWrapper";
@@ -17,6 +17,7 @@ class Logotrainer extends Component {
   handleItemClick = (ev, { name }) => {
     this.setState({ activeItem: name });
   };
+
   render() {
     return (
       <div>

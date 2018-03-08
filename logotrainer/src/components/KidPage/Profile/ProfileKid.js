@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, List, Icon, Label } from "semantic-ui-react";
 import TestModal from "./TestModal";
-import { addTestModal } from "../../actions/testInModal";
+import { addTestModal } from "../../../actions/testInModal";
 
 class ProfileKid extends Component {
   render() {

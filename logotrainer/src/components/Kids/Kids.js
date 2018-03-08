@@ -82,7 +82,6 @@ class Kids extends Component {
                   {item.firstName} {item.lastName}
                 </Card.Header>
                 <Card.Meta>Дата рождения: {item.dateOfBirth}</Card.Meta>
-                <Card.Description>Группа {item.group}</Card.Description>
               </Card.Content>
               <Icon
                 name="edit"
