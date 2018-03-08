@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Modal, Header, Divider } from "semantic-ui-react";
+import { Modal, Header, Segment } from "semantic-ui-react";
 import { removeSetExerciseList } from "../../../actions/setExerciseList";
 
 class SetExerciseModal extends Component {
@@ -16,14 +16,20 @@ class SetExerciseModal extends Component {
           {this.props.kidInPage.firstName + " " + this.props.kidInPage.lastName}
         </Header>
         <Modal.Content scrolling>
-          {this.props.setExerciseList.map(exercise => (
+          {this.props.setExerciseList.map((exercise, index) => (
             <div>
-              <Header>{exercise.exerciseName}</Header>
-              <Header as="h5">Инвентарь: </Header>
-              {exercise.exerciseInventory}
-              <Header as="h5">Методика: </Header>
-              {exercise.exerciseSteps}
-              <Divider />
+              <Header as="h4">
+                {index + 1}
+                {". "}
+                {exercise.exerciseName}
+              </Header>
+              <Segment raised>
+                <Header as="h5">Инвентарь: </Header>
+                {exercise.exerciseInventory}
+                <Header as="h5">Методика: </Header>
+                {exercise.exerciseSteps}
+              </Segment>
+              <Header as="h5" />
             </div>
           ))}
         </Modal.Content>
