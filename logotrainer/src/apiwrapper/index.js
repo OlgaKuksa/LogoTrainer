@@ -294,7 +294,9 @@ export const generateSetApi = (kidId, skillList) => {
     kidSetId: uuid(),
     createDateTime: new Date(),
     kidId,
-    exerciseIdsInSet: ["10001", "10002", "10003"]
+    exerciseIdsInSet: allExercises
+      .filter(item => skillList.includes(item.exerciseMainSkillId))
+      .map(item => item.exerciseId)
   };
   sets = [...sets, defaultSetObject];
   return Promise.resolve(defaultSetObject);
