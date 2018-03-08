@@ -19,6 +19,8 @@ namespace Logotrainer.Persistence.Repositories
         private const string getSkillsBySkillGroupIdSql =
             "SELECT SkillGroupId, SkillId, SkillName,SkillQuestion FROM [Skill] WHERE [SkillGroupId]=@SkillGroupId";
 
+        private const string getLevelsBySkillIdSql =
+            "SELECT SkillId,LevelId,LevelText,LevelNumber FROM [Level] WHERE [SkillId]=@SkillId";
         public IList<SkillGroup> GetAll()
         {
             var shouldOpenConnection = Connection.State != ConnectionState.Open;
@@ -36,7 +38,17 @@ namespace Logotrainer.Persistence.Repositories
 
         private IList<Skill> GetSkillsBySkillGroupId(Guid skillGroupId)
         {
-            return Connection.Query<Skill>(getSkillsBySkillGroupIdSql, new {SkillGroupId = skillGroupId}).ToList();
+            var skillsBySkillGroupId = Connection.Query<Skill>(getSkillsBySkillGroupIdSql, new {SkillGroupId = skillGroupId}).ToList();
+            foreach (var skill in skillsBySkillGroupId)
+            {
+                skill.Levels = GetLevelsBySkillId(skill.SkillId);
+            }
+            return skillsBySkillGroupId;
+        }
+
+        private IList<Level> GetLevelsBySkillId(Guid skillId)
+        {
+            return Connection.Query<Level>(getLevelsBySkillIdSql, new {SkillId = skillId}).ToList();
         }
     }
 }
