@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -12,24 +7,6 @@ using Server.Models;
 
 namespace Server
 {
-    public class EmailService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
-        }
-    }
-
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
-        }
-    }
-
     // Configure the application user manager which is used in this application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
@@ -37,10 +14,12 @@ namespace Server
             : base(store)
         {
         }
+
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
             IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager =
+                new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
@@ -74,8 +53,7 @@ namespace Server
                 Subject = "Security Code",
                 BodyFormat = "Your security code is {0}"
             });
-            manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
+
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
@@ -85,6 +63,4 @@ namespace Server
             return manager;
         }
     }
-
-    // Configure the application sign-in manager which is used in this application.  
 }
