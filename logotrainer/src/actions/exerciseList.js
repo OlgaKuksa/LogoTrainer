@@ -9,6 +9,7 @@ export const GET_EXERCISE_LIST = "GET_EXERCISE_LIST";
 export const ADD_EXERCISE = "ADD_EXERCISE";
 export const UPDATE_EXERCISE = "UPDATE_EXERCISE";
 export const REMOVE_EXERCISE = "REMOVE_EXERCISE";
+export const CLEAR_EXERCISELIST = "CLEAR_EXERCISELIST";
 
 const getExerciseList = payload => ({
   type: GET_EXERCISE_LIST,
@@ -48,3 +49,8 @@ export const removeExerciseAsync = exercise => (dispatch, getState) => {
     dispatch(removeExerciseFromModal());
   });
 };
+
+export const clearExerciseList = payload => ({
+  type: CLEAR_EXERCISELIST,
+  payload: payload
+});

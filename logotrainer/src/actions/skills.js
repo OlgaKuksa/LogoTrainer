@@ -9,7 +9,7 @@ import {
   removeSkillGroupApi
 } from "../apiwrapper";
 import { updateFilter } from "./exerciseFilter";
-
+import { clearExerciseList } from "./exerciseList";
 export const GET_SKILLS = "GET_SKILLS";
 export const ADD_SKILLGROUP = "ADD_SKILLGROUP";
 export const ADD_SKILL = "ADD_SKILL";
@@ -89,7 +89,10 @@ export const updateSkill = skillData => ({
 
 export const updateSkillAsync = skillData => dispatch => {
   const action = updateSkill(skillData);
-  updateSkillApi(action.payload).then(() => dispatch(action));
+  updateSkillApi(action.payload).then(() => {
+    dispatch(action);
+    dispatch(clearExerciseList());
+  });
 };
 
 export const updateSkillGroup = payload => ({
@@ -125,6 +128,8 @@ export const removeSkillAsync = skillData => (dispatch, getState) => {
     dispatch(action);
     let state = getState();
     state.exerciseFilter.mainSkillId === skillData.skillId &&
+      state.skills.find(skillgroup => skillgroup.skills.length > 0) !==
+        undefined &&
       dispatch(
         updateFilter({
           mainSkillId: state.skills.find(
@@ -135,5 +140,6 @@ export const removeSkillAsync = skillData => (dispatch, getState) => {
           ).skills[0].skillLevels[0].levelId
         })
       );
+    dispatch(clearExerciseList());
   });
 };

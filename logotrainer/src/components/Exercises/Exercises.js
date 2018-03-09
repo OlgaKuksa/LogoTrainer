@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, Icon } from "semantic-ui-react";
+import { Button, Icon, Message } from "semantic-ui-react";
 import { addExerciseToModal } from "../../actions/exerciseInModal";
 import ExerciseModal from "./ExerciseModal";
 import ExerciseSearchForm from "./ExerciseSearchForm";
@@ -18,9 +18,12 @@ class Exercises extends Component {
               onClick={() =>
                 this.props.addExerciseToModal({
                   exerciseSecondarySkills: [],
-                  exerciseMainSkillId: this.props.skills[0].skills[0].skillId,
-                  exerciseMainLevelId: this.props.skills[0].skills[0]
-                    .skillLevels[0].levelId
+                  exerciseMainSkillId: this.props.skills.find(
+                    skillgroup => skillgroup.skills.length > 0
+                  ).skills[0].skillId,
+                  exerciseMainLevelId: this.props.skills.find(
+                    skillgroup => skillgroup.skills.length > 0
+                  ).skills[0].skillLevels[0].levelId
                 })
               }
             >
@@ -30,7 +33,13 @@ class Exercises extends Component {
             {this.props.exerciseList === null ? null : <ExerciseList />}
             {this.props.exerciseInModal == null ? null : <ExerciseModal />}
           </div>
-        ) : null}
+        ) : (
+          <Message color="olive">
+            <Icon name="warning circle" compact />
+            Работа с упражнениями возможна после добавления хотя бы одного
+            навыка
+          </Message>
+        )}
       </div>
     );
   }
