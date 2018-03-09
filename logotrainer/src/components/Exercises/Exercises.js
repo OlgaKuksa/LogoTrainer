@@ -34,8 +34,8 @@ class Exercises extends Component {
             {this.props.exerciseInModal == null ? null : <ExerciseModal />}
           </div>
         ) : (
-          <Message color="olive">
-            <Icon name="warning circle" compact />
+          <Message compact color="olive">
+            <Icon name="warning circle" />
             Работа с упражнениями возможна после добавления хотя бы одного
             навыка
           </Message>
