@@ -186,8 +186,12 @@ export const removeSkillGroupApi = payload => {
   return Promise.resolve(payload);
 };
 
-export const getExerciseListApi = () => {
-  return Promise.resolve([...allExercises]);
+export const getExerciseListApi = filter => {
+  return Promise.resolve(
+    allExercises.filter(
+      exercise => exercise.exerciseMainLevelId === filter.mainLevelId
+    )
+  );
 };
 
 export const addExerciseApi = exercise => {

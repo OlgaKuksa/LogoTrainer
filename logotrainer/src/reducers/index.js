@@ -13,6 +13,7 @@ import groups from "./groups";
 import setSettingsInModal from "./setSettingsInModal";
 import setList from "./setList";
 import setExerciseList from "./setExerciseList";
+import exerciseFilter from "./exerciseFilter";
 
 const appReducers = combineReducers({
   groups,
@@ -28,7 +29,8 @@ const appReducers = combineReducers({
   testResults,
   setSettingsInModal,
   setList,
-  setExerciseList
+  setExerciseList,
+  exerciseFilter
 });
 
 export default appReducers;

@@ -3,28 +3,45 @@ import { connect } from "react-redux";
 import { Form, Button, Segment } from "semantic-ui-react";
 import { getExerciseListAsync } from "../../actions/exerciseList";
 import SelectSkillRow from "./SelectSkillRow";
+import { updateFilter } from "../../actions/exerciseFilter";
 
 class ExerciseSearchForm extends Component {
-  updateMainLevel = () => {
-    return;
-  };
-
-  updateSecondarySkill = () => {
-    return;
-  };
-
   render() {
     return (
       <Segment>
         <Form>
           <SelectSkillRow
             isMain={true}
-            skillId={this.props.skills[0].skills[0].skillId}
-            updateMainLevel={this.updateMainLevel}
-            updateSecondarySkill={this.updateSecondarySkill}
+            skillId={this.props.exerciseFilter.mainSkillId}
+            leveId={this.props.exerciseFilter.mainLevelId}
+            updateMainLevel={levelId =>
+              this.props.updateFilter({
+                mainSkillId: this.props.exerciseFilter.mainSkillId,
+                mainLevelId: levelId
+              })
+            }
+            updateSecondarySkill={skillId =>
+              this.props.updateFilter({
+                mainSkillId: skillId,
+                mainLevelId: this.props.skills
+                  .find(
+                    skillgroup =>
+                      skillgroup.skills.find(
+                        skill => skill.skillId === skillId
+                      ) !== undefined
+                  )
+                  .skills.find(skill => skill.skillId === skillId)
+                  .skillLevels[0].levelId
+              })
+            }
           />
-
-          <Button onClick={this.props.getExerciseListAsync}>Поиск</Button>
+          <Button
+            onClick={() =>
+              this.props.getExerciseListAsync(this.props.exerciseFilter)
+            }
+          >
+            Поиск
+          </Button>
         </Form>
       </Segment>
     );
@@ -32,11 +49,13 @@ class ExerciseSearchForm extends Component {
 }
 
 const mapStateToProps = state => ({
+  exerciseFilter: state.exerciseFilter,
   skills: state.skills
 });
 
 const mapDispatchToProps = {
-  getExerciseListAsync
+  getExerciseListAsync,
+  updateFilter
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExerciseSearchForm);

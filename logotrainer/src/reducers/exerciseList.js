@@ -4,7 +4,7 @@ import {
   UPDATE_EXERCISE
 } from "../actions/exerciseList";
 
-const DEFAULT_STATE = [];
+const DEFAULT_STATE = null;
 
 const exerciseList = (state = DEFAULT_STATE, action) => {
   switch (action.type) {

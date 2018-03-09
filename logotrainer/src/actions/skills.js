@@ -8,6 +8,7 @@ import {
   removeSkillApi,
   removeSkillGroupApi
 } from "../apiwrapper";
+import { updateFilter } from "./exerciseFilter";
 
 export const GET_SKILLS = "GET_SKILLS";
 export const ADD_SKILLGROUP = "ADD_SKILLGROUP";
@@ -27,6 +28,12 @@ export const getSkillsAsync = () => (dispatch, getState) => {
   if (state.skills) return Promise.resolve();
   return getSkillsApi().then(payload => {
     dispatch(getSkills(payload));
+    dispatch(
+      updateFilter({
+        mainSkillId: payload[0].skills[0].skillId,
+        mainLevelId: payload[0].skills[0].skillLevels[0].levelId
+      })
+    );
   });
 };
 

@@ -23,8 +23,8 @@ const removeExercise = payload => ({
   type: REMOVE_EXERCISE,
   payload
 });
-export const getExerciseListAsync = () => (dispatch, getState) => {
-  return getExerciseListApi().then(payload => {
+export const getExerciseListAsync = filter => (dispatch, getState) => {
+  return getExerciseListApi(filter).then(payload => {
     dispatch(getExerciseList(payload));
   });
 };

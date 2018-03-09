@@ -24,7 +24,7 @@ class Exercises extends Component {
           <Icon name="add" size="big" /> Добавить упражнение
         </Button>
         <ExerciseSearchForm />
-        <ExerciseList />
+        {this.props.exerciseList === null ? null : <ExerciseList />}
         {this.props.exerciseInModal == null ? null : <ExerciseModal />}
       </div>
     );
@@ -33,7 +33,8 @@ class Exercises extends Component {
 
 const mapStateToProps = state => ({
   exerciseInModal: state.exerciseInModal,
-  skills: state.skills
+  skills: state.skills,
+  exerciseList: state.exerciseList
 });
 
 const mapDispatchToProps = {
