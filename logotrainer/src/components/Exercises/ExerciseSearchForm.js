@@ -13,7 +13,7 @@ class ExerciseSearchForm extends Component {
           <SelectSkillRow
             isMain={true}
             skillId={this.props.exerciseFilter.mainSkillId}
-            leveId={this.props.exerciseFilter.mainLevelId}
+            levelId={this.props.exerciseFilter.mainLevelId}
             updateMainLevel={levelId =>
               this.props.updateFilter({
                 mainSkillId: this.props.exerciseFilter.mainSkillId,
