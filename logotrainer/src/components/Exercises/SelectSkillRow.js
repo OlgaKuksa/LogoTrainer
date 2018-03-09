@@ -4,11 +4,13 @@ import { Form, Label, Icon, Dropdown } from "semantic-ui-react";
 
 class SelectSkillRow extends Component {
   state = {
-    selectedGroupId: this.props.skills.find(
-      group =>
-        group.skills.find(skill => skill.skillId == this.props.skillId) !=
-        undefined
-    ).skillGroupId,
+    selectedGroupId: this.props.skills
+      .filter(skillgroup => skillgroup.skills.length > 0)
+      .find(
+        group =>
+          group.skills.find(skill => skill.skillId == this.props.skillId) !=
+          undefined
+      ).skillGroupId,
     selectedSkillId: this.props.skillId,
     selectedLevelId: this.props.levelId || 0
   };
@@ -55,14 +57,16 @@ class SelectSkillRow extends Component {
               onChange={this.onGroupChange}
               defaultValue={this.state.selectedGroupId}
             >
-              {this.props.skills.map(skillGroup => (
-                <option
-                  value={skillGroup.skillGroupId}
-                  key={skillGroup.skillGroupId}
-                >
-                  {skillGroup.skillGroupName}
-                </option>
-              ))}
+              {this.props.skills
+                .filter(skillgroup => skillgroup.skills.length > 0)
+                .map(skillGroup => (
+                  <option
+                    value={skillGroup.skillGroupId}
+                    key={skillGroup.skillGroupId}
+                  >
+                    {skillGroup.skillGroupName}
+                  </option>
+                ))}
             </select>
           </Label>
           <Label>

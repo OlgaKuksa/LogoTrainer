@@ -61,9 +61,23 @@ export const addSkill = skillData => ({
     }
   }
 });
-export const addSkillAsync = skillData => dispatch => {
+export const addSkillAsync = skillData => (dispatch, getState) => {
   const action = addSkill(skillData);
-  addSkillApi(action.payload).then(() => dispatch(action));
+  const state = getState();
+  addSkillApi(action.payload).then(() => {
+    let shouldUpdateExerciseFilter =
+      state.skills.filter(skillgroup => skillgroup.skills.length > 0).length ===
+      0;
+    dispatch(action);
+    console.log(action);
+    shouldUpdateExerciseFilter &&
+      dispatch(
+        updateFilter({
+          mainSkillId: action.payload.skill.skillId,
+          mainLevelId: action.payload.skill.skillLevels[0].levelId
+        })
+      );
+  });
 };
 export const updateSkill = skillData => ({
   type: UPDATE_SKILL,
@@ -105,7 +119,21 @@ export const removeSkill = skillData => ({
   }
 });
 
-export const removeSkillAsync = skillData => dispatch => {
+export const removeSkillAsync = skillData => (dispatch, getState) => {
   const action = removeSkill(skillData);
-  removeSkillApi(action.payload).then(() => dispatch(action));
+  removeSkillApi(action.payload).then(() => {
+    dispatch(action);
+    let state = getState();
+    state.exerciseFilter.mainSkillId === skillData.skillId &&
+      dispatch(
+        updateFilter({
+          mainSkillId: state.skills.find(
+            skillgroup => skillgroup.skills.length > 0
+          ).skills[0].skillId,
+          mainLevelId: state.skills.find(
+            skillgroup => skillgroup.skills.length > 0
+          ).skills[0].skillLevels[0].levelId
+        })
+      );
+  });
 };

@@ -10,22 +10,27 @@ class Exercises extends Component {
   render() {
     return (
       <div>
-        <Button
-          color="olive"
-          onClick={() =>
-            this.props.addExerciseToModal({
-              exerciseSecondarySkills: [],
-              exerciseMainSkillId: this.props.skills[0].skills[0].skillId,
-              exerciseMainLevelId: this.props.skills[0].skills[0].skillLevels[0]
-                .levelId
-            })
-          }
-        >
-          <Icon name="add" size="big" /> Добавить упражнение
-        </Button>
-        <ExerciseSearchForm />
-        {this.props.exerciseList === null ? null : <ExerciseList />}
-        {this.props.exerciseInModal == null ? null : <ExerciseModal />}
+        {this.props.skills.filter(skillgroup => skillgroup.skills.length > 0)
+          .length > 0 ? (
+          <div>
+            <Button
+              color="olive"
+              onClick={() =>
+                this.props.addExerciseToModal({
+                  exerciseSecondarySkills: [],
+                  exerciseMainSkillId: this.props.skills[0].skills[0].skillId,
+                  exerciseMainLevelId: this.props.skills[0].skills[0]
+                    .skillLevels[0].levelId
+                })
+              }
+            >
+              <Icon name="add" size="big" /> Добавить упражнение
+            </Button>
+            <ExerciseSearchForm />
+            {this.props.exerciseList === null ? null : <ExerciseList />}
+            {this.props.exerciseInModal == null ? null : <ExerciseModal />}
+          </div>
+        ) : null}
       </div>
     );
   }

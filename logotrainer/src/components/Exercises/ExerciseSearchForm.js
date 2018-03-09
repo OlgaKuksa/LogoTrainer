@@ -35,6 +35,7 @@ class ExerciseSearchForm extends Component {
               })
             }
           />
+
           <Button
             onClick={() =>
               this.props.getExerciseListAsync(this.props.exerciseFilter)

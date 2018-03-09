@@ -18,7 +18,6 @@ class ExerciseList extends Component {
               <Card key={exercise.exerciseId}>
                 <Card.Content>
                   <Card.Header>{exercise.exerciseName}</Card.Header>
-
                   {"Основной навык: " +
                     this.props.skills
                       .find(

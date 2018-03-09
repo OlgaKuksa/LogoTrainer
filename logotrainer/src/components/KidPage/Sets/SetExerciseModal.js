@@ -17,7 +17,7 @@ class SetExerciseModal extends Component {
         </Header>
         <Modal.Content scrolling>
           {this.props.setExerciseList.map((exercise, index) => (
-            <div>
+            <div key={exercise.exerciseId}>
               <Header as="h4">
                 {index + 1}
                 {". "}
