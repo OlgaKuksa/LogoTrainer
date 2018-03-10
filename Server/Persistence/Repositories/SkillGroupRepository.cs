@@ -10,35 +10,53 @@ namespace Logotrainer.Persistence.Repositories
 {
     public class SkillGroupRepository : BaseRepository, ISkillGroupRepository
     {
-        public SkillGroupRepository(IDbConnection connection): base(connection)
+        public SkillGroupRepository(IDbConnection connection) : base(connection)
         {
         }
 
-        private const string getAllSql = "SELECT SkillGroupId, SkillGroupName FROM [SkillGroup]";
-
-        private const string getSkillsBySkillGroupIdSql =
-            "SELECT SkillGroupId, SkillId, SkillName,SkillQuestion FROM [Skill] WHERE [SkillGroupId]=@SkillGroupId";
-
-        private const string getLevelsBySkillIdSql =
-            "SELECT SkillId,LevelId,LevelText,LevelNumber FROM [Level] WHERE [SkillId]=@SkillId";
         public IList<SkillGroup> GetAll()
         {
             var shouldOpenConnection = Connection.State != ConnectionState.Open;
-            if(shouldOpenConnection)
+            if (shouldOpenConnection)
                 Connection.Open();
-            var ret = Connection.Query<SkillGroup>(getAllSql).ToList();
+            var ret = Connection.Query<SkillGroup>(SkillGroupSql.GetAll).ToList();
             foreach (var skillGroup in ret)
             {
                 skillGroup.Skills = GetSkillsBySkillGroupId(skillGroup.SkillGroupId);
             }
-            if(shouldOpenConnection)
+            if (shouldOpenConnection)
                 Connection.Close();
             return ret.ToList();
         }
 
+        public void Add(SkillGroup skillGroup)
+        {
+            var shouldOpenConnection = Connection.State != ConnectionState.Open;
+            if (shouldOpenConnection)
+                Connection.Open();
+            Connection.Execute(
+                SkillGroupSql.Add,
+                skillGroup);
+            if (shouldOpenConnection)
+                Connection.Close();
+        }
+
+        public void Update(SkillGroup skillGroup)
+        {
+            var shouldOpenConnection = Connection.State != ConnectionState.Open;
+            if (shouldOpenConnection)
+                Connection.Open();
+            Connection.Execute(
+                SkillGroupSql.Update,
+                skillGroup);
+            if (shouldOpenConnection)
+                Connection.Close();
+        }
+
         private IList<Skill> GetSkillsBySkillGroupId(Guid skillGroupId)
         {
-            var skillsBySkillGroupId = Connection.Query<Skill>(getSkillsBySkillGroupIdSql, new {SkillGroupId = skillGroupId}).ToList();
+            var skillsBySkillGroupId = Connection
+                .Query<Skill>(SkillGroupSql.GetSkillsBySkillGroupId, new {SkillGroupId = skillGroupId}).ToList();
             foreach (var skill in skillsBySkillGroupId)
             {
                 skill.SkillLevels = GetLevelsBySkillId(skill.SkillId);
@@ -48,7 +66,7 @@ namespace Logotrainer.Persistence.Repositories
 
         private IList<Level> GetLevelsBySkillId(Guid skillId)
         {
-            return Connection.Query<Level>(getLevelsBySkillIdSql, new {SkillId = skillId}).ToList();
+            return Connection.Query<Level>(SkillGroupSql.GetLevelsBySkillId, new {SkillId = skillId}).ToList();
         }
     }
 }

@@ -9,12 +9,12 @@ namespace Logotrainer.Server
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "DefaultApi",
-                url: "api/{controller}/{action}/{id}",
-                defaults: new { id = UrlParameter.Optional, action = "Index" },
-                namespaces: new[] { "Logotrainer.Server.Controllers.Api" }
-            );
+            //routes.MapRoute(
+            //    name: "DefaultApi",
+            //    url: "api/{controller}/{action}/{id}",
+            //    defaults: new { id = UrlParameter.Optional, action = "Index" },
+            //    namespaces: new[] { "Logotrainer.Server.Controllers.Api" }
+            //);
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

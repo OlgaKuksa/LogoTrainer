@@ -13,18 +13,18 @@ namespace Logotrainer.Server
             //config.SuppressDefaultHostAuthentication();
             //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-            //// Use camel case for JSON data.
-            //config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
-            //    new CamelCasePropertyNamesContractResolver();
+            // Use camel case for JSON data.
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
+                new CamelCasePropertyNamesContractResolver();
 
-            //// Web API routes
-            //config.MapHttpAttributeRoutes();
+            // Web API routes
+            config.MapHttpAttributeRoutes();
 
-            //config.Routes.MapHttpRoute(
-            //    name: "DefaultApi",
-            //    routeTemplate: "api/{controller}/{id}",
-            //    defaults: new {id = RouteParameter.Optional}
-            //);
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { action="Index", id = RouteParameter.Optional }
+            );
         }
     }
 }

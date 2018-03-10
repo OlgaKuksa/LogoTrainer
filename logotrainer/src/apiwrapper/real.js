@@ -1,112 +1,112 @@
 import fetch from "cross-fetch";
 const uuid = require("uuid/v4");
 
-const allSkills = [
-  {
-    skillGroupId: "1",
-    skillGroupName: "Звукопроизношение",
-    skills: [
-      {
-        skillId: "11",
-        skillName: "Произношение свистящих 11",
-        skillQuestion:
-          "Произносит ли ребенок звуки с-сь, з-зь (всегда и чисто)?",
-        skillLevels: [
-          {
-            levelId: "110",
-            levelNumber: 100,
-            levelText: "Да, всегда"
-          },
-          {
-            levelId: "111",
-            levelNumber: 80,
-            levelText: "Практически всегда, но иногда заменяет их другими"
-          },
-          {
-            levelId: "112",
-            levelNumber: 50,
-            levelText: "Иногда получается произносить, но чаще нет"
-          },
-          {
-            levelId: "113",
-            levelNumber: 10,
-            levelText:
-              "Ребенок совсем не произносит звуки или произносит очень редко"
-          }
-        ]
-      },
-      {
-        skillId: "12",
-        skillName: "Произношение шипящих 12",
-        skillQuestion: "Произносит ли ребенок чисто звуки ш, ж, ч, щ?",
-        skillLevels: [
-          {
-            levelId: "120",
-            levelNumber: 100,
-            levelText: "Да, всегда"
-          },
-          {
-            levelId: "121",
-            levelNumber: 75,
-            levelText:
-              "Практически всегда, но иногда заменяет их другими (сь, ць и т.п.)"
-          },
-          {
-            levelId: "122",
-            levelNumber: 50,
-            levelText: "Иногда получается проскакивает, но чаще нет"
-          },
-          {
-            levelId: "123",
-            levelNumber: 0,
-            levelText: "Совсем не произносит"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    skillGroupId: "2",
-    skillGroupName: "Грамматический строй речи",
-    skills: [
-      {
-        skillId: "21",
-        skillName: "Составление предложения 21",
-        skillQuestion:
-          "Говорит ли ребенок правильными развернутыми предложениями (всегда или почти всегда)?",
-        skillLevels: [
-          {
-            levelId: "210",
-            levelNumber: 100,
-            levelText: "Да, всегда"
-          },
-          {
-            levelId: "211",
-            levelNumber: 80,
-            levelText: "Предложения правильные, но не очень развернутые"
-          },
-          {
-            levelId: "212",
-            levelNumber: 60,
-            levelText:
-              "Предложения есть, но есть небольшие ошибки (например, в предлогах)"
-          },
-          {
-            levelId: "213",
-            levelNumber: 25,
-            levelText:
-              "Грамматический строй серьезно нарушен (например, не согласуются подлежащее и сказуемое, порядок слов нарушается)"
-          },
-          {
-            levelId: "214",
-            levelNumber: 5,
-            levelText: "Есть отдельные слова"
-          }
-        ]
-      }
-    ]
-  }
-];
+// const allSkills = [
+//   {
+//     skillGroupId: "1",
+//     skillGroupName: "Звукопроизношение",
+//     skills: [
+//       {
+//         skillId: "11",
+//         skillName: "Произношение свистящих 11",
+//         skillQuestion:
+//           "Произносит ли ребенок звуки с-сь, з-зь (всегда и чисто)?",
+//         skillLevels: [
+//           {
+//             levelId: "110",
+//             levelNumber: 100,
+//             levelText: "Да, всегда"
+//           },
+//           {
+//             levelId: "111",
+//             levelNumber: 80,
+//             levelText: "Практически всегда, но иногда заменяет их другими"
+//           },
+//           {
+//             levelId: "112",
+//             levelNumber: 50,
+//             levelText: "Иногда получается произносить, но чаще нет"
+//           },
+//           {
+//             levelId: "113",
+//             levelNumber: 10,
+//             levelText:
+//               "Ребенок совсем не произносит звуки или произносит очень редко"
+//           }
+//         ]
+//       },
+//       {
+//         skillId: "12",
+//         skillName: "Произношение шипящих 12",
+//         skillQuestion: "Произносит ли ребенок чисто звуки ш, ж, ч, щ?",
+//         skillLevels: [
+//           {
+//             levelId: "120",
+//             levelNumber: 100,
+//             levelText: "Да, всегда"
+//           },
+//           {
+//             levelId: "121",
+//             levelNumber: 75,
+//             levelText:
+//               "Практически всегда, но иногда заменяет их другими (сь, ць и т.п.)"
+//           },
+//           {
+//             levelId: "122",
+//             levelNumber: 50,
+//             levelText: "Иногда получается проскакивает, но чаще нет"
+//           },
+//           {
+//             levelId: "123",
+//             levelNumber: 0,
+//             levelText: "Совсем не произносит"
+//           }
+//         ]
+//       }
+//     ]
+//   },
+//   {
+//     skillGroupId: "2",
+//     skillGroupName: "Грамматический строй речи",
+//     skills: [
+//       {
+//         skillId: "21",
+//         skillName: "Составление предложения 21",
+//         skillQuestion:
+//           "Говорит ли ребенок правильными развернутыми предложениями (всегда или почти всегда)?",
+//         skillLevels: [
+//           {
+//             levelId: "210",
+//             levelNumber: 100,
+//             levelText: "Да, всегда"
+//           },
+//           {
+//             levelId: "211",
+//             levelNumber: 80,
+//             levelText: "Предложения правильные, но не очень развернутые"
+//           },
+//           {
+//             levelId: "212",
+//             levelNumber: 60,
+//             levelText:
+//               "Предложения есть, но есть небольшие ошибки (например, в предлогах)"
+//           },
+//           {
+//             levelId: "213",
+//             levelNumber: 25,
+//             levelText:
+//               "Грамматический строй серьезно нарушен (например, не согласуются подлежащее и сказуемое, порядок слов нарушается)"
+//           },
+//           {
+//             levelId: "214",
+//             levelNumber: 5,
+//             levelText: "Есть отдельные слова"
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// ];
 
 let allExercises = [
   {
@@ -154,13 +154,22 @@ let TestResults = [
 ];
 
 export const getSkillsApi = () => {
-  return fetch("./api/SkillGroup/GetAll",{credentials:"include"}).then(res=>res.json()).then(res=>{console.log(res);return res;});
+  return fetch("./api/SkillGroup/GetAll", { credentials: "include" })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      return res;
+    });
   //return Promise.resolve([...allSkills]);
 };
 
 export const addSkillGroupApi = skillGroup => {
-  //TODO
-  return Promise.resolve(skillGroup);
+  return fetch("./api/SkillGroup/Add", {
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    method: "post",
+    body: JSON.stringify(skillGroup)
+  }).then(() => skillGroup);
 };
 
 export const addSkillApi = payload => {
@@ -174,8 +183,12 @@ export const updateSkillApi = payload => {
 };
 
 export const updateSkillGroupApi = payload => {
-  //TODO
-  return Promise.resolve(payload);
+  return fetch("./api/SkillGroup/Update", {
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    method: "post",
+    body: JSON.stringify(payload)
+  }).then(() => payload);
 };
 
 export const removeSkillApi = payload => {
