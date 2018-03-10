@@ -20,8 +20,6 @@ namespace Logotrainer.Server.Controllers.Api
             SkillRepository.Add(skill);
         }
 
-        
-
         [System.Web.Mvc.HttpPost] public void Remove([FromBody] Skill skill)
         {
             SkillRepository.Remove(skill);

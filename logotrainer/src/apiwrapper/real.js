@@ -191,13 +191,25 @@ export const removeSkillGroupApi = payload => {
 };
 
 export const addSkillApi = payload => {
-  //TODO
-  return Promise.resolve(payload);
+  const { skill, skillGroupId } = payload;
+  const skillForServer = { ...skill, skillGroupId };
+  return fetch("./api/Skill/Add", {
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    method: "post",
+    body: JSON.stringify(skillForServer)
+  }).then(() => payload);
 };
 
 export const updateSkillApi = payload => {
-  //TODO
-  return Promise.resolve(payload);
+  const { skillToUpdate: skill, skillGroupId } = payload;
+  const skillForServer = { ...skill, skillGroupId };
+  return fetch("./api/Skill/Update", {
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    method: "post",
+    body: JSON.stringify(skillForServer)
+  }).then(() => payload);
 };
 
 export const removeSkillApi = payload => {

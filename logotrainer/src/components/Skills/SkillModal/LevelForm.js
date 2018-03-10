@@ -7,7 +7,6 @@ class LevelForm extends Component {
       <Form.Group levelid={this.props.level.levelId}>
         <Form.Input
           type="number"
-          placeholder="50"
           label="Уровень (%)"
           name="levelNumber"
           onChange={this.props.onLevelPropertyChange}
