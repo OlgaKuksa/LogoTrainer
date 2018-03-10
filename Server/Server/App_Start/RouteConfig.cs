@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Server
+namespace Logotrainer.Server
 {
     public class RouteConfig
     {
@@ -13,7 +13,7 @@ namespace Server
                 name: "DefaultApi",
                 url: "api/{controller}/{action}/{id}",
                 defaults: new { id = UrlParameter.Optional, action = "Index" },
-                namespaces: new[] { "Server.Controllers.Api, Server" }
+                namespaces: new[] { "Logotrainer.Server.Controllers.Api" }
             );
             routes.MapRoute(
                 name: "Default",

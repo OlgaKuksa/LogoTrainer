@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Server.Controllers
+namespace Logotrainer.Server.Controllers
 {
     [Authorize] public class HomeController : Controller
     {

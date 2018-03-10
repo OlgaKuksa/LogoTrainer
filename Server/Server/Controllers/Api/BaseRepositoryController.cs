@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Server.Controllers.Api
+namespace Logotrainer.Server.Controllers.Api
 {
     public abstract class BaseRepositoryController : Controller
     {

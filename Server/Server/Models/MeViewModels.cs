@@ -1,4 +1,4 @@
-﻿namespace Server.Models
+﻿namespace Logotrainer.Server.Models
 {
     // Models returned by MeController actions.
     public class GetViewModel

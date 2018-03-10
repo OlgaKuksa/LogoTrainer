@@ -1,9 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Server.Startup))]
+[assembly: OwinStartup(typeof(Logotrainer.Server.Startup))]
 
-namespace Server
+namespace Logotrainer.Server
 {
     public partial class Startup
     {

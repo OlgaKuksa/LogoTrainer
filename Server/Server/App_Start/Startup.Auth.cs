@@ -5,10 +5,10 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using Server.Models;
-using Server.Providers;
+using Logotrainer.Server.Models;
+using Logotrainer.Server.Providers;
 
-namespace Server
+namespace Logotrainer.Server
 {
     public partial class Startup
     {

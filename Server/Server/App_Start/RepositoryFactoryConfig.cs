@@ -3,7 +3,7 @@ using Logotrainer.Model.Interfaces;
 using Logotrainer.Persistence.Repositories;
 using Owin;
 
-namespace Server
+namespace Logotrainer.Server
 {
     public static class RepositoryFactoryConfig
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Server.Models
+namespace Logotrainer.Server.Models
 {
     // Models returned by AccountController actions.
     public class ExternalLoginConfirmationViewModel

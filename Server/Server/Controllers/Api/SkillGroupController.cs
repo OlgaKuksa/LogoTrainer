@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using Logotrainer.Model.Interfaces;
 
-namespace Server.Controllers.Api
+namespace Logotrainer.Server.Controllers.Api
 {
     [Authorize] public class SkillGroupController : BaseRepositoryController
     {

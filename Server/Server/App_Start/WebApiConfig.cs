@@ -2,7 +2,7 @@
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 
-namespace Server
+namespace Logotrainer.Server
 {
     public static class WebApiConfig
     {

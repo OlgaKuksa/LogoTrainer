@@ -2,9 +2,9 @@
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Server.Models;
+using Logotrainer.Server.Models;
 
-namespace Server.Controllers
+namespace Logotrainer.Server.Controllers
 {
     [Authorize] public class MeController : ApiController
     {

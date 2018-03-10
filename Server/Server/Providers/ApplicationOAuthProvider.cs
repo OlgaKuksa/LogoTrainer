@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.OAuth;
 
-namespace Server.Providers
+namespace Logotrainer.Server.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {

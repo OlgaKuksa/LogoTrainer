@@ -5,9 +5,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Server.Models;
+using Logotrainer.Server.Models;
 
-namespace Server.Controllers
+namespace Logotrainer.Server.Controllers
 {
     [Authorize] public class ManageController : Controller
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Server
+namespace Logotrainer.Server
 {
     public class FilterConfig
     {
