@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IRepositoryFactory.cs" />
+    <Compile Include="Interfaces\ISkillGroupRepository.cs" />
+    <Compile Include="Interfaces\ISkillRepository.cs" />
     <Compile Include="Operation\Level.cs" />
     <Compile Include="Operation\Skill.cs" />
     <Compile Include="Operation\SkillGroup.cs" />

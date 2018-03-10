@@ -28,6 +28,11 @@ namespace Logotrainer.Persistence.Repositories
             return new SkillGroupRepository(Connection);
         }
 
+        public ISkillRepository CreateSkillRepository()
+        {
+            return new SkillRepository(Connection);
+        }
+
         public void Dispose()
         {
         }
