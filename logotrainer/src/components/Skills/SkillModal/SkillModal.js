@@ -134,6 +134,9 @@ class SkillModal extends Component {
                   key={item.levelId}
                   removeLevelBtnHandler={this.removeLevelBtnHandler}
                   onLevelPropertyChange={this.onLevelPropertyChange}
+                  canBeRemoved={Boolean(
+                    this.state.skillInModal.skillLevels.length > 1
+                  )}
                 />
               ))}
             <Icon

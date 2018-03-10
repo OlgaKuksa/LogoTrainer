@@ -33,12 +33,14 @@ class LevelForm extends Component {
               : this.props.level.levelText
           }
         />
-        <Icon
-          name="remove circle"
-          color="red"
-          size="big"
-          onClick={this.props.removeLevelBtnHandler}
-        />
+        {this.props.canBeRemoved ? (
+          <Icon
+            name="remove circle"
+            color="red"
+            size="big"
+            onClick={this.props.removeLevelBtnHandler}
+          />
+        ) : null}
       </Form.Group>
     );
   }

@@ -37,7 +37,7 @@ class Skills extends Component {
       <div>
         <Grid>
           <Grid.Column width={4}>
-            <Menu fluid vertical tabular color="olive">
+            <Menu fluid vertical color="olive" pointing>
               {this.props.skills.map(item => (
                 <Menu.Item
                   name={item.skillGroupName}
@@ -45,8 +45,9 @@ class Skills extends Component {
                   key={item.skillGroupId}
                   active={this.state.activeItem == item.skillGroupId}
                   onClick={this.handleMenuItemClick}
+                  size="tiny"
                 >
-                  {item.skillGroupName}
+                  <strong>{item.skillGroupName}</strong>
                   <Icon
                     name="pencil"
                     onClick={e => {

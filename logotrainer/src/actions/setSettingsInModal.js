@@ -18,7 +18,7 @@ export const sendSettingsToGenerateSetAsync = (
   skillList
 ) => dispatch => {
   return generateSetApi(kidId, skillList).then(payload => {
-    dispatch(addSetToSetList(payload));
+    if (payload.kidSetId) dispatch(addSetToSetList(payload));
     dispatch(removeSetSettingsModal());
   });
 };

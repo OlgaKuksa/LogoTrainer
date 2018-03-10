@@ -28,6 +28,9 @@ class TestModalSkillItem extends Component {
                 checked={this.state.value == level.levelId}
                 onClick={this.handleChange}
                 readOnly={this.props.isReadonly}
+                disabled={
+                  this.state.value !== level.levelId && this.props.isReadonly
+                }
               />
             </Form.Field>
           ))}

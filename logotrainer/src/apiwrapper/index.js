@@ -186,8 +186,12 @@ export const removeSkillGroupApi = payload => {
   return Promise.resolve(payload);
 };
 
-export const getExerciseListApi = () => {
-  return Promise.resolve([...allExercises]);
+export const getExerciseListApi = filter => {
+  return Promise.resolve(
+    allExercises.filter(
+      exercise => exercise.exerciseMainLevelId === filter.mainLevelId
+    )
+  );
 };
 
 export const addExerciseApi = exercise => {
@@ -289,19 +293,33 @@ export const getGroupsApi = () => {
 //begin: sets
 let sets = [];
 
+export const getSetListApi = kidId => {
+  let setsForKid = sets.filter(item => item.kidId === kidId);
+  return Promise.resolve(setsForKid);
+};
+
 export const generateSetApi = (kidId, skillList) => {
   let defaultSetObject = {
     kidSetId: uuid(),
     createDateTime: new Date(),
     kidId,
-    exerciseIdsInSet: ["10001", "10002", "10003"]
+    exerciseIdsInSet: allExercises
+      .filter(item => skillList.includes(item.exerciseMainSkillId))
+      .map(item => item.exerciseId)
   };
+  if (defaultSetObject.exerciseIdsInSet.length === 0)
+    return Promise.resolve({});
   sets = [...sets, defaultSetObject];
   return Promise.resolve(defaultSetObject);
 };
 
 export const getSetExercisesApi = setId => {
-  return Promise.resolve(allExercises);
+  let thisSet = sets.find(item => item.kidSetId === setId);
+  return Promise.resolve(
+    allExercises.filter(exercise =>
+      thisSet.exerciseIdsInSet.includes(exercise.exerciseId)
+    )
+  );
 };
 
 //end:sets

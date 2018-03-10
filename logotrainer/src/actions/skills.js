@@ -8,7 +8,8 @@ import {
   removeSkillApi,
   removeSkillGroupApi
 } from "../apiwrapper";
-
+import { updateFilter } from "./exerciseFilter";
+import { clearExerciseList } from "./exerciseList";
 export const GET_SKILLS = "GET_SKILLS";
 export const ADD_SKILLGROUP = "ADD_SKILLGROUP";
 export const ADD_SKILL = "ADD_SKILL";
@@ -27,6 +28,12 @@ export const getSkillsAsync = () => (dispatch, getState) => {
   if (state.skills) return Promise.resolve();
   return getSkillsApi().then(payload => {
     dispatch(getSkills(payload));
+    dispatch(
+      updateFilter({
+        mainSkillId: payload[0].skills[0].skillId,
+        mainLevelId: payload[0].skills[0].skillLevels[0].levelId
+      })
+    );
   });
 };
 
@@ -54,9 +61,23 @@ export const addSkill = skillData => ({
     }
   }
 });
-export const addSkillAsync = skillData => dispatch => {
+export const addSkillAsync = skillData => (dispatch, getState) => {
   const action = addSkill(skillData);
-  addSkillApi(action.payload).then(() => dispatch(action));
+  const state = getState();
+  addSkillApi(action.payload).then(() => {
+    let shouldUpdateExerciseFilter =
+      state.skills.filter(skillgroup => skillgroup.skills.length > 0).length ===
+      0;
+    dispatch(action);
+    console.log(action);
+    shouldUpdateExerciseFilter &&
+      dispatch(
+        updateFilter({
+          mainSkillId: action.payload.skill.skillId,
+          mainLevelId: action.payload.skill.skillLevels[0].levelId
+        })
+      );
+  });
 };
 export const updateSkill = skillData => ({
   type: UPDATE_SKILL,
@@ -68,7 +89,10 @@ export const updateSkill = skillData => ({
 
 export const updateSkillAsync = skillData => dispatch => {
   const action = updateSkill(skillData);
-  updateSkillApi(action.payload).then(() => dispatch(action));
+  updateSkillApi(action.payload).then(() => {
+    dispatch(action);
+    dispatch(clearExerciseList());
+  });
 };
 
 export const updateSkillGroup = payload => ({
@@ -98,7 +122,24 @@ export const removeSkill = skillData => ({
   }
 });
 
-export const removeSkillAsync = skillData => dispatch => {
+export const removeSkillAsync = skillData => (dispatch, getState) => {
   const action = removeSkill(skillData);
-  removeSkillApi(action.payload).then(() => dispatch(action));
+  removeSkillApi(action.payload).then(() => {
+    dispatch(action);
+    let state = getState();
+    state.exerciseFilter.mainSkillId === skillData.skillId &&
+      state.skills.find(skillgroup => skillgroup.skills.length > 0) !==
+        undefined &&
+      dispatch(
+        updateFilter({
+          mainSkillId: state.skills.find(
+            skillgroup => skillgroup.skills.length > 0
+          ).skills[0].skillId,
+          mainLevelId: state.skills.find(
+            skillgroup => skillgroup.skills.length > 0
+          ).skills[0].skillLevels[0].levelId
+        })
+      );
+    dispatch(clearExerciseList());
+  });
 };

@@ -1,10 +1,11 @@
 import {
   GET_EXERCISE_LIST,
   REMOVE_EXERCISE,
-  UPDATE_EXERCISE
+  UPDATE_EXERCISE,
+  CLEAR_EXERCISELIST
 } from "../actions/exerciseList";
 
-const DEFAULT_STATE = [];
+const DEFAULT_STATE = null;
 
 const exerciseList = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
@@ -21,6 +22,8 @@ const exerciseList = (state = DEFAULT_STATE, action) => {
             ? exercise
             : action.payload
       );
+    case CLEAR_EXERCISELIST:
+      return DEFAULT_STATE;
     default:
       return state;
   }
