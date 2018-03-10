@@ -15,23 +15,29 @@ namespace Logotrainer.Server.Controllers.Api
         {
         }
 
-        public IList<SkillGroup> GetAll()
-        {
-            var repo = RepositoryFactory.CreateSkillGroupRepository();
-            var ret = repo.GetAll();
-            return ret;
-        }
-
         [System.Web.Mvc.HttpPost] public void Add([FromBody] SkillGroup skillGroup)
         {
-            var repo = RepositoryFactory.CreateSkillGroupRepository();
-            repo.Add(skillGroup);
+            SkillGroupRepository.Add(skillGroup);
+        }
+
+        public IList<SkillGroup> GetAll()
+        {
+            return SkillGroupRepository.GetAll();
+        }
+
+        [System.Web.Mvc.HttpPost] public void Remove([FromBody] SkillGroup skillGroup)
+        {
+            SkillGroupRepository.Remove(skillGroup);
         }
 
         [System.Web.Mvc.HttpPost] public void Update([FromBody] SkillGroup skillGroup)
         {
-            var repo = RepositoryFactory.CreateSkillGroupRepository();
-            repo.Update(skillGroup);
+            SkillGroupRepository.Update(skillGroup);
+        }
+
+        private ISkillGroupRepository SkillGroupRepository
+        {
+            get { return RepositoryFactory.CreateSkillGroupRepository(); }
         }
     }
 }

@@ -53,6 +53,11 @@ namespace Logotrainer.Persistence.Repositories
                 Connection.Close();
         }
 
+        public void Remove(SkillGroup skillGroup)
+        {
+            Connection.Execute(SkillGroupSql.Remove, skillGroup);
+        }
+
         private IList<Skill> GetSkillsBySkillGroupId(Guid skillGroupId)
         {
             var skillsBySkillGroupId = Connection

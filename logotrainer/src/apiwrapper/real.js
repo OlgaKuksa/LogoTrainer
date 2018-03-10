@@ -172,6 +172,15 @@ export const addSkillGroupApi = skillGroup => {
   }).then(() => skillGroup);
 };
 
+export const updateSkillGroupApi = payload => {
+  return fetch("./api/SkillGroup/Update", {
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    method: "post",
+    body: JSON.stringify(payload)
+  }).then(() => payload);
+};
+
 export const addSkillApi = payload => {
   //TODO
   return Promise.resolve(payload);
@@ -182,23 +191,18 @@ export const updateSkillApi = payload => {
   return Promise.resolve(payload);
 };
 
-export const updateSkillGroupApi = payload => {
-  return fetch("./api/SkillGroup/Update", {
-    credentials: "include",
-    headers: { "Content-Type": "application/json" },
-    method: "post",
-    body: JSON.stringify(payload)
-  }).then(() => payload);
-};
-
 export const removeSkillApi = payload => {
   //TODO
   return Promise.resolve(payload);
 };
 
 export const removeSkillGroupApi = payload => {
-  //TODO
-  return Promise.resolve(payload);
+  return fetch("./api/SkillGroup/Remove", {
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    method: "post",
+    body: JSON.stringify(payload)
+  }).then(() => payload);
 };
 
 export const getExerciseListApi = filter => {

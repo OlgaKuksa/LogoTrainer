@@ -98,6 +98,15 @@ namespace Logotrainer.Persistence.Repositories {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM [SkillGroup] WHERE [SkillGroupId]=@SkillGroupId.
+        /// </summary>
+        internal static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UPDATE [SkillGroup]
         ///SET [SkillGroupName]=@SkillGroupName
         ///WHERE [SkillGroupId]=@SkillGroupId.

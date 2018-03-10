@@ -135,4 +135,7 @@ WHERE [SkillGroupId]=@SkillGroupId</value>
     <value>INSERT INTO [SkillGroup]([SkillGroupId],[SkillGroupName])
 VALUES (@SkillGroupId, @SkillGroupName)</value>
   </data>
+  <data name="Remove" xml:space="preserve">
+    <value>DELETE FROM [SkillGroup] WHERE [SkillGroupId]=@SkillGroupId</value>
+  </data>
 </root>

@@ -14,5 +14,6 @@ namespace Logotrainer.Model.Interfaces
         IList<SkillGroup> GetAll();
         void Add(SkillGroup skillGroup);
         void Update(SkillGroup skillGroup);
+        void Remove(SkillGroup skillGroup);
     }
 }
