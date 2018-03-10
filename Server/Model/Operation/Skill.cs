@@ -10,6 +10,6 @@ namespace Logotrainer.Model.Operation
 
         public string SkillName { get; set; }
         public string SkillQuestion { get; set; }
-        public IList<Level> Levels { get; set; }
+        public IList<Level> SkillLevels { get; set; }
     }
 }

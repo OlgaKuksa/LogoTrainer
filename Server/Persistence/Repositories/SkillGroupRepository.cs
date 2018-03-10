@@ -41,7 +41,7 @@ namespace Logotrainer.Persistence.Repositories
             var skillsBySkillGroupId = Connection.Query<Skill>(getSkillsBySkillGroupIdSql, new {SkillGroupId = skillGroupId}).ToList();
             foreach (var skill in skillsBySkillGroupId)
             {
-                skill.Levels = GetLevelsBySkillId(skill.SkillId);
+                skill.SkillLevels = GetLevelsBySkillId(skill.SkillId);
             }
             return skillsBySkillGroupId;
         }
