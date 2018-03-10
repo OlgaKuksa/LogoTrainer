@@ -19,7 +19,7 @@ const uuid = require("uuid/v4");
 
 class Skills extends Component {
   state = {
-    activeItem: (this.props.skills[0] || {}).skillGroupId || 0
+    activeItem: ((this.props.skills || [])[0] || {}).skillGroupId || 0
   };
   handleMenuItemClick = (e, { id }) => {
     this.setState({
@@ -27,6 +27,7 @@ class Skills extends Component {
     });
   };
   render() {
+    if (this.props.skills == null) return null;
     let selectedGroup =
       this.props.skills == null
         ? {}
