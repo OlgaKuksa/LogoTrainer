@@ -38,7 +38,7 @@ go
         SkillId              uniqueidentifier NOT NULL,
         PRIMARY KEY NONCLUSTERED (LevelId), 
         FOREIGN KEY (SkillId)
-                              REFERENCES Skill
+                              REFERENCES Skill ON DELETE CASCADE
  )
 go
  
@@ -106,7 +106,7 @@ go
         FOREIGN KEY (LevelId)
                               REFERENCES [Level], 
         FOREIGN KEY (SkillId)
-                              REFERENCES Skill, 
+                              REFERENCES Skill ON DELETE CASCADE, 
         FOREIGN KEY (KidProfileId)
                               REFERENCES KidProfile
  )

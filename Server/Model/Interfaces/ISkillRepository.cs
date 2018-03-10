@@ -6,6 +6,6 @@ namespace Logotrainer.Model.Interfaces
     {
         void Add(Skill skill);
         void Update(Skill skill);
-        void Remove(Skill skill);
+        bool Remove(Skill skill);
     }
 }

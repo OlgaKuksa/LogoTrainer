@@ -53,13 +53,22 @@ namespace Logotrainer.Persistence.Repositories
             }
             foreach (var levelIdToRemove in levelIdsToRemove)
             {
+                //redirect to next lower-or-equal level all exercises/test results
+                //or first greater if no lower levels
                 Connection.Execute("DELETE FROM [Level] WHERE [LevelId]=@LevelId", new {LevelId = levelIdToRemove});
             }
         }
 
-        public void Remove(Skill skill)
+        public bool Remove(Skill skill)
         {
+            if (Connection.QuerySingle<int>(
+                    "SELECT COUNT(*) FROM [Level] INNER JOIN [Exercise] ON [Level].[LevelId]=[Exercise].[LevelId] WHERE [Level].[SkillId]=@SkillId",
+                    skill) > 0)
+                return false;
+            //cannot remove if any exercise is using it
+            //will remove test results - cascade
             Connection.Execute(SkillSql.Remove, skill);
+            return true;
         }
     }
 }

@@ -213,7 +213,13 @@ export const updateSkillApi = payload => {
 };
 
 export const removeSkillApi = payload => {
-  //TODO
+  return fetch("./api/Skill/Remove", {
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    method: "post",
+    body: JSON.stringify(payload)
+  }).then(() => payload);
+  //TODO check server responce
   return Promise.resolve(payload);
 };
 
