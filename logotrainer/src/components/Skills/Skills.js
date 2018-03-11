@@ -26,6 +26,14 @@ class Skills extends Component {
       activeItem: id
     });
   };
+  componentWillReceiveProps(nextProps) {
+    if (
+      this.state.activeItem == 0 &&
+      nextProps.skills &&
+      nextProps.skills.length
+    )
+      this.setState({ activeItem: nextProps.skills[0].skillGroupId });
+  }
   render() {
     if (this.props.skills == null) return null;
     let selectedGroup =
