@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import "./KidPage.css";
 import ProfileKid from "./Profile/ProfileKid.js";
 import SetsKid from "./Sets/SetsKid.js";
+import ProgressKid from "./ProgressKid";
 
 class KidPage extends Component {
   state = {
@@ -55,6 +56,7 @@ class KidPage extends Component {
         </Menu>
         {this.state.activeItem === "profile" && <ProfileKid />}
         {this.state.activeItem === "sets" && <SetsKid />}
+        {this.state.activeItem === "progress" && <ProgressKid />}
       </div>
     );
   }
