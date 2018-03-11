@@ -40,10 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IExerciseRepository.cs" />
     <Compile Include="Interfaces\IRepositoryFactory.cs" />
     <Compile Include="Interfaces\ISkillGroupRepository.cs" />
     <Compile Include="Interfaces\ISkillRepository.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
+    <Compile Include="Operation\Exercise.cs" />
+    <Compile Include="Operation\Group.cs" />
+    <Compile Include="Operation\Kid.cs" />
+    <Compile Include="Operation\KidProfile.cs" />
+    <Compile Include="Operation\KidSet.cs" />
     <Compile Include="Operation\Level.cs" />
     <Compile Include="Operation\Skill.cs" />
     <Compile Include="Operation\SkillGroup.cs" />
