@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Logotrainer.Model.Interfaces;
 using Logotrainer.Server.Models;
@@ -7,7 +8,10 @@ using Microsoft.AspNet.Identity;
 namespace Logotrainer.Server
 {
     public class LocalUserStore : IUserStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>,
-        IUserLockoutStore<ApplicationUser, string>, IUserTwoFactorStore<ApplicationUser,string>
+        IUserLockoutStore<ApplicationUser, string>, IUserTwoFactorStore<ApplicationUser, string>,
+        IUserPhoneNumberStore<ApplicationUser>,
+        IUserLoginStore<ApplicationUser>,
+        IUserEmailStore<ApplicationUser>
     {
         private IRepositoryFactory RepositoryFactory { get; set; }
 
@@ -114,6 +118,71 @@ namespace Logotrainer.Server
         public Task<bool> GetTwoFactorEnabledAsync(ApplicationUser user)
         {
             return Task.FromResult(false);
+        }
+
+        public Task SetPhoneNumberAsync(ApplicationUser user, string phoneNumber)
+        {
+            return Task.FromResult(user.PhoneNumber = phoneNumber);
+        }
+
+        public Task<string> GetPhoneNumberAsync(ApplicationUser user)
+        {
+            return Task.FromResult(user.PhoneNumber);
+        }
+
+        public Task<bool> GetPhoneNumberConfirmedAsync(ApplicationUser user)
+        {
+            return Task.FromResult(true);
+        }
+
+        public Task SetPhoneNumberConfirmedAsync(ApplicationUser user, bool confirmed)
+        {
+            return Task.FromResult(user.PhoneNumberConfirmed = confirmed);
+        }
+
+        public Task AddLoginAsync(ApplicationUser user, UserLoginInfo login)
+        {
+            return Task.FromResult(false);
+        }
+
+        public Task RemoveLoginAsync(ApplicationUser user, UserLoginInfo login)
+        {
+            return Task.FromResult(false);
+        }
+
+        public Task<IList<UserLoginInfo>> GetLoginsAsync(ApplicationUser user)
+        {
+            return Task.FromResult(new UserLoginInfo[] { } as IList<UserLoginInfo>);
+        }
+
+        public Task<ApplicationUser> FindAsync(UserLoginInfo login)
+        {
+            return Task.FromResult<ApplicationUser>(null);
+        }
+
+        public Task SetEmailAsync(ApplicationUser user, string email)
+        {
+            return Task.FromResult(false);
+        }
+
+        public Task<string> GetEmailAsync(ApplicationUser user)
+        {
+            return Task.FromResult(user.UserName);
+        }
+
+        public Task<bool> GetEmailConfirmedAsync(ApplicationUser user)
+        {
+            return Task.FromResult(true);
+        }
+
+        public Task SetEmailConfirmedAsync(ApplicationUser user, bool confirmed)
+        {
+            return Task.FromResult(false);
+        }
+
+        public Task<ApplicationUser> FindByEmailAsync(string email)
+        {
+            return FindByNameAsync(email);
         }
     }
 }
