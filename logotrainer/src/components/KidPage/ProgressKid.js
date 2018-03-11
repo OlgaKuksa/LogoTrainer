@@ -22,7 +22,7 @@ class ProgressKid extends Component {
               <XAxis dataKey="profileDate" />
               <YAxis />
               <Legend />
-              <Tooltip />
+              <Tooltip content={<div>{}</div>}/>
               <Bar dataKey="skillValue" fill="#8884d8" />
             </BarChart>
           </div>
