@@ -19,6 +19,9 @@ namespace Logotrainer.Persistence.Repositories
         public void Update(User user)
         {
             //throw new System.NotImplementedException();
+            Connection.Execute(@"UPDATE [User]
+SET [Password]=@Password
+WHERE [UserId]=@UserId", user);
         }
 
         public User FindById(string userId)
