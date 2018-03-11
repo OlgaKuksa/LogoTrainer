@@ -28,12 +28,18 @@ export const getSkillsAsync = () => (dispatch, getState) => {
   if (state.skills) return Promise.resolve();
   return getSkillsApi().then(payload => {
     dispatch(getSkills(payload));
-    dispatch(
-      updateFilter({
-        mainSkillId: payload[0].skills[0].skillId,
-        mainLevelId: payload[0].skills[0].skillLevels[0].levelId
-      })
-    );
+    if (
+      payload &&
+      payload.length &&
+      payload[0].skills &&
+      payload[0].skills.length
+    )
+      dispatch(
+        updateFilter({
+          mainSkillId: payload[0].skills[0].skillId,
+          mainLevelId: payload[0].skills[0].skillLevels[0].levelId
+        })
+      );
   });
 };
 
@@ -127,9 +133,10 @@ export const removeSkillAsync = skillData => (dispatch, getState) => {
   removeSkillApi(action.payload).then(() => {
     dispatch(action);
     let state = getState();
-    state.exerciseFilter.mainSkillId === skillData.skillId &&
-      state.skills.find(skillgroup => skillgroup.skills.length > 0) !==
-        undefined &&
+    if (
+      state.exerciseFilter.mainSkillId === skillData.skillId &&
+      state.skills.find(skillgroup => skillgroup.skills.length > 0)
+    )
       dispatch(
         updateFilter({
           mainSkillId: state.skills.find(
