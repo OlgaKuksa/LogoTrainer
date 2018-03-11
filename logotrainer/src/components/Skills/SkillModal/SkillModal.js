@@ -12,14 +12,17 @@ import { v4 as guid } from "uuid";
 
 class SkillModal extends Component {
   state = {
-    skillInModal: { ...this.props.skillInModal }
+    skillInModal: { ...this.props.skillInModal },
+    error: false
   };
 
   addLevelBtnHandler = () => {
-    let levels = [...this.state.skillInModal.skillLevels, { levelId: guid() }];
-    let theSkill = { ...this.state.skillInModal };
-    theSkill.skillLevels = [...levels];
-    this.setState({ skillInModal: theSkill });
+    const { skillInModal } = this.state;
+    let levels = [...skillInModal.skillLevels, { levelId: guid() }];
+    let theSkill = { ...skillInModal, skillLevels: levels };
+    this.setState({
+      skillInModal: theSkill
+    });
   };
 
   removeLevelBtnHandler = ev => {
@@ -28,7 +31,9 @@ class SkillModal extends Component {
     skillToOperate.skillLevels = skillToOperate.skillLevels.filter(
       level => level.levelId != levelIdToRemove
     );
-    this.setState({ skillInModal: skillToOperate });
+    this.setState({
+      skillInModal: skillToOperate
+    });
   };
 
   onSkillPropertyChange = ev => {
@@ -68,35 +73,67 @@ class SkillModal extends Component {
   };
 
   addUpdateSkillBtnHandler = () => {
-    this.props.skillInModal.skillId === undefined
-      ? this.props.addSkill({
-          skillGroupId: this.props.groupid,
-          skill: this.state.skillInModal
-        })
-      : this.props.updateSkill({
-          skillGroupId: this.props.groupid,
-          skill: this.state.skillInModal
-        });
-    this.props.removeSkillModal();
+    if (this.containsInvalidData()) return;
+    const {
+      skillInModal: { skillId: ownSkillId } = {},
+      removeSkillModal,
+      addSkill,
+      updateSkill,
+      groupid: skillGroupId
+    } = this.props;
+    const isNew = ownSkillId === undefined;
+    const { skillInModal: skill } = this.state;
+    if (isNew)
+      addSkill({
+        skillGroupId,
+        skill
+      });
+    else
+      updateSkill({
+        skillGroupId,
+        skill
+      });
+    removeSkillModal();
+  };
+
+  containsInvalidData = () => {
+    const {
+      skillInModal: { skillName, skillQuestion, skillLevels }
+    } = this.state;
+    if (
+      skillName &&
+      skillName.trim() &&
+      skillQuestion &&
+      skillQuestion.trim() &&
+      skillLevels.every(
+        level =>
+          level.levelNumber <= 100 &&
+          level.levelNumber >= 0 &&
+          level.levelText &&
+          level.levelText.trim()
+      )
+    ) {
+      return false;
+    } else {
+      this.setState({ error: true });
+      return true;
+    }
   };
 
   render() {
-    let legend =
-      this.props.skillInModal.skillId === undefined
-        ? "Добавить навык"
-        : "Редактировать навык";
-    let btnLabel =
-      this.props.skillInModal.skillId === undefined ? "Добавить" : "Сохранить";
-
+    const {
+      skillInModal: { skillId: ownSkillId } = {},
+      removeSkillModal
+    } = this.props;
+    const isNew = ownSkillId === undefined;
+    let legend = isNew ? "Добавить навык" : "Редактировать навык";
+    let btnLabel = isNew ? "Добавить" : "Сохранить";
+    const {
+      skillInModal: { skillName = "", skillQuestion = "", skillLevels },
+      error
+    } = this.state;
     return (
-      <Modal
-        onClose={() => {
-          this.props.removeSkillModal();
-          this.setState(this.props.skillInModal);
-        }}
-        open={Boolean(this.props.skillInModal)}
-        closeIcon
-      >
+      <Modal onClose={removeSkillModal} open closeIcon>
         <Modal.Header>{legend}</Modal.Header>
         <Modal.Content scrolling>
           <Form>
@@ -107,11 +144,7 @@ class SkillModal extends Component {
               required
               name="skillName"
               onChange={this.onSkillPropertyChange}
-              defaultValue={
-                this.state.skillInModal.skillName == undefined
-                  ? ""
-                  : this.state.skillInModal.skillName
-              }
+              defaultValue={skillName}
             />
 
             <Form.Input
@@ -121,22 +154,16 @@ class SkillModal extends Component {
               name="skillQuestion"
               onChange={this.onSkillPropertyChange}
               required
-              defaultValue={
-                this.state.skillInModal.skillQuestion == undefined
-                  ? ""
-                  : this.state.skillInModal.skillQuestion
-              }
+              defaultValue={skillQuestion}
             />
-            {this.state.skillInModal.skillLevels !== undefined &&
-              this.state.skillInModal.skillLevels.map(item => (
+            {skillLevels != null &&
+              skillLevels.map(item => (
                 <LevelForm
                   level={item}
                   key={item.levelId}
                   removeLevelBtnHandler={this.removeLevelBtnHandler}
                   onLevelPropertyChange={this.onLevelPropertyChange}
-                  canBeRemoved={Boolean(
-                    this.state.skillInModal.skillLevels.length > 1
-                  )}
+                  canBeRemoved={skillLevels.length > 1}
                 />
               ))}
             <Icon
@@ -148,7 +175,12 @@ class SkillModal extends Component {
           </Form>
         </Modal.Content>
         <Modal.Actions>
-          {this.props.skillInModal.skillId !== undefined && (
+          {error && (
+            <Message negative>
+              Пожалуйста, заполните все обязательные поля (обозначены *)
+            </Message>
+          )}
+          {!isNew && (
             <Button color="red" onClick={this.removeSkillBtnHandler}>
               Удалить
             </Button>
