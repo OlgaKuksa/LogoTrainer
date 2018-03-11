@@ -9,8 +9,6 @@ GO
 USE [LogotrainerDB]
 GO
 
-
- 
  CREATE TABLE SkillGroup (
         SkillGroupName       nvarchar(100) NULL,
         SkillGroupId         uniqueidentifier NOT NULL,
@@ -67,8 +65,8 @@ go
  
  
  CREATE TABLE Kid (
-        FirstName            nvarchar(50) NULL,
         KidId                uniqueidentifier NOT NULL,
+		FirstName            nvarchar(50) NULL,
         MiddleName           nvarchar(50) NULL,
         LastName             nvarchar(50) NULL,
         DateOfBirth          datetime NULL,
@@ -77,9 +75,10 @@ go
         ParentInfo           nvarchar(200) NULL,
         ParentMobile         nvarchar(100) NULL,
         ParentUserId         uniqueidentifier NULL,
-        IsArchived           int NULL,
+		GroupId				 uniqueidentifier NOT NULL,
+        IsArchived           bit NULL,
         PRIMARY KEY NONCLUSTERED (KidId), 
-        FOREIGN KEY (ParentUserId)
+        FOREIGN KEY (GroupId)
                               REFERENCES [Group], 
         FOREIGN KEY (ParentUserId)
                               REFERENCES [User]
@@ -129,9 +128,12 @@ go
         ExerciseInventory    nvarchar(300) NULL,
         ExerciseSteps        nvarchar(max) NULL,
         LevelId              uniqueidentifier NULL,
+		UserId				uniqueidentifier NOT NULL,
+		IsArchived          bit NULL
         PRIMARY KEY NONCLUSTERED (ExerciseId), 
         FOREIGN KEY (LevelId)
-                              REFERENCES [Level]
+                              REFERENCES [Level],
+		FOREIGN KEY (UserId) REFERENCES [User]
  )
 go
  
