@@ -7,5 +7,11 @@ namespace Logotrainer.Model.Interfaces
         ISkillGroupRepository CreateSkillGroupRepository();
 
         ISkillRepository CreateSkillRepository();
+
+        IUserRepository CreateUserRepository();
+    }
+
+    public interface IUserRepository
+    {
     }
 }

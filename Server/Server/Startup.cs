@@ -9,8 +9,8 @@ namespace Logotrainer.Server
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
             RepositoryFactoryConfig.Register(app);
+            ConfigureAuth(app);
         }
     }
 }

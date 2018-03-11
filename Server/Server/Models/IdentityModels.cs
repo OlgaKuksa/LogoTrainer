@@ -1,5 +1,7 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Logotrainer.Model.Operation;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -17,7 +19,20 @@ namespace Logotrainer.Server.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public User ToUser()
+        {
+            return new User(){UserId = new Guid(Id),LoginId = UserName,Password = PasswordHash};
+        }
+
+        public static ApplicationUser FromUser(User user)
+        {
+            if (user == null) return null;
+            return new ApplicationUser(){Id=user.UserId.ToString(),UserName = user.LoginId,PasswordHash = user.Password};
+        }
     }
+
+   
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

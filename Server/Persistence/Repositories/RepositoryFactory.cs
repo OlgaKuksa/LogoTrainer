@@ -7,7 +7,7 @@ namespace Logotrainer.Persistence.Repositories
 {
     public class RepositoryFactory : IRepositoryFactory
     {
-        public RepositoryFactory(string connectionString):this(()=>new SqlConnection(connectionString))
+        public RepositoryFactory(string connectionString) : this(() => new SqlConnection(connectionString))
         {
         }
 
@@ -31,6 +31,11 @@ namespace Logotrainer.Persistence.Repositories
         public ISkillRepository CreateSkillRepository()
         {
             return new SkillRepository(Connection);
+        }
+
+        public IUserRepository CreateUserRepository()
+        {
+            return new UserRepository(Connection);
         }
 
         public void Dispose()
