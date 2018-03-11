@@ -43,9 +43,11 @@
     <Compile Include="Interfaces\IRepositoryFactory.cs" />
     <Compile Include="Interfaces\ISkillGroupRepository.cs" />
     <Compile Include="Interfaces\ISkillRepository.cs" />
+    <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Operation\Level.cs" />
     <Compile Include="Operation\Skill.cs" />
     <Compile Include="Operation\SkillGroup.cs" />
+    <Compile Include="Operation\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

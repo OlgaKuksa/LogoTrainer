@@ -9,14 +9,4 @@ namespace Logotrainer.Model.Operation
         public int LevelNumber { get; set; }
         public Guid SkillId { get; set; }
     }
-
-    public class User
-    {
-        public Guid UserId { get; set; }
-        public string LoginId { get; set; }
-        public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Role { get; set; }
-    }
 }

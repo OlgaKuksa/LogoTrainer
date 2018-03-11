@@ -10,8 +10,4 @@ namespace Logotrainer.Model.Interfaces
 
         IUserRepository CreateUserRepository();
     }
-
-    public interface IUserRepository
-    {
-    }
 }

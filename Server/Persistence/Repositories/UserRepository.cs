@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Dapper;
 using Logotrainer.Model.Interfaces;
 using Logotrainer.Model.Operation;
 
@@ -18,6 +19,20 @@ namespace Logotrainer.Persistence.Repositories
         public void Update(User user)
         {
             //throw new System.NotImplementedException();
+        }
+
+        public User FindById(string userId)
+        {
+            return Connection.QuerySingleOrDefault<User>(
+                "SELECT [UserId],[LoginId],[Password],[FirstName],[LastName],[Role] FROM [User] WHERE [UserId]=@UserId",
+                new {UserId = userId});
+        }
+
+        public User FindByLoginId(string loginId)
+        {
+            return Connection.QuerySingleOrDefault<User>(
+                "SELECT [UserId],[LoginId],[Password],[FirstName],[LastName],[Role] FROM [User] WHERE [LoginId]=@LoginId",
+                new { LoginId = loginId });
         }
     }
 }
