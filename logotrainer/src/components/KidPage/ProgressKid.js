@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Message, Icon, Header } from "semantic-ui-react";
 import { BarChart, XAxis, YAxis, Bar, Tooltip, Legend } from "recharts";
+
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 class ProgressKid extends Component {
   render() {
@@ -17,7 +18,10 @@ class ProgressKid extends Component {
           <div>
             <Header>Средний уровень развития навыков по группе навыков</Header>
             <BarChart width={500} height={300} data={this.props.profiles}>
-              <XAxis dataKey="profileDate" />
+              <XAxis
+                dataKey="profileDate"
+                tickFormatter={profileDate => profileDate.toString()}
+              />
               <YAxis />
               <Legend />
               <Tooltip />

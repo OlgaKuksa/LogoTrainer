@@ -52,7 +52,10 @@ class SkillModal extends Component {
       "levelid"
     );
     let name = ev.target.getAttribute("name");
-    let value = ev.target.value;
+    let value =
+      ev.target.getAttribute("type") == "number"
+        ? Number(ev.target.value)
+        : ev.target.value;
     this.setState(prevState => ({
       skillInModal: {
         ...prevState.skillInModal,
