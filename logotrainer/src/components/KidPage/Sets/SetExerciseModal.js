@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Modal, Header, Segment } from "semantic-ui-react";
+import { Modal, Header, Segment, Button, Icon } from "semantic-ui-react";
 import { removeSetExerciseList } from "../../../actions/setExerciseList";
+import { createPdfForSet } from "../../../utils/pdf";
 
 class SetExerciseModal extends Component {
+  handleCreatePdfBtn = () => {
+    createPdfForSet(this.props.setExerciseList, this.props.kidInPage, false);
+    this.props.removeSetExerciseList();
+  };
+
   render() {
     return (
-      <Modal
-        onClose={this.props.removeSetExerciseList}
-        open={Boolean(this.props.setExerciseList)}
-        closeIcon
-      >
+      <Modal onClose={this.props.removeSetExerciseList} open closeIcon>
         <Header color="green">
           Комплекс упражнений{" - "}
           {this.props.kidInPage.firstName + " " + this.props.kidInPage.lastName}
@@ -33,6 +35,11 @@ class SetExerciseModal extends Component {
             </div>
           ))}
         </Modal.Content>
+        <Modal.Actions>
+          <Button color="green" onClick={this.handleCreatePdfBtn}>
+            <Icon name="file pdf outline" />Сохранить как pdf-файл
+          </Button>
+        </Modal.Actions>
       </Modal>
     );
   }
