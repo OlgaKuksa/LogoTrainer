@@ -38,6 +38,11 @@ namespace Logotrainer.Persistence.Repositories
             return new UserRepository(Connection);
         }
 
+        public IKidSetRepository CreateKidSetRepository()
+        {
+            return new KidSetRepository(Connection);
+        }
+
         public void Dispose()
         {
         }

@@ -8,4 +8,10 @@ namespace Logotrainer.Model.Interfaces
     {
         IList<Exercise> FindByLevelId(Guid mainLevelId);
     }
+
+    public interface IKidSetRepository
+    {
+        void Add(KidSet kidSet);
+        KidSet GenerateNewKidSet(Guid kidId, IList<Guid> skillIds, bool excludeOld = true);
+    }
 }

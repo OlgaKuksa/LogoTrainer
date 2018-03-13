@@ -17,7 +17,6 @@ namespace Logotrainer.Persistence.Repositories
         {
             Connection.Execute(SkillSql.Add, skill);
             AddOrUpdateLevels(skill);
-            
         }
 
         public void Update(Skill skill)
@@ -40,7 +39,6 @@ namespace Logotrainer.Persistence.Repositories
                     Connection.Execute(
                         "UPDATE [Level]\nSET [LevelNumber]=@LevelNumber,[LevelText]=@LevelText\nWHERE [LevelId]=@LevelId",
                         level);
-                   
                 }
                 else
                 {
@@ -48,7 +46,6 @@ namespace Logotrainer.Persistence.Repositories
                     Connection.Execute(
                         "INSERT INTO [Level]([SkillId],[LevelId],[LevelNumber],[LevelText])\nVALUES (@SkillId,@LevelId,@LevelNumber,@LevelText)",
                         level);
-                   
                 }
             }
             foreach (var levelIdToRemove in levelIdsToRemove)
