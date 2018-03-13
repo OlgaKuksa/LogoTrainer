@@ -58,7 +58,7 @@ VALUES (@KidSetId,@ExerciseId)", new {kidSet.KidSetId, ExerciseId = exerciseId})
             var kidProfileId = FindLastKidProfileId(kidId);
 
             if (kidProfileId == default(Guid)) return new List<Exercise>();
-            var ret = Connection.Query<Exercise>(@"SELECT DISTINCT e.[ExerciseId] FROM [Exercise] e
+            var ret = Connection.Query<Exercise>(@"SELECT DISTINCT e.[ExerciseId], e.[LevelId] as [ExerciseMainLevelId] FROM [Exercise] e
 INNER JOIN [TestResult] tr
 ON e.[LevelId]=tr.[LevelId]
 WHERE tr.[KidProfileId]=@KidProfileId
