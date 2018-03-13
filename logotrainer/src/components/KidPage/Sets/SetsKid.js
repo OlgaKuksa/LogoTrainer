@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, Icon, List } from "semantic-ui-react";
+import { Button, Icon, List, Message } from "semantic-ui-react";
 import { addSetSettingsModal } from "../../../actions/setSettingsInModal";
 import { getExercisesApiAsync } from "../../../actions/setExerciseList";
 import SetSettingsModal from "./SetSettingsModal";
@@ -10,13 +10,21 @@ class SetsKids extends Component {
   render() {
     return (
       <div>
-        <Button
-          color="olive"
-          onClick={() => this.props.addSetSettingsModal({})}
-        >
-          <Icon name="sticky note outline" />
-          Автогенерация комплекса
-        </Button>
+        {this.props.testResults.length > 0 ? (
+          <Button
+            color="olive"
+            onClick={() => this.props.addSetSettingsModal({})}
+          >
+            <Icon name="sticky note outline" />
+            Автогенерация комплекса
+          </Button>
+        ) : (
+          <Message compact color="olive">
+            <Icon name="warning circle" />
+            Работа с комплексами возможна только тогда, когда у ребенка есть
+            хотя бы один заполненный профиль
+          </Message>
+        )}
         {this.props.setList == null ? null : (
           <List bulleted>
             {this.props.setList.map(set => (
@@ -49,7 +57,8 @@ const mapStateToProps = state => ({
   setSettingsInModal: state.setSettingsInModal,
   setList: state.setList,
   setExerciseList: state.setExerciseList,
-  kidInPage: state.kidInPage
+  kidInPage: state.kidInPage,
+  testResults: state.testResults
 });
 
 const mapDispatchToProps = {

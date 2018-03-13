@@ -67,6 +67,7 @@ export const addSkill = skillData => ({
     }
   }
 });
+
 export const addSkillAsync = skillData => (dispatch, getState) => {
   const action = addSkill(skillData);
   const state = getState();

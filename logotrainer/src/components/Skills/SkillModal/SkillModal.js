@@ -52,7 +52,10 @@ class SkillModal extends Component {
       "levelid"
     );
     let name = ev.target.getAttribute("name");
-    let value = ev.target.value;
+    let value =
+      ev.target.getAttribute("type") == "number"
+        ? Number(ev.target.value)
+        : ev.target.value;
     this.setState(prevState => ({
       skillInModal: {
         ...prevState.skillInModal,
@@ -177,7 +180,8 @@ class SkillModal extends Component {
         <Modal.Actions>
           {error && (
             <Message negative>
-              Пожалуйста, заполните все обязательные поля (обозначены *)
+              Пожалуйста, заполните все обязательные поля (обозначены *).
+              Значение уровня должно быть от 0 до 100
             </Message>
           )}
           {!isNew && (
