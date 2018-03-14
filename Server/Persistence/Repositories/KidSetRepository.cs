@@ -40,12 +40,12 @@ VALUES (@KidSetId,@ExerciseId)", new {kidSet.KidSetId, ExerciseId = exerciseId})
             var allExercises = FindAllExercisesByKidIdAndSkillIds(kidId, skillIds);
             if (shouldOpenConnection)
                 Connection.Close();
-            if (excludeOld)
-                allExercises = allExercises.Where(it => !oldExerciseIds.Contains(it.ExerciseId)).ToList();
             var newExercises = allExercises.GroupBy(it => it.ExerciseMainLevelId).Select(gr =>
                 gr.ToList()).Select(exerciseList =>
             {
                 if (exerciseList.Count == 1) return exerciseList[0];
+                if (excludeOld)
+                    exerciseList = exerciseList.Where(it => !oldExerciseIds.Contains(it.ExerciseId)).ToList();
                 return exerciseList.OrderByDescending(it =>
                     (it.ExerciseSecondarySkills ?? Enumerable.Empty<Guid>()).Intersect(skillIds).Count()).First();
             }).Where(it => it != null).Select(it => it.ExerciseId).ToList();

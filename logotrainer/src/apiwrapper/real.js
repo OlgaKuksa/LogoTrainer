@@ -49,13 +49,7 @@ let TestResults = [
 export const getSkillsApi = () => {
   return fetch("./api/SkillGroup/GetAll", {
     credentials: "include"
-  })
-    .then(res => res.json())
-    .then(res => {
-      console.log(res);
-      return res;
-    });
-  //return Promise.resolve([...allSkills]);
+  }).then(res => res.json());
 };
 
 export const addSkillGroupApi = skillGroup => {
