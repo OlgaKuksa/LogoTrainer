@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Modal, Icon, Button, Form, Header } from "semantic-ui-react";
+import { Modal, Button, Form, Header } from "semantic-ui-react";
 import {
   addKidAsync as addKid,
   updateKidAsync as updateKid
@@ -15,7 +15,7 @@ class KidModal extends Component {
       firstName = "",
       lastName = "",
       isArchived = false,
-      dateOfBirth = new Date().toISOString().substring(0, 10)
+      dateOfBirth = new Date()
     } =
       props.kidInModal || {};
     const kidInModal = {
@@ -23,7 +23,7 @@ class KidModal extends Component {
       firstName,
       lastName,
       isArchived,
-      dateOfBirth
+      dateOfBirth: new Date(dateOfBirth).toISOString().substring(0, 10)
     };
     this.state = { isNew, kidInModal };
   }

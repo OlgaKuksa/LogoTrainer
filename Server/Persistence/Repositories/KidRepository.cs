@@ -39,7 +39,7 @@ namespace Logotrainer.Persistence.Repositories
 
         public void Add(Kid kid)
         {
-            Connection.Execute(@"INSERT INTO [dbo].[Kid]
+            Connection.Execute(@"INSERT INTO [Kid]
            ([KidId]
            ,[FirstName]
            ,[MiddleName]
@@ -67,7 +67,20 @@ namespace Logotrainer.Persistence.Repositories
 
         public void Update(Kid kid)
         {
-            throw new NotImplementedException();
+            Connection.Execute(@"UPDATE [Kid]
+   SET 
+      [FirstName] = @FirstName
+      ,[MiddleName] = @MiddleName
+      ,[LastName] = @LastName
+      ,[DateOfBirth] = @DateOfBirth
+      ,[HomeAddress] = @HomeAddress
+      ,[HomePhone] = @HomePhone
+      ,[ParentInfo] = @ParentInfo
+      ,[ParentMobile] = @ParentMobile   
+      ,[GroupId] = @GroupId
+      ,[IsArchived] = @IsArchived
+ WHERE [KidId]=@KidId", kid);
         }
+
     }
 }

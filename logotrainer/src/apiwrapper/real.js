@@ -189,32 +189,6 @@ export const getTestResultsApi = kidId => {
   );
 };
 //begin: kids
-let allKids = [
-  {
-    kidId: 1,
-    firstName: "Егор",
-    lastName: "Иванов",
-    dateOfBirth: "2012-05-19",
-    groupId: 1,
-    isArchived: false
-  },
-  {
-    kidId: 2,
-    firstName: "Анастасия",
-    lastName: "Семенова",
-    dateOfBirth: "2012-03-15",
-    groupId: 2,
-    isArchived: false
-  },
-  {
-    kidId: 3,
-    firstName: "Иван",
-    lastName: "Алексин",
-    dateOfBirth: "2011-12-24",
-    groupId: 1,
-    isArchived: false
-  }
-];
 export const getKidsApi = () => {
   return fetch("./api/Kid/GetAll", { credentials: "include" }).then(res =>
     res.json()
@@ -225,7 +199,6 @@ export const addKidApi = payload => {
     ...payload,
     kidId: uuid()
   };
-  allKids = [...allKids, toAdd];
   return fetch("./api/Kid/Add", {
     credentials: "include",
     headers: {
@@ -234,19 +207,16 @@ export const addKidApi = payload => {
     method: "post",
     body: JSON.stringify(toAdd)
   });
-  return Promise.resolve(toAdd);
 };
 export const updateKidApi = payload => {
-  allKids = allKids.map(
-    kid =>
-      kid.kidId === payload.kidId
-        ? {
-            ...kid,
-            ...payload
-          }
-        : kid
-  );
-  return Promise.resolve(payload);
+  return fetch("./api/Kid/Update", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "post",
+    body: JSON.stringify(payload)
+  }).then(() => payload);
 };
 //end: kids
 //begin: groups

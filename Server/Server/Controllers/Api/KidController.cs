@@ -26,6 +26,11 @@ namespace Logotrainer.Server.Controllers.Api
             KidRepository.Add(kid);
         }
 
+        [System.Web.Mvc.HttpPost] public void Update(Kid kid)
+        {
+            KidRepository.Update(kid);
+        }
+
         private IKidRepository KidRepository
         {
             get { return RepositoryFactory.CreateKidRepository(); }
