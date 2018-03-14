@@ -19,7 +19,9 @@ namespace Logotrainer.Server.Controllers.Api
 
         public IList<Group> GetAll()
         {
-            return GroupRepository.FindGroupsByLogoUserId(new Guid(User.Identity.GetUserId()));
+            var userId = User.Identity.GetUserId();
+            if(userId==null) return new List<Group>();
+            return GroupRepository.FindGroupsByLogoUserId(new Guid(userId));
         }
 
         private IGroupRepository GroupRepository
