@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IExerciseRepository.cs" />
+    <Compile Include="Interfaces\IKidRepository.cs" />
     <Compile Include="Interfaces\IRepositoryFactory.cs" />
     <Compile Include="Interfaces\ISkillGroupRepository.cs" />
     <Compile Include="Interfaces\ISkillRepository.cs" />

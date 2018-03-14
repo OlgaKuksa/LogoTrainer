@@ -9,6 +9,7 @@
     }
   },
   "dependencies": {
+    "cross-fetch": "^2.1.0",
     "pdfmake": "^0.1.36",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
