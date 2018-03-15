@@ -85,7 +85,7 @@ class TestModal extends Component {
               Для записи профиля ребенка нужно ответить на все вопросы теста
             </Message>
           )}
-          {this.state.kidProfileId !== undefined ? null : (
+          {this.state.testInModal.kidProfileId !== undefined ? null : (
             <Button color="green" onClick={this.addTestResultBtnHandler}>
               Записать
             </Button>
