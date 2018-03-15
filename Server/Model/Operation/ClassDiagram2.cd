@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Logotrainer.Model.Operation.Exercise">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAFBgAAAAAAAAAAAAAAAAEAAAABAQAAAAAAAAAAA=</HashCode>
+      <FileName>Operation\Exercise.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Logotrainer.Model.Operation.Group">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Operation\Group.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Logotrainer.Model.Operation.Kid">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAEAEIAAABAAAAAAQwAAAAAAQgAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Operation\Kid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Logotrainer.Model.Operation.KidProfile">
+    <Position X="5.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAQAAAgAAAAAAACAAAAAA=</HashCode>
+      <FileName>Operation\KidProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Logotrainer.Model.Operation.KidSet">
+    <Position X="7" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAYAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Operation\KidSet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Logotrainer.Model.Operation.Level">
+    <Position X="3.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAABAgAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Operation\Level.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Logotrainer.Model.Operation.Skill">
+    <Position X="3.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAQAIABAAAAAEAAA=</HashCode>
+      <FileName>Operation\Skill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Logotrainer.Model.Operation.SkillGroup">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Operation\SkillGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Logotrainer.Model.Operation.User">
+    <Position X="8.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAEAAAAQgAAAAAAAACAAAAAAAAAAg=</HashCode>
+      <FileName>Operation\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
