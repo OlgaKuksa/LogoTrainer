@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Logotrainer.Model.Interfaces;
 using Logotrainer.Model.Operation;
@@ -8,10 +7,17 @@ namespace Logotrainer.Server.Controllers.Api
 {
     [Authorize] public class ExerciseController : BaseRepositoryController
     {
+        public ExerciseController(IRepositoryFactory repositoryFactory) : base(repositoryFactory)
+        {
+        }
+
+        public ExerciseController()
+        {
+        }
+
         [HttpPost] public IList<Exercise> FindByKidSet(KidSet kidSet)
         {
             return ExerciseRepository.FindByKidSet(kidSet);
-            throw new NotImplementedException();
         }
 
         public void Add(Exercise exercise)
