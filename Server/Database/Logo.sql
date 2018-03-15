@@ -125,6 +125,7 @@ go
  
  CREATE TABLE Exercise (
         ExerciseId           uniqueidentifier NOT NULL,
+		ExerciseName         nvarchar(300) NULL,
         ExerciseInventory    nvarchar(300) NULL,
         ExerciseSteps        nvarchar(max) NULL,
         LevelId              uniqueidentifier NULL,
@@ -149,4 +150,15 @@ go
  )
 go
  
- 
+ CREATE TABLE ExerciseSecondarySkill(
+		ExerciseId           uniqueidentifier NOT NULL,
+		SkillId              uniqueidentifier NOT NULL,
+		PRIMARY KEY NONCLUSTERED(ExerciseId, SkillId),
+		FOREIGN KEY (ExerciseId)
+                              REFERENCES Exercise,
+		FOREIGN KEY (SkillId)
+                              REFERENCES Skill
+		ON DELETE CASCADE
+		
+ )
+ GO	

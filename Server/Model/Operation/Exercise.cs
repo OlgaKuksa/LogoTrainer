@@ -6,6 +6,7 @@ namespace Logotrainer.Model.Operation
     public class Exercise
     {
         public Guid ExerciseId { get; set; }
+        public string ExerciseNamge { get; set; }
         public string ExerciseName { get; set; }
         public string ExerciseInventory { get; set; }
         public string ExerciseSteps { get; set; }

@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Logotrainer.Model.Operation.Exercise">
-    <Position X="5.25" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAFBgAAAAAAAAAAAAAAAAEAAAABAQAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAFBgAAAAAAAAAAAAAAAAEAAAIBAQAAAAAAAAAAA=</HashCode>
       <FileName>Operation\Exercise.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Logotrainer.Model.Operation.Group">
-    <Position X="7" Y="0.5" Width="1.5" />
+    <Position X="7.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
       <FileName>Operation\Group.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Logotrainer.Model.Operation.Kid">
-    <Position X="8.75" Y="0.5" Width="1.5" />
+    <Position X="9.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAEAEIAAABAAAAAAQwAAAAAAQgAAAAAAAAAAAAAg=</HashCode>
       <FileName>Operation\Kid.cs</FileName>
@@ -29,7 +29,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Logotrainer.Model.Operation.KidSet">
-    <Position X="7" Y="2" Width="1.5" />
+    <Position X="7.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAAAYAAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>Operation\KidSet.cs</FileName>
@@ -57,7 +57,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Logotrainer.Model.Operation.User">
-    <Position X="8.75" Y="3.75" Width="1.5" />
+    <Position X="9.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAAEAAAAQgAAAAAAAACAAAAAAAAAAg=</HashCode>
       <FileName>Operation\User.cs</FileName>
