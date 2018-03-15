@@ -40,20 +40,29 @@ namespace Logotrainer.Server.Controllers.Api
         }
     }
 
-    public class ExerciseFilter
-    {
-        public Guid MainLevelId { get; set; }
-    }
-
     public class KidProfileController : BaseRepositoryController
     {
+        public KidProfileController()
+        {
+        }
+
+        public KidProfileController(IRepositoryFactory repositoryFactory) : base(repositoryFactory)
+        {
+        }
+
         public void Add(KidProfile kidProfile)
         {
+            KidProfileRepository.Add(kidProfile);
         }
 
         public IList<KidProfile> FindByKid(Kid kid)
         {
-            throw new NotImplementedException();
+            return KidProfileRepository.FindByKidId(kid.KidId);
         }
+
+        public IKidProfileRepository KidProfileRepository { get
+            {
+                return RepositoryFactory.CreateKidProfileRepository();
+            } }
     }
 }

@@ -10,4 +10,10 @@ namespace Logotrainer.Model.Interfaces
         void Add(Kid kid);
         void Update(Kid kid);
     }
+
+    public interface IKidProfileRepository
+    {
+        void Add(KidProfile kidProfile);
+        IList<KidProfile> FindByKidId(Guid kidId);
+    }
 }
