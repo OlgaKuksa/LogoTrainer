@@ -8,7 +8,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Logotrainer.Server.Controllers.Api.GenerateKidSetParameter">
-    <Position X="6.25" Y="6" Width="1.5" />
+    <Position X="5.75" Y="5.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>Controllers\Api\GenerateKidSetParameter.cs</FileName>
@@ -16,13 +16,21 @@
   </Class>
   <Class Name="Logotrainer.Server.Controllers.Api.GroupController">
     <Position X="9.75" Y="3.5" Width="1.5" />
+    <Members>
+      <Method Name="GroupController" Hidden="true" />
+      <Property Name="GroupRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
       <FileName>Controllers\Api\GroupController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Logotrainer.Server.Controllers.Api.KidController">
-    <Position X="2.75" Y="3.5" Width="1.5" />
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <Members>
+      <Method Name="KidController" Hidden="true" />
+      <Property Name="KidRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAYAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
       <FileName>Controllers\Api\KidController.cs</FileName>
@@ -30,20 +38,32 @@
   </Class>
   <Class Name="Logotrainer.Server.Controllers.Api.KidSetController">
     <Position X="6.25" Y="3.5" Width="1.5" />
+    <Members>
+      <Method Name="KidSetController" Hidden="true" />
+      <Property Name="KidSetRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAEAAAAAAAABAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Controllers\Api\KidSetController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Logotrainer.Server.Controllers.Api.SkillController">
-    <Position X="13.25" Y="3.5" Width="1.5" />
+    <Position X="13.5" Y="3.5" Width="1.5" />
+    <Members>
+      <Method Name="SkillController" Hidden="true" />
+      <Property Name="SkillRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAYBAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Controllers\Api\SkillController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Logotrainer.Server.Controllers.Api.SkillGroupController">
-    <Position X="4.5" Y="3.5" Width="1.5" />
+    <Position X="4.25" Y="3.5" Width="1.75" />
+    <Members>
+      <Method Name="SkillGroupController" Hidden="true" />
+      <Property Name="SkillGroupRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAYAAAAAAAAAAAAAAAAABAAAAAAQAAAAAgAAAAAAAAA=</HashCode>
       <FileName>Controllers\Api\SkillGroupController.cs</FileName>
@@ -51,22 +71,30 @@
   </Class>
   <Class Name="Logotrainer.Server.Controllers.Api.ExerciseController">
     <Position X="8" Y="3.5" Width="1.5" />
+    <Members>
+      <Method Name="ExerciseController" Hidden="true" />
+      <Property Name="ExerciseRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
-      <HashCode>AAYAAAAAAIAAAAAAAAAABAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
-      <FileName>Controllers\Api\KidSetController.cs</FileName>
+      <HashCode>AAYAAAAAAIAAAAAAAAAABAAAAAAAAAAAAAIAAQAAAAA=</HashCode>
+      <FileName>Controllers\Api\ExerciseController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Logotrainer.Server.Controllers.Api.ExerciseFilter">
     <Position X="8" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
-      <FileName>Controllers\Api\KidSetController.cs</FileName>
+      <FileName>Controllers\Api\ExerciseFilter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Logotrainer.Server.Controllers.Api.KidProfileController">
-    <Position X="11.5" Y="3.5" Width="1.5" />
+    <Position X="11.5" Y="3.5" Width="1.75" />
+    <Members>
+      <Method Name="KidProfileController" Hidden="true" />
+      <Property Name="KidProfileRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
-      <HashCode>AAIAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAIAAACAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Controllers\Api\KidSetController.cs</FileName>
     </TypeIdentifier>
   </Class>
