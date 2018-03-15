@@ -192,6 +192,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\BaseRepositoryController.cs" />
+    <Compile Include="Controllers\Api\ExerciseController.cs" />
     <Compile Include="Controllers\Api\GenerateKidSetParameter.cs" />
     <Compile Include="Controllers\Api\KidController.cs" />
     <Compile Include="Controllers\Api\KidSetController.cs" />

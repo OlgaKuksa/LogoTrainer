@@ -52,16 +52,40 @@ VALUES (@KidSetId,@ExerciseId)", new {kidSet.KidSetId, ExerciseId = exerciseId})
             return new KidSet {KidSetId = Guid.NewGuid(), KidId = kidId, ExerciseIdsInSet = newExercises};
         }
 
+        public IList<KidSet> FindByKid(Kid kid)
+        {
+            var shouldOpenConnection = Connection.State != ConnectionState.Open;
+            if (shouldOpenConnection)
+                Connection.Open();
+            var ret = Connection.Query<KidSet>(@"SELECT [KidId],[KidSetId],[CreateDateTime]
+FROM [KidSet] WHERE [KidId]=@KidId", kid).ToList();
+            foreach (var kidSet in ret)
+            {
+                kidSet.ExerciseIdsInSet = FindExerciseIdsInSet(kidSet);
+            }
+            if (shouldOpenConnection)
+                Connection.Close();
+            return ret;
+        }
+
+        private IList<Guid> FindExerciseIdsInSet(KidSet kidSet)
+        {
+            return Connection
+                .Query<Guid>("SELECT [ExerciseId] FROM [KidSetExercise] WHERE [KidSetId]=@KidSetId", kidSet).ToList();
+        }
+
         private IList<Exercise> FindAllExercisesByKidIdAndSkillIds(Guid kidId, IList<Guid> skillIds)
         {
             if (!skillIds.Any()) return new List<Exercise>();
             var kidProfileId = FindLastKidProfileId(kidId);
 
             if (kidProfileId == default(Guid)) return new List<Exercise>();
-            var ret = Connection.Query<Exercise>(@"SELECT DISTINCT e.[ExerciseId], e.[LevelId] as [ExerciseMainLevelId] FROM [Exercise] e
+            var ret = Connection.Query<Exercise>(
+                @"SELECT DISTINCT e.[ExerciseId], e.[LevelId] as [ExerciseMainLevelId] FROM [Exercise] e
 INNER JOIN [TestResult] tr
 ON e.[LevelId]=tr.[LevelId]
-WHERE tr.[KidProfileId]=@KidProfileId
+WHERE e.[IsArchived]=0
+AND tr.[KidProfileId]=@KidProfileId
 AND tr.[SkillId] IN @SkillIds",
                 new {KidId = kidId, KidProfileId = kidProfileId, SkillIds = skillIds}).ToList();
             foreach (var exercise in ret)

@@ -29,42 +29,14 @@ namespace Logotrainer.Server.Controllers.Api
             //TODO
         }
 
-        [HttpPost] public IList<KidSet> FindByKid(Kid Kid)
+        [HttpPost] public IList<KidSet> FindByKid(Kid kid)
         {
-            throw new NotImplementedException();
+            return KidSetRepository.FindByKid(kid);
         }
 
         private IKidSetRepository KidSetRepository
         {
             get { return RepositoryFactory.CreateKidSetRepository(); }
-        }
-    }
-
-    [Authorize] public class ExerciseController : BaseRepositoryController
-    {
-        [HttpPost] public IList<Exercise> FindByKidSet(KidSet kidSet)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Add(Exercise exercise)
-        {
-            
-        }
-
-        public void Update(Exercise exercise)
-        {
-            
-        }
-
-        public void Remove(Exercise exercise)
-        {
-            
-        }
-
-        public IList<Exercise> FindByFilter(ExerciseFilter filter)
-        {
-            throw new NotImplementedException();
         }
     }
 
@@ -77,7 +49,6 @@ namespace Logotrainer.Server.Controllers.Api
     {
         public void Add(KidProfile kidProfile)
         {
-            
         }
 
         public IList<KidProfile> FindByKid(Kid kid)
