@@ -35,7 +35,7 @@ WHERE [UserId]=@UserId", user);
         {
             return Connection.QuerySingleOrDefault<User>(
                 "SELECT [UserId],[LoginId],[Password],[FirstName],[LastName],[Role] FROM [User] WHERE [LoginId]=@LoginId",
-                new { LoginId = loginId });
+                new {LoginId = loginId});
         }
     }
 }

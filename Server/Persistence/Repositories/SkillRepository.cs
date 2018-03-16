@@ -15,13 +15,18 @@ namespace Logotrainer.Persistence.Repositories
 
         public void Add(Skill skill)
         {
-            Connection.Execute(SkillSql.Add, skill);
+            Connection.Execute(@"INSERT INTO [Skill] (SkillGroupId, SkillId, SkillName,SkillQuestion)
+VALUES(@SkillGroupId, @SkillId, @SkillName,@SkillQuestion)", skill);
             AddOrUpdateLevels(skill);
         }
 
         public void Update(Skill skill)
         {
-            Connection.Execute(SkillSql.Update, skill);
+            Connection.Execute(@"UPDATE [Skill]
+SET
+SkillName=@SkillName,
+SkillQuestion=@SkillQuestion
+WHERE [SkillId]=@SkillId", skill);
             AddOrUpdateLevels(skill);
         }
 
@@ -64,7 +69,7 @@ namespace Logotrainer.Persistence.Repositories
                 return false;
             //cannot remove if any exercise is using it
             //will remove test results - cascade
-            Connection.Execute(SkillSql.Remove, skill);
+            Connection.Execute("DELETE FROM [Skill] WHERE [SkillId]=@SkillId", skill);
             return true;
         }
     }
