@@ -21,7 +21,9 @@ class ProfileKid extends Component {
                     <List.Header>
                       <a onClick={() => this.props.addTestModal(kidProfile)}>
                         {"Профиль от " +
-                          kidProfile.createDateTime.toLocaleDateString()}
+                          new Date(
+                            kidProfile.createDateTime
+                          ).toLocaleDateString()}
                       </a>
                     </List.Header>
                   </List.Item>

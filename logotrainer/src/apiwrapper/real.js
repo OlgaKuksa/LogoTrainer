@@ -165,7 +165,7 @@ export const removeExerciseApi = exerciseToRemove => {
 };
 
 export const addTestResultApi = (kidId, testResult) => {
-  let addedData = {
+  const addedData = {
     kidProfileId: uuid(),
     kidId,
     testResult: {
@@ -173,14 +173,26 @@ export const addTestResultApi = (kidId, testResult) => {
     },
     createDateTime: new Date()
   };
-  TestResults = [...TestResults, addedData];
-  return Promise.resolve(addedData);
+
+  return fetch("./api/KidProfile/Add", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "post",
+    body: JSON.stringify(addedData)
+  }).then(() => addedData);
 };
 
 export const getTestResultsApi = kidId => {
-  return Promise.resolve(
-    TestResults.filter(resultObject => resultObject.kidId === kidId)
-  );
+  return fetch("./api/KidProfile/FindByKid", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "post",
+    body: JSON.stringify({ kidId })
+  }).then(res => res.json());
 };
 //begin: kids
 export const getKidsApi = () => {
