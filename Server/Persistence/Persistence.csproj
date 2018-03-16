@@ -53,17 +53,7 @@
     <Compile Include="Repositories\KidSetRepository.cs" />
     <Compile Include="Repositories\RepositoryFactory.cs" />
     <Compile Include="Repositories\SkillGroupRepository.cs" />
-    <Compile Include="Repositories\SkillGroupSql.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SkillGroupSql.resx</DependentUpon>
-    </Compile>
     <Compile Include="Repositories\SkillRepository.cs" />
-    <Compile Include="Repositories\SkillSql.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SkillSql.resx</DependentUpon>
-    </Compile>
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,16 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Repositories\SkillGroupSql.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SkillGroupSql.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Repositories\SkillSql.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SkillSql.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -33,19 +33,6 @@ let allExercises = [
   }
 ];
 
-let TestResults = [
-  {
-    kidProfileId: "11111",
-    kidId: 1,
-    createDateTime: new Date(),
-    testResult: {
-      "11": "110",
-      "12": "121",
-      "21": "212"
-    }
-  }
-];
-
 export const getSkillsApi = () => {
   return fetch("./api/SkillGroup/GetAll", {
     credentials: "include"
@@ -130,17 +117,26 @@ export const removeSkillApi = payload => {
 };
 
 export const getExerciseListApi = filter => {
-  return Promise.resolve(
-    allExercises.filter(
-      exercise => exercise.exerciseMainLevelId === filter.mainLevelId
-    )
-  );
+  return fetch("./api/Exercise/FindByFilter", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "post",
+    body: JSON.stringify(filter)
+  }).then(res => res.json());
 };
 
 export const addExerciseApi = exercise => {
-  exercise.exerciseId = Date.now();
-  allExercises.push(exercise);
-  return Promise.resolve(exercise);
+  const toAdd = { ...exercise, exerciseId: uuid() };
+  return fetch("./api/Exercise/Add", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "post",
+    body: JSON.stringify(toAdd)
+  }).then(() => toAdd);
 };
 
 export const updateExerciseApi = exerciseToUpdate => {
@@ -156,12 +152,14 @@ export const updateExerciseApi = exerciseToUpdate => {
 };
 
 export const removeExerciseApi = exerciseToRemove => {
-  allExercises = [
-    ...allExercises.filter(
-      exercise => exercise.exerciseId !== exerciseToRemove.exerciseId
-    )
-  ];
-  return Promise.resolve(exerciseToRemove);
+  return fetch("./api/Exercise/Remove", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "post",
+    body: JSON.stringify({ exerciseId: exerciseToRemove.exerciseId })
+  }).then(() => exerciseToRemove);
 };
 
 export const addTestResultApi = (kidId, testResult) => {

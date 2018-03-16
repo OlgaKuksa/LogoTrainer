@@ -31,6 +31,7 @@ FROM [Exercise] e
 INNER JOIN [Level] l
 ON e.[LevelId]=l.[LevelId]
 WHERE e.[LevelId]=@LevelId
+AND e.[IsArchived]=0
 ", new{LevelId=mainLevelId}).ToList();
             foreach (var exercise in ret)
             {
@@ -79,7 +80,27 @@ WHERE kse.[KidSetId]=@KidSetId
 
         public void Add(Exercise exercise)
         {
-            throw new NotImplementedException();
+            var shouldOpen = Connection.State != ConnectionState.Open;
+            if(shouldOpen)
+                Connection.Open();
+            Connection.Execute(@"INSERT INTO [Exercise]
+([ExerciseId]
+,[ExerciseInventory]
+,[ExerciseSteps]
+,[LevelId]
+,[UserId]
+,[IsArchived]
+,[ExerciseName])
+VALUES (
+@ExerciseId,
+@ExerciseInventory,
+@ExerciseSteps,
+@ExerciseMainLevelId,
+@UserId,
+0,
+@ExerciseName)",exercise);
+            if(shouldOpen)
+                Connection.Close();
         }
 
         public void Update(Exercise exercise)
@@ -89,7 +110,9 @@ WHERE kse.[KidSetId]=@KidSetId
 
         public void Remove(Exercise exercise)
         {
-            throw new NotImplementedException();
+            Connection.Execute(@"UPDATE [Exercise]
+SET [IsArchived]=1
+WHERE [ExerciseId]=@ExerciseId", exercise);
         }
     }
 }

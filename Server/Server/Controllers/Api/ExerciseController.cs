@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Logotrainer.Model.Interfaces;
 using Logotrainer.Model.Operation;
+using Microsoft.AspNet.Identity;
 
 namespace Logotrainer.Server.Controllers.Api
 {
@@ -22,6 +24,9 @@ namespace Logotrainer.Server.Controllers.Api
 
         public void Add(Exercise exercise)
         {
+            var userId = new Guid(User.Identity.GetUserId());
+            exercise.UserId = userId;
+
             ExerciseRepository.Add(exercise);
         }
 

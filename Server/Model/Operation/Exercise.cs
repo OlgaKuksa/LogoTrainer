@@ -13,5 +13,6 @@ namespace Logotrainer.Model.Operation
         public Guid ExerciseMainSkillId { get; set; }
         public Guid ExerciseMainLevelId { get; set; }
         public IList<Guid> ExerciseSecondarySkills { get; set; }
+        public Guid UserId { get; set; }
     }
 }
