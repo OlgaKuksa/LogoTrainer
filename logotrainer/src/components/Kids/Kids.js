@@ -81,7 +81,10 @@ class Kids extends Component {
                 <Card.Header>
                   {item.firstName} {item.lastName}
                 </Card.Header>
-                <Card.Meta>Дата рождения: {item.dateOfBirth}</Card.Meta>
+                <Card.Meta>
+                  Дата рождения:{" "}
+                  {new Date(item.dateOfBirth).toLocaleDateString()}
+                </Card.Meta>
               </Card.Content>
               <Icon
                 name="edit"
