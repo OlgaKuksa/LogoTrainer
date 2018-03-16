@@ -32,7 +32,7 @@ INNER JOIN [Level] l
 ON e.[LevelId]=l.[LevelId]
 WHERE e.[LevelId]=@LevelId
 AND e.[IsArchived]=0
-", new{LevelId=mainLevelId}).ToList();
+", new {LevelId = mainLevelId}).ToList();
             foreach (var exercise in ret)
             {
                 exercise.ExerciseSecondarySkills = FindExerciseSecondarySkills(exercise.ExerciseId);
@@ -81,7 +81,7 @@ WHERE kse.[KidSetId]=@KidSetId
         public void Add(Exercise exercise)
         {
             var shouldOpen = Connection.State != ConnectionState.Open;
-            if(shouldOpen)
+            if (shouldOpen)
                 Connection.Open();
             Connection.Execute(@"INSERT INTO [Exercise]
 ([ExerciseId]
@@ -98,14 +98,46 @@ VALUES (
 @ExerciseMainLevelId,
 @UserId,
 0,
-@ExerciseName)",exercise);
-            if(shouldOpen)
+@ExerciseName)", exercise);
+            AddOrUpdateSecondarySkills(exercise);
+            if (shouldOpen)
                 Connection.Close();
+        }
+
+        private void AddOrUpdateSecondarySkills(Exercise exercise)
+        {
+            if (exercise.ExerciseSecondarySkills == null) return;
+            var existingSkillIds = FindExerciseSecondarySkills(exercise.ExerciseId);
+            var newSkillIds = exercise.ExerciseSecondarySkills.Except(existingSkillIds).Distinct().ToList();
+            var skillIdsToRemove = existingSkillIds.Except(exercise.ExerciseSecondarySkills).ToList();
+            foreach (var skillId in newSkillIds)
+            {
+                Connection.Execute(@"INSERT INTO [ExerciseSecondarySkill]([ExerciseId],[SkillId])
+VALUES (@ExerciseId,@SkillId)", new {exercise.ExerciseId, SkillId = skillId});
+            }
+            if (skillIdsToRemove.Count > 0)
+            {
+                Connection.Execute(@"DELETE FROM [ExerciseSecondarySkill]
+WHERE [ExerciseId]=@ExerciseId
+AND [SkillId] IN @skillIdsToRemove", new {exercise.ExerciseId, skillIdsToRemove});
+            }
         }
 
         public void Update(Exercise exercise)
         {
-            throw new NotImplementedException();
+            var shouldOpen = Connection.State != ConnectionState.Open;
+            if (shouldOpen)
+                Connection.Open();
+            Connection.Execute(@"UPDATE [Exercise]
+SET
+[ExerciseInventory]=@ExerciseInventory
+,[ExerciseSteps]=@ExerciseSteps
+,[LevelId]=@ExerciseMainLevelId
+,[ExerciseName]=@ExerciseName
+WHERE [ExerciseId]=@ExerciseId", exercise);
+            AddOrUpdateSecondarySkills(exercise);
+            if (shouldOpen)
+                Connection.Close();
         }
 
         public void Remove(Exercise exercise)

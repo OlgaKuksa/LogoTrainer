@@ -1,8 +1,7 @@
 import fetch from "cross-fetch";
 const uuid = require("uuid/v4");
 
-let allExercises = [
-  {
+let allExercises = [{
     exerciseId: "10001",
     exerciseName: "Фиксация языка вверху",
     exerciseInventory: "ватная палочка",
@@ -15,8 +14,7 @@ let allExercises = [
     exerciseId: "10002",
     exerciseName: "Автоматизация звука ш",
     exerciseInventory: "Лист со списком слов с буквой ш",
-    exerciseSteps:
-      "Читать слова. Заставлять ребенка повторять слова с буквой ш - повторять, если ошибается",
+    exerciseSteps: "Читать слова. Заставлять ребенка повторять слова с буквой ш - повторять, если ошибается",
     exerciseMainSkillId: "12",
     exerciseMainLevelId: "121",
     exerciseSecondarySkills: []
@@ -25,8 +23,7 @@ let allExercises = [
     exerciseId: "10003",
     exerciseName: "Составление краткого рассказа",
     exerciseInventory: "Рассказ из 5 предложений",
-    exerciseSteps:
-      "Прочитать рассказ. По каждому предложению задать вопрос. Попросить ребенка пересказать",
+    exerciseSteps: "Прочитать рассказ. По каждому предложению задать вопрос. Попросить ребенка пересказать",
     exerciseMainSkillId: "21",
     exerciseMainLevelId: "212",
     exerciseSecondarySkills: ["11", "12"]
@@ -73,7 +70,10 @@ export const removeSkillGroupApi = payload => {
 };
 
 export const addSkillApi = payload => {
-  const { skill, skillGroupId } = payload;
+  const {
+    skill,
+    skillGroupId
+  } = payload;
   const skillForServer = {
     ...skill,
     skillGroupId
@@ -89,7 +89,10 @@ export const addSkillApi = payload => {
 };
 
 export const updateSkillApi = payload => {
-  const { skillToUpdate: skill, skillGroupId } = payload;
+  const {
+    skillToUpdate: skill,
+    skillGroupId
+  } = payload;
   const skillForServer = {
     ...skill,
     skillGroupId
@@ -128,7 +131,9 @@ export const getExerciseListApi = filter => {
 };
 
 export const addExerciseApi = exercise => {
-  const toAdd = { ...exercise, exerciseId: uuid() };
+  const toAdd = { ...exercise,
+    exerciseId: uuid()
+  };
   return fetch("./api/Exercise/Add", {
     credentials: "include",
     headers: {
@@ -140,15 +145,14 @@ export const addExerciseApi = exercise => {
 };
 
 export const updateExerciseApi = exerciseToUpdate => {
-  allExercises = [
-    ...allExercises.map(
-      exercise =>
-        exercise.exerciseId !== exerciseToUpdate.exerciseId
-          ? exercise
-          : exerciseToUpdate
-    )
-  ];
-  return Promise.resolve(exerciseToUpdate);
+  return fetch("./api/Exercise/Update", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "post",
+    body: JSON.stringify(exerciseToUpdate)
+  }).then(() => exerciseToUpdate);
 };
 
 export const removeExerciseApi = exerciseToRemove => {
@@ -158,7 +162,9 @@ export const removeExerciseApi = exerciseToRemove => {
       "Content-Type": "application/json"
     },
     method: "post",
-    body: JSON.stringify({ exerciseId: exerciseToRemove.exerciseId })
+    body: JSON.stringify({
+      exerciseId: exerciseToRemove.exerciseId
+    })
   }).then(() => exerciseToRemove);
 };
 
@@ -189,12 +195,16 @@ export const getTestResultsApi = kidId => {
       "Content-Type": "application/json"
     },
     method: "post",
-    body: JSON.stringify({ kidId })
+    body: JSON.stringify({
+      kidId
+    })
   }).then(res => res.json());
 };
 //begin: kids
 export const getKidsApi = () => {
-  return fetch("./api/Kid/GetAll", { credentials: "include" }).then(res =>
+  return fetch("./api/Kid/GetAll", {
+    credentials: "include"
+  }).then(res =>
     res.json()
   );
 };
