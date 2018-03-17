@@ -200,6 +200,7 @@
     <Compile Include="Controllers\Api\KidSetController.cs" />
     <Compile Include="Controllers\Api\GroupController.cs" />
     <Compile Include="Controllers\Api\SkillController.cs" />
+    <Compile Include="Controllers\Api\SkillRemoveResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />

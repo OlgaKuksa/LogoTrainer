@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
-using Logotrainer.Model.Interfaces;
+﻿using Logotrainer.Model.Interfaces;
 using Logotrainer.Model.Operation;
 
 namespace Logotrainer.Server.Controllers.Api
@@ -15,17 +13,23 @@ namespace Logotrainer.Server.Controllers.Api
         {
         }
 
-        [System.Web.Mvc.HttpPost] public void Add([FromBody] Skill skill)
+        [System.Web.Mvc.HttpPost] public void Add(Skill skill)
         {
             SkillRepository.Add(skill);
         }
 
-        [System.Web.Mvc.HttpPost] public void Remove([FromBody] Skill skill)
+        [System.Web.Mvc.HttpPost] public SkillRemoveResult Remove(Skill skill)
         {
-            SkillRepository.Remove(skill);
+            var ret = new SkillRemoveResult
+            {
+                SkillId = skill.SkillId,
+                SkillGroupId = skill.SkillGroupId,
+                FailedToRemove = !SkillRepository.Remove(skill)
+            };
+            return ret;
         }
 
-        [System.Web.Mvc.HttpPost] public void Update([FromBody] Skill skill)
+        [System.Web.Mvc.HttpPost] public void Update(Skill skill)
         {
             SkillRepository.Update(skill);
         }

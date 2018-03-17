@@ -69,7 +69,8 @@ WHERE [SkillId]=@SkillId", skill);
                 return false;
             //cannot remove if any exercise is using it
             //will remove test results - cascade
-            Connection.Execute("DELETE FROM [Skill] WHERE [SkillId]=@SkillId", skill);
+            Connection.Execute(@"DELETE FROM [Level] WHERE [SkillId]=@SkillId
+DELETE FROM [Skill] WHERE [SkillId]=@SkillId", skill);
             return true;
         }
     }

@@ -80,7 +80,7 @@ export const removeSkillApi = payload => {
     },
     method: "post",
     body: JSON.stringify(payload)
-  }).then(() => payload);
+  }).then(res => res.json());
   //TODO check server responce
 };
 

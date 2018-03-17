@@ -36,6 +36,7 @@ const skills = (state = DEFAULT_STATE, action) => {
             : { ...group, skills: [...group.skills, action.payload.skill] }
       );
     case REMOVE_SKILL:
+      if (action.payload.failedToRemove) return state;
       return state.map(
         group =>
           group.skillGroupId != action.payload.skillGroupId

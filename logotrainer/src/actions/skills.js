@@ -123,16 +123,13 @@ export const removeSkillGroupAsync = payload => dispatch => {
 };
 export const removeSkill = skillData => ({
   type: REMOVE_SKILL,
-  payload: {
-    skillGroupId: skillData.skillGroupId,
-    skillId: skillData.skillId
-  }
+  payload: skillData
 });
 
 export const removeSkillAsync = skillData => (dispatch, getState) => {
   const action = removeSkill(skillData);
-  removeSkillApi(action.payload).then(() => {
-    dispatch(action);
+  removeSkillApi(action.payload).then(result => {
+    dispatch(removeSkill(result));
     let state = getState();
     if (
       state.exerciseFilter.mainSkillId === skillData.skillId &&
