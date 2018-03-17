@@ -56,10 +56,15 @@ class ExerciseModal extends Component {
   };
 
   updateMainSkillHandler = skillId => {
+    const levelId = this.props.skills
+      .map(gr => gr.skills.find(skill => skill.skillId === skillId))
+      .filter(Boolean)
+      .map(skill => skill.skillLevels[0].levelId)[0];
+    if (this.state.exerciseMainSkillId === skillId) return;
     this.setState({
       ...this.state,
       exerciseMainSkillId: skillId,
-      exerciseMainLevelId: this.props.skills[0].skills[0].skillLevels[0].levelId
+      exerciseMainLevelId: levelId
     });
   };
 
