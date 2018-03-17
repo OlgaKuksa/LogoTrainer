@@ -19,6 +19,8 @@ namespace Logotrainer.Server.Controllers.Api
         [HttpPost] public KidSet GenerateKidSet(GenerateKidSetParameter parameter)
         {
             var kidSet = KidSetRepository.GenerateNewKidSet(parameter.KidId, parameter.SkillIds, true);
+            if (kidSet.ExerciseIdsInSet == null || kidSet.ExerciseIdsInSet.Count == 0)
+                return kidSet;
             kidSet.CreateDateTime = DateTime.UtcNow;
             KidSetRepository.Add(kidSet);
             return kidSet;

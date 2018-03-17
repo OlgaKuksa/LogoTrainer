@@ -19,7 +19,7 @@ namespace Logotrainer.Persistence.Repositories
             var shouldOpenConnection = Connection.State != ConnectionState.Open;
             if (shouldOpenConnection)
                 Connection.Open();
-            Connection.Execute(@"INSERT INTO [KidSet]([KidId].[KidSetId],[CreateDateTime])
+            Connection.Execute(@"INSERT INTO [KidSet]([KidId],[KidSetId],[CreateDateTime])
 VALUES (@KidId,@KidSetId,@CreateDateTime)", kidSet);
             if (kidSet.ExerciseIdsInSet != null)
                 foreach (var exerciseId in kidSet.ExerciseIdsInSet)

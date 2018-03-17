@@ -1,35 +1,6 @@
 import fetch from "cross-fetch";
 const uuid = require("uuid/v4");
 
-let allExercises = [{
-    exerciseId: "10001",
-    exerciseName: "Фиксация языка вверху",
-    exerciseInventory: "ватная палочка",
-    exerciseSteps: "Помочь ребенку зафиксировать язык наверху",
-    exerciseMainSkillId: "12",
-    exerciseMainLevelId: "123",
-    exerciseSecondarySkills: ["11"]
-  },
-  {
-    exerciseId: "10002",
-    exerciseName: "Автоматизация звука ш",
-    exerciseInventory: "Лист со списком слов с буквой ш",
-    exerciseSteps: "Читать слова. Заставлять ребенка повторять слова с буквой ш - повторять, если ошибается",
-    exerciseMainSkillId: "12",
-    exerciseMainLevelId: "121",
-    exerciseSecondarySkills: []
-  },
-  {
-    exerciseId: "10003",
-    exerciseName: "Составление краткого рассказа",
-    exerciseInventory: "Рассказ из 5 предложений",
-    exerciseSteps: "Прочитать рассказ. По каждому предложению задать вопрос. Попросить ребенка пересказать",
-    exerciseMainSkillId: "21",
-    exerciseMainLevelId: "212",
-    exerciseSecondarySkills: ["11", "12"]
-  }
-];
-
 export const getSkillsApi = () => {
   return fetch("./api/SkillGroup/GetAll", {
     credentials: "include"
@@ -70,10 +41,7 @@ export const removeSkillGroupApi = payload => {
 };
 
 export const addSkillApi = payload => {
-  const {
-    skill,
-    skillGroupId
-  } = payload;
+  const { skill, skillGroupId } = payload;
   const skillForServer = {
     ...skill,
     skillGroupId
@@ -89,10 +57,7 @@ export const addSkillApi = payload => {
 };
 
 export const updateSkillApi = payload => {
-  const {
-    skillToUpdate: skill,
-    skillGroupId
-  } = payload;
+  const { skillToUpdate: skill, skillGroupId } = payload;
   const skillForServer = {
     ...skill,
     skillGroupId
@@ -131,7 +96,8 @@ export const getExerciseListApi = filter => {
 };
 
 export const addExerciseApi = exercise => {
-  const toAdd = { ...exercise,
+  const toAdd = {
+    ...exercise,
     exerciseId: uuid()
   };
   return fetch("./api/Exercise/Add", {
@@ -204,9 +170,7 @@ export const getTestResultsApi = kidId => {
 export const getKidsApi = () => {
   return fetch("./api/Kid/GetAll", {
     credentials: "include"
-  }).then(res =>
-    res.json()
-  );
+  }).then(res => res.json());
 };
 export const addKidApi = payload => {
   const toAdd = {
@@ -242,35 +206,42 @@ export const getGroupsApi = () => {
 //end: groups
 
 //begin: sets
-let sets = [];
 
 export const getSetListApi = kidId => {
-  let setsForKid = sets.filter(item => item.kidId === kidId);
-  return Promise.resolve(setsForKid);
+  return fetch("./api/KidSet/FindByKid", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "post",
+    body: JSON.stringify({ kidId })
+  }).then(res => res.json());
 };
 
-export const generateSetApi = (kidId, skillList) => {
-  let defaultSetObject = {
-    kidSetId: uuid(),
-    createDateTime: new Date(),
-    kidId,
-    exerciseIdsInSet: allExercises
-      .filter(item => skillList.includes(item.exerciseMainSkillId))
-      .map(item => item.exerciseId)
-  };
-  if (defaultSetObject.exerciseIdsInSet.length === 0)
-    return Promise.resolve({});
-  sets = [...sets, defaultSetObject];
-  return Promise.resolve(defaultSetObject);
+export const generateSetApi = (kidId, skillIds) => {
+  return fetch("./api/KidSet/GenerateKidSet", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "post",
+    body: JSON.stringify({ kidId, skillIds })
+  })
+    .then(res => res.json())
+    .then(
+      res => (res.exerciseIdsInSet && res.exerciseIdsInSet.length ? res : {})
+    );
 };
 
-export const getSetExercisesApi = setId => {
-  let thisSet = sets.find(item => item.kidSetId === setId);
-  return Promise.resolve(
-    allExercises.filter(exercise =>
-      thisSet.exerciseIdsInSet.includes(exercise.exerciseId)
-    )
-  );
+export const getSetExercisesApi = kidSetId => {
+  return fetch("./api/Exercise/FindByKidSet", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "post",
+    body: JSON.stringify({ kidSetId })
+  }).then(res => res.json());
 };
 
 //end:sets

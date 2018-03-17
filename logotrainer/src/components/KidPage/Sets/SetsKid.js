@@ -36,7 +36,7 @@ class SetsKids extends Component {
                     }
                   >
                     {"Комплекс от " +
-                      set.createDateTime.toLocaleDateString() +
+                      new Date(set.createDateTime).toLocaleDateString() +
                       " - " +
                       set.exerciseIdsInSet.length +
                       " упр."}
