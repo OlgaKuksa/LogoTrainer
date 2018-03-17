@@ -53,12 +53,14 @@ class TestModal extends Component {
         closeIcon
       >
         <Header color="green">
-          {this.state.createDateTime !== undefined
+          {this.state.testInModal.createDateTime !== undefined
             ? this.props.kidInPage.firstName +
               " " +
               this.props.kidInPage.lastName +
               " - профиль от " +
-              this.state.createDateTime.toLocaleDateString()
+              new Date(
+                this.state.testInModal.createDateTime
+              ).toLocaleDateString()
             : "Oценка навыков ребенка"}
         </Header>
         <Modal.Content scrolling>
