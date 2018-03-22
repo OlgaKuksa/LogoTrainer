@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Modal, Header, Message, Icon } from "semantic-ui-react";
+import { Modal, Header, Message } from "semantic-ui-react";
 import { removeTestModal } from "../../../actions/testInModal";
 import { addTestResultAsync } from "../../../actions/testResults";
 import TestModalSkillItem from "./TestModalSkillItem";
