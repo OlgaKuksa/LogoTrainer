@@ -6,7 +6,7 @@ namespace Logotrainer.Server.Models
     // Models returned by AccountController actions.
     public class ExternalLoginConfirmationViewModel
     {
-        [Required, Display(Name = "Email")] public string Email { get; set; }
+        [Required, Display(Name = "Электронная почта")] public string Email { get; set; }
 
         [Display(Name = "Hometown")] public string Hometown { get; set; }
     }
@@ -38,27 +38,27 @@ namespace Logotrainer.Server.Models
 
     public class ForgotViewModel
     {
-        [Required, Display(Name = "Email")] public string Email { get; set; }
+        [Required, Display(Name = "Электронная почта")] public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
-        [Required, Display(Name = "Email"), EmailAddress] public string Email { get; set; }
+        [Required, Display(Name = "Электронная почта"), EmailAddress] public string Email { get; set; }
 
-        [Required, DataType(DataType.Password), Display(Name = "Password")] public string Password { get; set; }
+        [Required, DataType(DataType.Password), Display(Name = "Пароль")] public string Password { get; set; }
 
-        [Display(Name = "Remember me?")] public bool RememberMe { get; set; }
+        [Display(Name = "Оставаться в системе?")] public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
-        [Required, EmailAddress, Display(Name = "Email")] public string Email { get; set; }
+        [Required, EmailAddress, Display(Name = "Электронная почта")] public string Email { get; set; }
 
-        [Required, StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6),
-         DataType(DataType.Password), Display(Name = "Password")] public string Password { get; set; }
+        [Required, StringLength(100, ErrorMessage = "{0} не может быть короче {2} символов.", MinimumLength = 6),
+         DataType(DataType.Password), Display(Name = "Пароль")] public string Password { get; set; }
 
-        [DataType(DataType.Password), Display(Name = "Confirm password"),
-         Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [DataType(DataType.Password), Display(Name = "Повторите пароль"),
+         Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Hometown")] public string Hometown { get; set; }
@@ -66,13 +66,13 @@ namespace Logotrainer.Server.Models
 
     public class ResetPasswordViewModel
     {
-        [Required, EmailAddress, Display(Name = "Email")] public string Email { get; set; }
+        [Required, EmailAddress, Display(Name = "Электронная почта")] public string Email { get; set; }
 
-        [Required, StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6),
-         DataType(DataType.Password), Display(Name = "Password")] public string Password { get; set; }
+        [Required, StringLength(100, ErrorMessage = "{0} не может быть короче {2} символов.", MinimumLength = 6),
+         DataType(DataType.Password), Display(Name = "Пароль")] public string Password { get; set; }
 
-        [DataType(DataType.Password), Display(Name = "Confirm password"),
-         Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [DataType(DataType.Password), Display(Name = "Повторите пароль"),
+         Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -80,6 +80,6 @@ namespace Logotrainer.Server.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required, EmailAddress, Display(Name = "Email")] public string Email { get; set; }
+        [Required, EmailAddress, Display(Name = "Электронная почта")] public string Email { get; set; }
     }
 }
