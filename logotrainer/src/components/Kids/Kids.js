@@ -77,8 +77,8 @@ class Kids extends Component {
         <CardGroup itemsPerRow={5} className="ui link cards">
           {filteredKids.map((item, index) => (
             <Card key={index} color="olive">
-              <Card.Content onClick={() => this.props.addKidToPageAsync(item)}>
-                <Card.Header>
+              <Card.Content>
+                <Card.Header onClick={() => this.props.addKidToPageAsync(item)}>
                   {item.firstName} {item.lastName}
                 </Card.Header>
                 <Card.Meta>
