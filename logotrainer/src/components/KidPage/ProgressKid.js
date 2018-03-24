@@ -6,6 +6,7 @@ import { BarChart, XAxis, YAxis, Bar, Tooltip, Legend } from "recharts";
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 class ProgressKid extends Component {
   render() {
+    console.log(this.props.profiles);
     return (
       <div>
         {this.props.profiles.length < 3 ? (
@@ -18,10 +19,7 @@ class ProgressKid extends Component {
           <div>
             <Header>Средний уровень развития навыков по группе навыков</Header>
             <BarChart width={500} height={300} data={this.props.profiles}>
-              <XAxis
-                dataKey="profileDate"
-                tickFormatter={profileDate => profileDate.toString()}
-              />
+              <XAxis dataKey="profileDate" />
               <YAxis />
               <Legend />
               <Tooltip />
@@ -84,7 +82,7 @@ const mapStateToProps = state => {
     skills: state.skills,
     profiles: state.testResults.map(profile => ({
       ...getAverageForSkillGroups(state.skills, profile.testResult),
-      profileDate: profile.createDateTime
+      profileDate: new Date(profile.createDateTime).toLocaleDateString()
     }))
   };
 };
