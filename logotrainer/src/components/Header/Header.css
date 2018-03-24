@@ -1,4 +1,9 @@
-.rightFloat{
-    float:right;
-    margin:10px
+.rightFloat {
+  float: right;
+  margin: 10px;
+}
+
+.exit {
+  color: white;
+  font-weight: bold;
 }

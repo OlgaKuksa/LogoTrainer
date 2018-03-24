@@ -10,7 +10,9 @@ class Header extends Component {
         <Icon name="settings" />
         Добро пожаловать, Логопед!
         <Label.Detail>
-          <a href="./Account/LogOff">Выход</a>
+          <a href="./Account/LogOff" className="exit">
+            Выход
+          </a>
         </Label.Detail>
       </Label>
     );

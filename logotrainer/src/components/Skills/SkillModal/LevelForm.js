@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Icon } from "semantic-ui-react";
+import "../../Logotrainer/Logotrainer.css";
 
 class LevelForm extends Component {
   render() {
@@ -38,6 +39,7 @@ class LevelForm extends Component {
             color="red"
             size="big"
             onClick={this.props.removeLevelBtnHandler}
+            className="removeCircleInModalSkill"
           />
         ) : null}
       </Form.Group>

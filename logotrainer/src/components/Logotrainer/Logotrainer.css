@@ -6,5 +6,10 @@
   margin: 10px;
 }
 
-.removeCircleInModal {
+.icon.removeCircleInModal {
+  margin-top: 15px;
+}
+
+.icon.removeCircleInModalSkill {
+  margin-top: 25px;
 }

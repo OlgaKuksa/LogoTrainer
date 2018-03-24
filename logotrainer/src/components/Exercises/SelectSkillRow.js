@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Form, Label, Icon, Dropdown } from "semantic-ui-react";
+import { Form, Label, Icon } from "semantic-ui-react";
+import "../Logotrainer/Logotrainer.css";
 
 class SelectSkillRow extends Component {
   state = {
@@ -116,6 +117,7 @@ class SelectSkillRow extends Component {
               color="red"
               size="big"
               onClick={this.props.removeSecondarySkill}
+              className="removeCircleInModal"
             />
           )}
         </Form.Group>

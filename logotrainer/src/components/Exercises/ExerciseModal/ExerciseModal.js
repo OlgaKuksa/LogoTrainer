@@ -156,21 +156,19 @@ class ExerciseModal extends Component {
               ))}
           </Form>
         </Modal.Content>
-        {this.state.exerciseId !== undefined && (
-          <Button
-            color="red"
-            onClick={() => this.props.removeExerciseAsync(this.state)}
-          >
-            Удалить
+        <Modal.Actions>
+          {this.state.exerciseId !== undefined && (
+            <Button
+              color="red"
+              onClick={() => this.props.removeExerciseAsync(this.state)}
+            >
+              Удалить
+            </Button>
+          )}
+          <Button color="green" onClick={this.addUpdateExerciseBtnHandler}>
+            {btnLabel}
           </Button>
-        )}
-        <Button
-          className="ui right floated button"
-          color="green"
-          onClick={this.addUpdateExerciseBtnHandler}
-        >
-          {btnLabel}
-        </Button>
+        </Modal.Actions>
       </Modal>
     );
   }
