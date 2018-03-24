@@ -20,6 +20,7 @@ class SkillCard extends Component {
             name="pencil"
             onClick={() => this.props.addSkillModal(this.props.skill)}
             color="olive"
+            className="ui right floated"
           />
         </Card.Content>
       </Card>

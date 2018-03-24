@@ -284,6 +284,7 @@
   <ItemGroup>
     <Content Include="Controllers\Api\ClassDiagram1.cd" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

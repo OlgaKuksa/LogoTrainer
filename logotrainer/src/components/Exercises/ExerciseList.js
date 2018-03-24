@@ -30,13 +30,15 @@ class ExerciseList extends Component {
                       .skills.find(
                         skill => skill.skillId === exercise.exerciseMainSkillId
                       ).skillName}
+
+                  <Icon
+                    name="edit"
+                    color="olive"
+                    size="large"
+                    onClick={() => this.props.addExerciseToModal(exercise)}
+                    className="ui right floated"
+                  />
                 </Card.Content>
-                <Icon
-                  name="edit"
-                  color="olive"
-                  size="large"
-                  onClick={() => this.props.addExerciseToModal(exercise)}
-                />
               </Card>
             ))}
           </Card.Group>

@@ -7,6 +7,7 @@ import {
   updateSkillGroupAsync as updateSkillGroup,
   removeSkillGroupAsync as removeSkillGroup
 } from "../../../actions/skills";
+import "../../Logotrainer/Logotrainer.css";
 
 class SkillGroupModal extends Component {
   state = {
@@ -69,11 +70,7 @@ class SkillGroupModal extends Component {
                     Удалить
                   </Button>
                 )}
-              <Button
-                color="green"
-                onClick={this.addUpdateBtnHandler}
-                className="ui right floated button"
-              >
+              <Button color="green" onClick={this.addUpdateBtnHandler}>
                 {btnLabel}
               </Button>
             </Modal.Actions>

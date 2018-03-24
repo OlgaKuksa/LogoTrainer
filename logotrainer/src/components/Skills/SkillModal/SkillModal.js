@@ -189,11 +189,7 @@ class SkillModal extends Component {
               Удалить
             </Button>
           )}
-          <Button
-            color="green"
-            className="ui right floated button"
-            onClick={this.addUpdateSkillBtnHandler}
-          >
+          <Button color="green" onClick={this.addUpdateSkillBtnHandler}>
             {btnLabel}
           </Button>
         </Modal.Actions>

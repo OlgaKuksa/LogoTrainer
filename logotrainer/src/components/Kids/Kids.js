@@ -85,13 +85,14 @@ class Kids extends Component {
                   Дата рождения:{" "}
                   {new Date(item.dateOfBirth).toLocaleDateString()}
                 </Card.Meta>
+                <Icon
+                  name="edit"
+                  color="olive"
+                  size="large"
+                  onClick={() => this.props.addToModal(item)}
+                  className="ui right floated"
+                />
               </Card.Content>
-              <Icon
-                name="edit"
-                color="olive"
-                size="large"
-                onClick={() => this.props.addToModal(item)}
-              />
             </Card>
           ))}
           <Card>

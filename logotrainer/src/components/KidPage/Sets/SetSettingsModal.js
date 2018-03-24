@@ -31,30 +31,32 @@ class SetSettingsModal extends Component {
         closeIcon
       >
         <Header color="green">Выбор целевых навыков для комплекса</Header>
-        <Form>
-          {this.props.skills.map(skillGroup => {
-            return (
-              <div key={skillGroup.skillGroupId}>
-                {skillGroup.skills.length === 0 ? null : (
-                  <Header as="h3">{skillGroup.skillGroupName}</Header>
-                )}
-                {skillGroup.skills.map(skill => (
-                  <Form.Field key={skill.skillId} color="green">
-                    <Checkbox
-                      value={skill.skillId}
-                      label={skill.skillName}
-                      onChange={this.handleChange}
-                      checked={this.state.selectedSkillIds.includes(
-                        skill.skillId
-                      )}
-                    />
-                  </Form.Field>
-                ))}
-                <Header as="h4" />
-              </div>
-            );
-          })}
-        </Form>
+        <Modal.Content>
+          <Form>
+            {this.props.skills.map(skillGroup => {
+              return (
+                <div key={skillGroup.skillGroupId}>
+                  {skillGroup.skills.length === 0 ? null : (
+                    <Header as="h3">{skillGroup.skillGroupName}</Header>
+                  )}
+                  {skillGroup.skills.map(skill => (
+                    <Form.Field key={skill.skillId} color="green">
+                      <Checkbox
+                        value={skill.skillId}
+                        label={skill.skillName}
+                        onChange={this.handleChange}
+                        checked={this.state.selectedSkillIds.includes(
+                          skill.skillId
+                        )}
+                      />
+                    </Form.Field>
+                  ))}
+                  <Header as="h4" />
+                </div>
+              );
+            })}
+          </Form>
+        </Modal.Content>
         <Modal.Actions>
           <Button
             color="green"
