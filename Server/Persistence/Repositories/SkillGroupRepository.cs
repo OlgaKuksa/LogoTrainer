@@ -74,7 +74,7 @@ WHERE [SkillGroupId]=@SkillGroupId",
 
         private IList<Level> GetLevelsBySkillId(Guid skillId)
         {
-            return Connection.Query<Level>("SELECT SkillId,LevelId,LevelText,LevelNumber FROM [Level] WHERE [SkillId]=@SkillId ORDER BY [LevelNumber] ASC", new {SkillId = skillId}).ToList();
+            return Connection.Query<Level>("SELECT SkillId,LevelId,LevelText,LevelNumber FROM [Level] WHERE [SkillId]=@SkillId ORDER BY [LevelNumber] ASC", new {SkillId = skillId}).OrderBy(it=>it.LevelNumber).ToList();
         }
     }
 }
