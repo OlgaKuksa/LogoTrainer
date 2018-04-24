@@ -6,7 +6,8 @@ import {
   Icon,
   Label,
   Dimmer,
-  Segment
+  Segment,
+  Checkbox
 } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { getGroupsAsync as getGroups } from "../../actions/groups";
@@ -59,20 +60,23 @@ class Kids extends Component {
     return (
       <div>
         {this.props.groups != null && this.props.groups.length > 0 ? (
-          <Label>
-            Группа
-            <select
-              name="kidsGroup"
-              placeholder="Выберите группу"
-              onChange={this.groupChanged}
-            >
-              {this.props.groups.map(item => (
-                <option value={item.groupId} key={item.groupId}>
-                  {item.groupNumber}
-                </option>
-              ))}
-            </select>
-          </Label>
+          <div>
+            <Label>
+              Группа
+              <select
+                name="kidsGroup"
+                placeholder="Выберите группу"
+                onChange={this.groupChanged}
+              >
+                {this.props.groups.map(item => (
+                  <option value={item.groupId} key={item.groupId}>
+                    {item.groupNumber}
+                  </option>
+                ))}
+              </select>
+            </Label>
+            <Checkbox label="Показать выбывших воспитанников" />
+          </div>
         ) : null}
         <CardGroup itemsPerRow={5} className="ui link cards">
           {filteredKids.map((item, index) => (

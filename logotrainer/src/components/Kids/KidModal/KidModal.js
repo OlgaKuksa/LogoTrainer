@@ -15,7 +15,12 @@ class KidModal extends Component {
       firstName = "",
       lastName = "",
       isArchived = false,
-      dateOfBirth = new Date()
+      dateOfBirth = new Date(),
+      middleName = "",
+      homeAddress = "",
+      homePhone = "",
+      parentInfo = "",
+      parentMobile = ""
     } =
       props.kidInModal || {};
     const kidInModal = {
@@ -23,6 +28,11 @@ class KidModal extends Component {
       firstName,
       lastName,
       isArchived,
+      middleName,
+      homeAddress,
+      homePhone,
+      parentInfo,
+      parentMobile,
       dateOfBirth: new Date(dateOfBirth).toISOString().substring(0, 10)
     };
     this.state = { isNew, kidInModal };
@@ -46,7 +56,17 @@ class KidModal extends Component {
   render() {
     const {
       isNew,
-      kidInModal: { firstName, lastName, isArchived, dateOfBirth }
+      kidInModal: {
+        firstName,
+        lastName,
+        isArchived,
+        dateOfBirth,
+        middleName,
+        homeAddress,
+        homePhone,
+        parentInfo,
+        parentMobile
+      }
     } = this.state;
     let legend = isNew ? "Добавить ребенка" : "Редактировать";
     let btnLabel = isNew ? "Добавить" : "Сохранить";
@@ -57,22 +77,30 @@ class KidModal extends Component {
         closeIcon
       >
         <Header icon="child" color="green" content={legend} />
-        <Modal.Content>
+        <Modal.Content scrolling>
           <Form>
             <Form.Input
               type="text"
               placeholder="Фамилия ребенка"
               label="Фамилия ребенка"
-              name="firstName"
-              defaultValue={firstName}
+              name="lastName"
+              defaultValue={lastName}
               onChange={this.onKidPropertyChanged}
             />
             <Form.Input
               type="text"
               placeholder="Имя ребенка"
               label="Имя ребенка"
-              name="lastName"
-              defaultValue={lastName}
+              name="firstName"
+              defaultValue={firstName}
+              onChange={this.onKidPropertyChanged}
+            />
+            <Form.Input
+              type="text"
+              placeholder="Отчество ребенка"
+              label="Отчество ребенка"
+              name="middleName"
+              defaultValue={middleName}
               onChange={this.onKidPropertyChanged}
             />
             <Form.Input
@@ -80,6 +108,38 @@ class KidModal extends Component {
               type="date"
               name="dateOfBirth"
               defaultValue={dateOfBirth}
+              onChange={this.onKidPropertyChanged}
+            />
+            <Form.Input
+              type="text"
+              placeholder="Город, улица, дом, квартира"
+              label="Домашний адрес"
+              name="homeAddress"
+              defaultValue={homeAddress}
+              onChange={this.onKidPropertyChanged}
+            />
+            <Form.Input
+              type="text"
+              placeholder="Домашний телефон"
+              label="Домашний телефон"
+              name="homePhone"
+              defaultValue={homePhone}
+              onChange={this.onKidPropertyChanged}
+            />
+            <Form.Input
+              type="text"
+              placeholder="ФИО законного представителя"
+              label="ФИО законного представителя"
+              name="parentInfo"
+              defaultValue={parentInfo}
+              onChange={this.onKidPropertyChanged}
+            />
+            <Form.Input
+              type="text"
+              placeholder="Телефон законного представителя"
+              label="Мобильный телефон законного представителя"
+              name="parentMobile"
+              defaultValue={parentMobile}
               onChange={this.onKidPropertyChanged}
             />
             <Form.Field
@@ -90,15 +150,13 @@ class KidModal extends Component {
               name="isArchived"
               onChange={this.onKidPropertyChanged}
             />
-            <Button
-              className="ui right floated button"
-              color="green"
-              onClick={this.onSaveKid}
-            >
-              {btnLabel}
-            </Button>
           </Form>
         </Modal.Content>
+        <Modal.Actions>
+          <Button color="green" onClick={this.onSaveKid}>
+            {btnLabel}
+          </Button>
+        </Modal.Actions>
       </Modal>
     );
   }

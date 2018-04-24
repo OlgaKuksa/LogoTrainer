@@ -184,7 +184,7 @@ export const addKidApi = payload => {
     },
     method: "post",
     body: JSON.stringify(toAdd)
-  });
+  }).then(() => toAdd);
 };
 export const updateKidApi = payload => {
   return fetch("./api/Kid/Update", {

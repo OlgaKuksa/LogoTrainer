@@ -14,6 +14,7 @@ import setSettingsInModal from "./setSettingsInModal";
 import setList from "./setList";
 import setExerciseList from "./setExerciseList";
 import exerciseFilter from "./exerciseFilter";
+import kidsView from "./kidsView";
 
 const appReducers = combineReducers({
   groups,
@@ -30,7 +31,8 @@ const appReducers = combineReducers({
   setSettingsInModal,
   setList,
   setExerciseList,
-  exerciseFilter
+  exerciseFilter,
+  kidsView
 });
 
 export default appReducers;
