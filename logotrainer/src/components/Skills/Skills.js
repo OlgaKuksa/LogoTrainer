@@ -46,27 +46,29 @@ class Skills extends Component {
       <div>
         <Grid>
           <Grid.Column width={4}>
-            <Menu fluid vertical color="olive" pointing>
-              {this.props.skills.map(item => (
-                <Menu.Item
-                  name={item.skillGroupName}
-                  id={item.skillGroupId}
-                  key={item.skillGroupId}
-                  active={this.state.activeItem == item.skillGroupId}
-                  onClick={this.handleMenuItemClick}
-                  size="tiny"
-                >
-                  <strong>{item.skillGroupName}</strong>
-                  <Icon
-                    name="pencil"
-                    onClick={e => {
-                      this.props.addSkillGroupModal(item);
-                      e.stopPropagation();
-                    }}
-                  />
-                </Menu.Item>
-              ))}
-            </Menu>
+            {this.props.skills.length > 0 && (
+              <Menu fluid vertical color="olive" pointing>
+                {this.props.skills.map(item => (
+                  <Menu.Item
+                    name={item.skillGroupName}
+                    id={item.skillGroupId}
+                    key={item.skillGroupId}
+                    active={this.state.activeItem == item.skillGroupId}
+                    onClick={this.handleMenuItemClick}
+                    size="tiny"
+                  >
+                    <strong>{item.skillGroupName}</strong>
+                    <Icon
+                      name="pencil"
+                      onClick={e => {
+                        this.props.addSkillGroupModal(item);
+                        e.stopPropagation();
+                      }}
+                    />
+                  </Menu.Item>
+                ))}
+              </Menu>
+            )}
             <Button
               color="olive"
               onClick={() => this.props.addSkillGroupModal({})}
