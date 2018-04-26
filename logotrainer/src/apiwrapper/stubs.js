@@ -265,7 +265,7 @@ let allKids = [
     lastName: "Иванов",
     dateOfBirth: "2012-05-19",
     groupId: 1,
-    isArchived: false
+    isArchived: 0
   },
   {
     kidId: 2,
@@ -273,7 +273,7 @@ let allKids = [
     lastName: "Семенова",
     dateOfBirth: "2012-03-15",
     groupId: 2,
-    isArchived: false
+    isArchived: 0
   },
   {
     kidId: 3,
@@ -281,7 +281,7 @@ let allKids = [
     lastName: "Алексин",
     dateOfBirth: "2011-12-24",
     groupId: 1,
-    isArchived: false
+    isArchived: 0
   }
 ];
 export const getKidsApi = () => {

@@ -76,7 +76,6 @@ export const addSkillAsync = skillData => (dispatch, getState) => {
       state.skills.filter(skillgroup => skillgroup.skills.length > 0).length ===
       0;
     dispatch(action);
-    console.log(action);
     shouldUpdateExerciseFilter &&
       dispatch(
         updateFilter({

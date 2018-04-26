@@ -4,16 +4,16 @@ import {
 } from "../actions/kidsView";
 
 const DEFAULT_STATE = {
-  activeGroup: 1,
-  graduatesVisibility: false
+  activeGroupId: null,
+  withArchived: false
 };
 
 const kidsView = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case SET_ACTIVE_GROUP:
-      return { ...state, activeGroup: action.payload };
+      return { ...state, activeGroupId: action.payload };
     case CHANGE_GRADUATES_VISIBILITY:
-      return { ...state, graduatesVisibility: action.payload };
+      return { ...state, withArchived: action.payload };
     default:
       return state;
   }
