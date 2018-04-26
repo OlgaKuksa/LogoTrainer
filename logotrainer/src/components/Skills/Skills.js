@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  Menu,
-  Grid,
-  Segment,
-  Button,
-  Icon,
-  CardGroup,
-  Card
-} from "semantic-ui-react";
+import { Menu, Grid, Button, Icon, CardGroup, Card } from "semantic-ui-react";
 import SkillCard from "./SkillCard";
 import { addSkillModal } from "../../actions/skillInModal";
 import { addSkillGroupModal } from "../../actions/skillGroupInModal";
 import SkillModal from "./SkillModal";
 import SkillGroupModal from "./SkillGroupModal";
+import LoadingDimmer from "../LoadingDimmer";
 
 const uuid = require("uuid/v4");
 
@@ -35,7 +28,7 @@ class Skills extends Component {
       this.setState({ activeItem: nextProps.skills[0].skillGroupId });
   }
   render() {
-    if (this.props.skills == null) return null;
+    if (this.props.skills == null) return <LoadingDimmer />;
     let selectedGroup =
       this.props.skills == null
         ? {}

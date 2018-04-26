@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import { Button, List, Icon, Label } from "semantic-ui-react";
 import TestModal from "./TestModal";
 import { addTestModal } from "../../../actions/testInModal";
+import LoadingDimmer from "../../LoadingDimmer";
 
 class ProfileKid extends Component {
   render() {
     return (
       <div>
-        {this.props.testResults == null ? null : (
+        {this.props.testResults == null ? (
+          <LoadingDimmer />
+        ) : (
           <div>
             <Button color="olive" onClick={() => this.props.addTestModal({})}>
               Пройти тест

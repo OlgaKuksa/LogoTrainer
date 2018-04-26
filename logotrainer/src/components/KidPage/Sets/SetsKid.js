@@ -5,6 +5,7 @@ import { addSetSettingsModal } from "../../../actions/setSettingsInModal";
 import { getExercisesApiAsync } from "../../../actions/setExerciseList";
 import SetSettingsModal from "./SetSettingsModal";
 import SetExerciseModal from "./SetExerciseModal";
+import LoadingDimmer from "../../LoadingDimmer";
 
 class SetsKids extends Component {
   render() {
@@ -25,7 +26,9 @@ class SetsKids extends Component {
             хотя бы один заполненный профиль
           </Message>
         )}
-        {this.props.setList == null ? null : (
+        {this.props.setList == null ? (
+          <LoadingDimmer />
+        ) : (
           <List bulleted>
             {this.props.setList.map(set => (
               <List.Item key={set.kidSetId}>

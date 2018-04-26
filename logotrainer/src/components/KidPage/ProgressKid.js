@@ -6,7 +6,6 @@ import { BarChart, XAxis, YAxis, Bar, Tooltip, Legend } from "recharts";
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 class ProgressKid extends Component {
   render() {
-    console.log(this.props.profiles);
     return (
       <div>
         {this.props.profiles.length < 3 ? (

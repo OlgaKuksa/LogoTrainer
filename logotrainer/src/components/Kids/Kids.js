@@ -19,6 +19,7 @@ import {
   changeGraduatesVisibility
 } from "../../actions/kidsView";
 import KidModal from "./KidModal";
+import LoadingDimmer from "../LoadingDimmer";
 
 class Kids extends Component {
   groupChanged = ev => {
@@ -44,7 +45,7 @@ class Kids extends Component {
   }
 
   render() {
-    if (this.props.kids === null) return <Dimmer>Загрузка данных </Dimmer>;
+    if (this.props.kids === null) return <LoadingDimmer />;
 
     let filteredKids = this.props.kids.filter(
       item =>
